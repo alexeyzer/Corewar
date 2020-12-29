@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/12/25 18:54:30 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/12/29 18:07:11 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			ft_printf("here we start workin");
+			ft_printf("here we start workin");//сначало надо все проверить и первое это имя или комментарий
+			validator(argv[1]);
 		}
 	}
 	return (0);
