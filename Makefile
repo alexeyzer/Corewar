@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c validations.c
+SRC = main.c validations.c validations_p2.c getline.c
 
 SRC_DIR = src/
 

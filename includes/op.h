@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/12/29 11:01:00 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/02 13:16:11 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 #define COMMENT_CHAR			'#'
+#define ALT_COMMENT_CHAR    ';'
 #define LABEL_CHAR				':'
 #define DIRECT_CHAR				'%'
 #define SEPARATOR_CHAR			','
@@ -67,10 +68,10 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH       (2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
-typedef struct		header_s
+typedef struct		s_header
 {
   unsigned int    magic;
   char            prog_name[PROG_NAME_LENGTH + 1];
   unsigned int		prog_size;
   char            comment[COMMENT_LENGTH + 1];
-}					header_t;
+}					t_header;

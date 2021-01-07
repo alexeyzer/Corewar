@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/12/29 18:07:11 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/05 12:39:05 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,23 @@ int checkname(char *str)
 	return (checkname2(str, i));
 }
 
+t_corewar *initstruct()
+{
+	t_corewar *newcorewar;
+
+	newcorewar = (t_corewar*)malloc(sizeof(t_corewar));
+	newcorewar->initial = (t_header*)malloc(sizeof(t_header));
+	newcorewar->head = NULL;
+	newcorewar->commandstable = NULL;
+	return (newcorewar);
+}
+
 
 int main(int argc, char **argv)
 {
+	t_corewar *corewar;
+
+
 	if (argc != 2)
 		ft_printf("Usage: ./asm player.s\n");
 	else
@@ -69,9 +83,32 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			ft_printf("here we start workin");//сначало надо все проверить и первое это имя или комментарий
-			validator(argv[1]);
+			corewar = initstruct();
+			ft_printf("here we start workin");
+			validator(argv[1], corewar);
 		}
 	}
 	return (0);
+}
+
+void exitcorewar(t_corewar **corewar, char *strtoprint, int online)
+{
+	t_header	*header;
+	if (strtoprint != NULL)
+	{
+		if (online != -1)
+			ft_printf("%s on line %d", strtoprint, online);
+		else
+			ft_printf("%s", strtoprint);
+	}
+	if (*corewar != NULL)
+	{
+		header = (*corewar)->initial;
+		if (header != NULL)
+		{
+			free(header);
+			(*corewar)->initial = NULL;
+		}
+		exit(0);
+	}
 }

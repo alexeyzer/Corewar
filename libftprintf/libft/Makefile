@@ -6,7 +6,7 @@
 #    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 22:26:44 by aguiller          #+#    #+#              #
-#    Updated: 2020/12/25 14:40:22 by alexzudin        ###   ########.fr        #
+#    Updated: 2021/01/05 15:48:16 by alexzudin        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC = ft_atoi.c \
 		ft_toupper.c\
 		ft_split_whitespaces.c \
 		get_next_line.c \
-		ft_isnb.c
+		ft_isnb.c \
+		ft_strchrs.c
 
 NAME = libft.a
 

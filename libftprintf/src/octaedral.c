@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 18:58:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/12/25 14:47:00 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/12/29 21:41:14 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	work_with_string(t_print *print, va_list list, int *count)
 
 	modul(print, &(print->w));
 	str = va_arg(list, char *);
-	if (!str)
-		write(1,"3",1);
 	len = ft_strlen(str);
 	str = edits(str, print->precision, print, &len);
 	if ((unsigned int)print->w > len)

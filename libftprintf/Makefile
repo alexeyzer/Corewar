@@ -38,7 +38,7 @@ file: $(NAME)
 	gcc -Wall -Wextra -Werror -o test ./src/main.o libftprintf.a
 
 %.o:%.c $(INCNAME)
-	gcc -Wall -ggdb -Wextra -Werror $(PRINTF_H) $(PRINTF_HL) -c $< -o $@
+	gcc -Wall -Wextra -Werror $(PRINTF_H) $(PRINTF_HL) -c $< -o $@
 
 clean:
 	@cd libft && $(MAKE) clean	

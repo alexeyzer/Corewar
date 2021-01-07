@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 22:55:46 by aguiller          #+#    #+#             */
-/*   Updated: 2020/10/15 18:23:39 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/07 21:10:19 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,6 @@ int					ft_islower(int c);
 int					ft_isupper(int c);
 int					ft_countwins(char const *s, char c);
 char				**ft_split_whitespaces(char *str);
+char				*ft_strchrs(const char *s, int c);
+
 #endif
