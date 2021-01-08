@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 15:28:45 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/07 21:06:34 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/07 21:19:17 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,13 @@ int statchekin(t_corewar *corewar)
 	int goin;
 
 	goin = 3;
-    while	(get_str(corewar->fd, &line) > 0 && goin != 0)//ожидаю либо comment либо name of player// пробелы?
+    while	(get_str(corewar->fd, &line) > 0 && goin != 0)
 	{
 		ft_printf("%s", line);
 		if (*line == '\0')
             continue ;
         else if (isitcomment(line) == 0)
-        {
             checknameorcomment(&line, corewar, &goin);
-        }
 		if (line != NULL)
 			ft_strdel(&line);
 		(corewar->currentline)++;

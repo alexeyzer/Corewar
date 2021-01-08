@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/05 15:57:30 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/07 22:39:54 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,49 @@ void initasm(t_corewar *corewar)
 	corewar->head->label = NULL;
 }
 
+int isitfromlabel(char a)
+{
+	int i;
+
+	i = 0;
+	while (LABEL_CHARS[i] != '\0')
+	{
+		if (a == LABEL_CHARS[i])
+			return (1);
+		i++;
+	}
+	return (-1);
+}
+
+int isitlabel(t_corewar *corewar, char *line)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while((line[i] ==  ' ' || line[i] ==  '\t') && (line[i] != '\n' && line [i] != '\0'))
+		i++;
+	j = i;
+	while (line[i] != LABEL_CHAR && line[i] != '\n' && line[i] != '\0' && line[i] != ' ' && line[i] != '\t')
+		i++;
+	if (line[i] == LABEL_CHAR)
+	{
+		i = j;
+		while (line[i] != LABEL_CHAR)
+		{
+			if (isitfromlabel(line[i]) < 0)
+			{
+				ft_printf("\n|%c|\n with this symbol", line[i]);
+				exitcorewar(&corewar, "invalid symbols for Label", corewar->currentline);
+			}
+			i++;
+		}
+		return (1);
+	}
+	else
+		return (-1);
+}
+
 int commandparser(t_corewar *corewar)
 {
 	char *line;
@@ -33,7 +76,8 @@ int commandparser(t_corewar *corewar)
             continue ;
         else if (isitcomment(line) == 0)
         {
-			
+			if (isitlabel(corewar, line) > 0)
+				ft_printf("we have label boys");
         }
 		if (line != NULL)
 			ft_strdel(&line);

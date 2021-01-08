@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/07 19:36:24 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/07 21:47:00 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void	getnext(char **line, int *i, t_corewar *corewar);
 int		isitcomment(char *line);
 int		getcurrentstring2(char **line, t_corewar *corewar, int i, int *goin);
 int		get_str(const int fd, char **row);
+int		commandparser(t_corewar *corewar);
 
 /*t_op    op_tab[17] =
 {

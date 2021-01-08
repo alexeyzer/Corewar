@@ -5,9 +5,8 @@
 
 	ld %0,r5
 
-entree2:
-entree3:
-entree:	live	%42		# entree
+entreent:
+entree:live	%42		# entree
 	ld	%0,r5
 	ld	%0,r5
 	zjmp	%:bite
