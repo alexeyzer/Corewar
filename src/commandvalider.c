@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/07 22:39:54 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 12:52:28 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void initasm(t_corewar *corewar)
+void	initasm(t_corewar *corewar)
 {
 	corewar->head = (t_asm*)malloc(sizeof(t_asm));
 	corewar->head->command = NULL;
@@ -20,9 +20,10 @@ void initasm(t_corewar *corewar)
 	corewar->head->next = NULL;
 	corewar->head->prev = NULL;
 	corewar->head->label = NULL;
+	corewar->now = corewar->head;
 }
 
-int isitfromlabel(char a)
+int		isitfromlabel(char a)
 {
 	int i;
 
@@ -36,7 +37,7 @@ int isitfromlabel(char a)
 	return (-1);
 }
 
-int isitlabel(t_corewar *corewar, char *line)
+int		isitlabel(t_corewar *corewar, char *line)
 {
 	int i;
 	int	j;
@@ -53,36 +54,65 @@ int isitlabel(t_corewar *corewar, char *line)
 		while (line[i] != LABEL_CHAR)
 		{
 			if (isitfromlabel(line[i]) < 0)
-			{
-				ft_printf("\n|%c|\n with this symbol", line[i]);
-				exitcorewar(&corewar, "invalid symbols for Label", corewar->currentline);
-			}
+				exitcorewar(&corewar, "invalid symbols for Label", corewar->currentline, line);
 			i++;
 		}
-		return (1);
+		return (i);
 	}
 	else
 		return (-1);
 }
 
-int commandparser(t_corewar *corewar)
+void	afterlabel(t_corewar *corewar, char *line, int i)
 {
-	char *line;
+	int j;
+	int numcommand;
+
+	j = i;
+	i++;
+	while (line[i] == '\t' || line[i] == ' ')
+		i++;
+	if (line[i] == '\n')
+		addlabel(corewar, line, j);
+	else
+	{
+		if ((numcommand = isitcommand(line, i)) >= 0)
+		{
+			addlabel(corewar, line, j);
+			iscommandcorrect(corewar, line, numcommand, i);
+			//if we have command parse + add command + iscommandcorrect?
+		}
+		else
+			exitcorewar(&corewar, "Error with syntax after label", corewar->currentline, line);
+	}
+}
+
+int		commandparser(t_corewar *corewar)
+{
+	char	*line;
+	int		i;
 
 	initasm(corewar);
-    while	(get_str(corewar->fd, &line) > 0)//ожидаю либо comment либо label libo command with params
+    while	(get_str(corewar->fd, &line) > 0)
 	{
-		if (*line == '\0')
+		if (*line == '\n')
             continue ;
         else if (isitcomment(line) == 0)
         {
-			if (isitlabel(corewar, line) > 0)
-				ft_printf("we have label boys");
+			if ( (i = isitlabel(corewar, line)) > 0)
+			{
+				ft_printf("WE got label:");
+				afterlabel(corewar, line, i);
+			}
+			else if ((i = isitcommand(line, 0)) > 0)
+			{
+				ft_printf("WE GOT WORK TO DO\n");
+				iscommandcorrect(corewar, line, i, 0);
+			}
         }
 		if (line != NULL)
 			ft_strdel(&line);
 		(corewar->currentline)++;
 	}
     return (1);
-	
 }

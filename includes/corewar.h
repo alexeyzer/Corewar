@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/07 21:47:00 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 13:07:24 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@
 # define GREY		"\033[37m"
 # define NO			"\033[0m"
 
+typedef struct	s_diretcommand
+{
+	int					commandnum;
+	int                	typeparams[3];
+	void				*param1;
+	void				*param2;
+	void				*param3;
+}				t_diretcommand;
+
 typedef struct	s_command
 {
 	char                *name;
@@ -39,7 +48,6 @@ typedef struct	s_command
 	int                	typeparams[3];
 	int					argumentcode;
 	int					dir_size;
-	int					*params;
 }				t_command;
 
 
@@ -186,7 +194,7 @@ typedef struct	s_asm
 {
 	t_labels			*label;
     int                 size;
-    t_command			*command;
+    t_diretcommand		*command;
 	struct s_asm        *next;
     struct s_asm        *prev;
 }				t_asm;
@@ -195,6 +203,7 @@ typedef struct	s_corewar
 {
 	t_header			*initial;
 	t_asm				*head;
+	t_asm				*now;
 	t_command			*commandstable;
 	int					fd;
 	int					currentline;
@@ -202,12 +211,15 @@ typedef struct	s_corewar
 }				t_corewar;
 
 int		validator(char *filename, t_corewar *corewar);
-void	exitcorewar(t_corewar **corewar, char *strtoprint, int online);
+void	exitcorewar(t_corewar **corewar, char *strtoprint, int online, char *line);
 void	getnext(char **line, int *i, t_corewar *corewar);
 int		isitcomment(char *line);
 int		getcurrentstring2(char **line, t_corewar *corewar, int i, int *goin);
 int		get_str(const int fd, char **row);
 int		commandparser(t_corewar *corewar);
+int		isitcommand(char *line, int r);
+void	addlabel(t_corewar *corewar, char *line, int i);
+int		iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i);
 
 /*t_op    op_tab[17] =
 {

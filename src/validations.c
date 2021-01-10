@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 15:28:45 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/07 21:19:17 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/09 16:33:45 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int getcurrentstring(char **line, t_corewar *corewar, int i, int *goin)
 			else if (j + 1 <= (int)PROG_NAME_LENGTH)
 				corewar->initial->prog_name[j++] = (*line)[i++];
 			else
-				exitcorewar(&corewar, "error with lenght of prog name", corewar->currentline);
+				exitcorewar(&corewar, "error with lenght of prog name", corewar->currentline, *line);
 		}
 		*goin = *goin & 1;
 	}
 	else
-		exitcorewar(&corewar, "error with name_cmd_string", corewar->currentline);
+		exitcorewar(&corewar, "error with name_cmd_string", corewar->currentline, *line);
 	return (1);
 }
 
@@ -88,8 +88,7 @@ int statchekin(t_corewar *corewar)
 	goin = 3;
     while	(get_str(corewar->fd, &line) > 0 && goin != 0)
 	{
-		ft_printf("%s", line);
-		if (*line == '\0')
+		if (*line == '\n')
             continue ;
         else if (isitcomment(line) == 0)
             checknameorcomment(&line, corewar, &goin);

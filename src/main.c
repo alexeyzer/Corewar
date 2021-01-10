@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/07 21:47:44 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/09 16:31:25 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,12 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-void exitcorewar(t_corewar **corewar, char *strtoprint, int online)
+void exitcorewar(t_corewar **corewar, char *strtoprint, int online, char *line)
 {
 	t_header	*header;
+
+	if (line != NULL)
+		ft_strdel(&line);
 	if (strtoprint != NULL)
 	{
 		if (online != -1)
