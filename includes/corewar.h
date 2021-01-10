@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 13:07:24 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 17:27:19 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,12 @@ int		commandparser(t_corewar *corewar);
 int		isitcommand(char *line, int r);
 void	addlabel(t_corewar *corewar, char *line, int i);
 int		iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i);
+void	connecttoasmdir(t_corewar *corewar, int now, char *line, int numcommand);
+void	connecttoasmind(t_corewar *corewar, int now, char *line, int numcommand);
+void	connecttoasmreg(t_corewar *corewar, int now, char *line, int numcommand);
+int		correctend(char *line);
+t_asm	*initasm();
+void	addcommand(t_corewar *corewar);
 
 /*t_op    op_tab[17] =
 {

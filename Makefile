@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 SRC = main.c validations.c validations_p2.c getline.c commandvalider.c \
-		isitcommand.c label.c
+		isitcommand.c label.c commandinit.c
 
 SRC_DIR = src/
 

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 11:44:23 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/09 16:34:01 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 17:12:03 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int getcurrentstring2(char **line, t_corewar *corewar, int i, int *goin)
 				exitcorewar(&corewar, "error with lenght of comment lenght", corewar->currentline, *line);
 		}
 		*goin = *goin & 2;
+		if (correctend(&((*line)[i + 1])) == -1)
+			exitcorewar(&corewar, "error bad characters after comment", corewar->currentline, *line);
 	}
 	else
 		exitcorewar(&corewar, "error with COMMENT_CMD_STRING", corewar->currentline, *line);

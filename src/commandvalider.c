@@ -6,21 +6,23 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 12:52:28 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 17:28:59 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	initasm(t_corewar *corewar)
+t_asm	*initasm()
 {
-	corewar->head = (t_asm*)malloc(sizeof(t_asm));
-	corewar->head->command = NULL;
-	corewar->head->size = 0;
-	corewar->head->next = NULL;
-	corewar->head->prev = NULL;
-	corewar->head->label = NULL;
-	corewar->now = corewar->head;
+	t_asm	*head;
+
+	head = (t_asm*)malloc(sizeof(t_asm));
+	head->command = NULL;
+	head->size = 0;
+	head->next = NULL;
+	head->prev = NULL;
+	head->label = NULL;
+	return (head);
 }
 
 int		isitfromlabel(char a)
@@ -92,23 +94,16 @@ int		commandparser(t_corewar *corewar)
 	char	*line;
 	int		i;
 
-	initasm(corewar);
+	corewar->head = initasm();
+	corewar->now = corewar->head;
     while	(get_str(corewar->fd, &line) > 0)
 	{
-		if (*line == '\n')
-            continue ;
-        else if (isitcomment(line) == 0)
+        if (isitcomment(line) == 0 && *line != '\n')
         {
 			if ( (i = isitlabel(corewar, line)) > 0)
-			{
-				ft_printf("WE got label:");
 				afterlabel(corewar, line, i);
-			}
 			else if ((i = isitcommand(line, 0)) > 0)
-			{
-				ft_printf("WE GOT WORK TO DO\n");
 				iscommandcorrect(corewar, line, i, 0);
-			}
         }
 		if (line != NULL)
 			ft_strdel(&line);

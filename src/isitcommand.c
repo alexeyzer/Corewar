@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:56:17 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 14:56:37 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 17:28:25 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,32 @@ int getnumofcommand(char *line)
 	return (-1);
 }
 
-int expectations(t_corewar *corewar, char *line, int numcommand, int now)
+int		expectations(char *line, int numcommand, int now)
 {
-	//expect ' ' but ',' always shoud be here if this is not the last parametr
-	//if it is the last paramter we shoud expect '\n'
+	int i;
+
+	i = 0;
+	while(line[i] ==  ' ' || line[i] ==  '\t')
+		i++;
+	if (now == commandstable[numcommand].countofparams - 1)
+	{
+		while(line[i] !=  ' ' && line[i] !=  '\t' && line[i] != '\n')
+			i++;
+		if (correctend(&(line[i])) == -1)
+			return (-1);
+		else
+			return (1);
+	}
+	else if (now < commandstable[numcommand].countofparams - 1)
+	{
+		while(line[i] !=  ',' && line[i] != '\n')
+			i++;
+		if (line[i] == ',')
+			return (i + 1);
+		else
+			return (-1);
+	}
+	return (-1);
 }
 
 int		isitcommand(char *line, int r)
@@ -55,7 +77,7 @@ int		isitcommand(char *line, int r)
 		return (-1);
 }
 
-int parsecommandsargstostruct(t_corewar *corewar, char *line, int numcommand, int now)
+int		parsecommandsargstostruct(t_corewar *corewar, char *line, int numcommand, int now)
 {
 	int i;
 
@@ -63,27 +85,22 @@ int parsecommandsargstostruct(t_corewar *corewar, char *line, int numcommand, in
 	while(line[i] ==  ' ' || line[i] ==  '\t')
 		i++;
 	if (line[i] == 'r' && ((commandstable[numcommand].typeparams[now] & T_REG) > 0))
-	{
-		corewar->fd = corewar->fd;
-		ft_printf("workin with register\n");
-	}
+		connecttoasmreg(corewar, now, &(line[i]), numcommand);
 	else if (line[i] == (char)DIRECT_CHAR && ((commandstable[numcommand].typeparams[now] & T_DIR) > 0))
-	{
-		ft_printf("workin with direct num\n");
-	}
+		connecttoasmdir(corewar, now,  &(line[i]), numcommand);
 	else if ((line[i] == (char)LABEL_CHAR || ft_isdigit(line[i]) == 1 || line[i] == '-') && ((commandstable[numcommand].typeparams[now] & T_IND) > 0))
-	{
-		ft_printf("workin with Indirect num\n");
-	}
+		connecttoasmind(corewar, now,  &(line[i]), numcommand);
 	else
 		return (-1);
-	return (1);
+	return (expectations(line, numcommand, now));
 }
 
 int iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i)
 {
-	int now;
+	int		now;
+	int		j;
 
+	j = 0;
 	now = 0;
 	while((line[i] ==  ' ' || line[i] ==  '\t') && (line[i] != '\n' && line [i] != '\0'))
 		i++;
@@ -91,9 +108,12 @@ int iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i)
 		i++;
 	while (now < commandstable[numcommand].countofparams)
 	{
-		parsecommandsargstostruct(corewar, &(line[i]), numcommand, now);
-
+		if ((j = parsecommandsargstostruct(corewar, &(line[i]), numcommand, now)) > 0)
+			i = i + j;
+		else
+			exitcorewar(&corewar, "Error with command argument", corewar->currentline, line);
 		now++;
 	}
+	addcommand(corewar);
 	return (1);
 }

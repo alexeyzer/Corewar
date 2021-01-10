@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 15:28:45 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/09 16:33:45 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 17:13:23 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int getcurrentstring(char **line, t_corewar *corewar, int i, int *goin)
 				exitcorewar(&corewar, "error with lenght of prog name", corewar->currentline, *line);
 		}
 		*goin = *goin & 1;
+		if (correctend(&((*line)[i + 1])) == -1)
+			exitcorewar(&corewar, "error bad characters after name", corewar->currentline, *line);
 	}
 	else
 		exitcorewar(&corewar, "error with name_cmd_string", corewar->currentline, *line);
@@ -88,9 +90,7 @@ int statchekin(t_corewar *corewar)
 	goin = 3;
     while	(get_str(corewar->fd, &line) > 0 && goin != 0)
 	{
-		if (*line == '\n')
-            continue ;
-        else if (isitcomment(line) == 0)
+        if (isitcomment(line) == 0 && *line != '\n')
             checknameorcomment(&line, corewar, &goin);
 		if (line != NULL)
 			ft_strdel(&line);

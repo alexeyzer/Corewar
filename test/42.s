@@ -3,7 +3,7 @@
 
 
 
-	ld 0,r5
+	ld 0e,r5   
 
 entreent:
 entree:live	%42		# entree

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:19:33 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/09 15:43:48 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/10 17:26:41 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,35 @@ void	addlabel(t_corewar *corewar, char *line, int i)
 		now->next = createlabel(line, i);
 		now->next->prev = now;
 	}
+}
+
+int	correctend(char *line)
+{
+	int i;
+
+	i = 0;
+	while(line[i] ==  ' ' || line[i] ==  '\t')
+		i++;
+	if (line[i] == '\n')
+		return (1);
+	else if (line[i] == ALT_COMMENT_CHAR || line[i] == COMMENT_CHAR)
+	{
+		while (line[i] != '\n' && line[i] != '\0')
+			i++;
+		if (line[i] == '\n')
+			return (1);
+		else
+			return (-1);	
+	}
+	return (-1);
+}
+
+void addcommand(t_corewar *corewar)
+{
+	t_asm *newasm;
+
+	newasm = initasm();
+	corewar->now->next = newasm;
+	newasm->prev = corewar->now;
+	corewar->now = newasm;
 }
