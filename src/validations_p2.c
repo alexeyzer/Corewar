@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 11:44:23 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 17:12:03 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 22:13:12 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int isitcomment(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] == ' ')
+	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	if (line[i] == COMMENT_CHAR || line[i] == ALT_COMMENT_CHAR)
+	if (line[i] == COMMENT_CHAR || line[i] == ALT_COMMENT_CHAR || line[i] == '\n')
 		return (1);
 	else
 		return (0);
@@ -38,7 +38,7 @@ int getcurrentstring2(char **line, t_corewar *corewar, int i, int *goin)
 	int j;
 
 	j = 0;
-	while ((*line)[i] == ' ')
+	while ((*line)[i] == ' ' || (*line)[i] == '\t')
 		i++;
 	if ((*line)[i] == '\"' && (((*goin) & 1) == 1))
 	{

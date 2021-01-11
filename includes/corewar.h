@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 18:58:53 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 21:18:55 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_diretcommand
 	int					commandnum;
 	int                	typeparams[3];
 	char				**param;
-	int					*paramtransmited;
+	double				*paramtransmited;
 }				t_diretcommand;
 
 typedef struct	s_command

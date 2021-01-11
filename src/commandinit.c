@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:54:47 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 17:49:17 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 21:19:07 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_diretcommand *createcommand(int numcommand)
 		head->param[i] = NULL;
 		i++;
 	}
-	head->paramtransmited = (int*)malloc(sizeof(int) * table[numcommand].countofparams);
+	head->paramtransmited = (double*)malloc(sizeof(double) * table[numcommand].countofparams);
 	head->typeparams[0] = 0;
 	head->typeparams[1] = 0;
 	head->typeparams[2] = 0;

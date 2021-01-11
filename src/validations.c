@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 15:28:45 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 12:25:06 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 22:20:40 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int getcurrentstring(char **line, t_corewar *corewar, int i, int *goin)
 	int j;
 
 	j = 0;
-	while ((*line)[i] == ' ')
+	while ((*line)[i] == ' ' || (*line)[i] == '\t')
 		i++;
 	if ((*line)[i] == '\"' && ((*goin & 2) == 2))
 	{
@@ -78,7 +78,7 @@ int checknameorcomment(char **line, t_corewar *corewar, int *goin)
 	if (NAME_CMD_STRING[j] == '\0')
 		getcurrentstring(line, corewar, i, goin);
 	else
-		checknameorcomment2(line, corewar, goin);
+		return (checknameorcomment2(line, corewar, goin));
 	return (1);
 }
 
@@ -91,7 +91,8 @@ int statchekin(t_corewar *corewar)
     while	(goin != 0 && get_str(corewar->fd, &line) > 0)
 	{
         if (isitcomment(line) == 0 && *line != '\n')
-            checknameorcomment(&line, corewar, &goin);
+            if (checknameorcomment(&line, corewar, &goin) < 0)
+				exitcorewar(&corewar, "Syntax error no comment or name", corewar->currentline, line);
 		if (line != NULL)
 			ft_strdel(&line);
 		(corewar->currentline)++;

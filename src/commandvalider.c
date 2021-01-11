@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 14:14:50 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 22:07:14 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ int		commandparser(t_corewar *corewar)
 				afterlabel(corewar, line, i);
 			else if ((i = isitcommand(line, 0)) >= 0)
 				iscommandcorrect(corewar, line, i, 0);
+			else
+				exitcorewar(&corewar, "Syntax error" , corewar->currentline, line);
         }
 		if (line != NULL)
 			ft_strdel(&line);
