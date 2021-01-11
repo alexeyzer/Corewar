@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 17:28:59 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 13:05:23 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	afterlabel(t_corewar *corewar, char *line, int i)
 		{
 			addlabel(corewar, line, j);
 			iscommandcorrect(corewar, line, numcommand, i);
-			//if we have command parse + add command + iscommandcorrect?
 		}
 		else
 			exitcorewar(&corewar, "Error with syntax after label", corewar->currentline, line);
@@ -98,11 +97,12 @@ int		commandparser(t_corewar *corewar)
 	corewar->now = corewar->head;
     while	(get_str(corewar->fd, &line) > 0)
 	{
+		ft_printf("%s", line);
         if (isitcomment(line) == 0 && *line != '\n')
         {
 			if ( (i = isitlabel(corewar, line)) > 0)
 				afterlabel(corewar, line, i);
-			else if ((i = isitcommand(line, 0)) > 0)
+			else if ((i = isitcommand(line, 0)) >= 0)
 				iscommandcorrect(corewar, line, i, 0);
         }
 		if (line != NULL)

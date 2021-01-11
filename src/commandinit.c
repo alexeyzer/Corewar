@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:54:47 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 16:30:52 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 12:58:22 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,41 +49,13 @@ char *argcopy(char *line)
 	return (newline);
 }
 
-void connecttoasmreg(t_corewar *corewar, int now, char *line, int numcommand)
+void connecttoasm(t_corewar *corewar, int now, char *line, int type)
 {
-	if (corewar->now->command == NULL)
-		corewar->now->command = createcommand(numcommand);
-	corewar->now->command->typeparams[now] = T_REG;
+	corewar->now->command->typeparams[now] = type;
 	if (now == 0)
 		corewar->now->command->param1 = argcopy(line);
 	if (now == 1)
 		corewar->now->command->param2 = argcopy(line);
 	if (now == 2)
-		corewar->now->command->param2 = argcopy(line);
-}
-
-void connecttoasmdir(t_corewar *corewar, int now, char *line, int numcommand)
-{
-	if (corewar->now->command == NULL)
-		corewar->now->command = createcommand(numcommand);
-	corewar->now->command->typeparams[now] = T_DIR;
-	if (now == 0)
-		corewar->now->command->param1 = argcopy(line);
-	if (now == 1)
-		corewar->now->command->param2 = argcopy(line);
-	if (now == 2)
-		corewar->now->command->param2 = argcopy(line);
-}
-
-void connecttoasmind(t_corewar *corewar, int now, char *line, int numcommand)
-{
-	if (corewar->now->command == NULL)
-		corewar->now->command = createcommand(numcommand);
-	corewar->now->command->typeparams[now] = T_IND;
-	if (now == 0)
-		corewar->now->command->param1 = argcopy(line);
-	if (now == 1)
-		corewar->now->command->param2 = argcopy(line);
-	if (now == 2)
-		corewar->now->command->param2 = argcopy(line);
+		corewar->now->command->param3 = argcopy(line);
 }

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 15:28:45 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 17:13:23 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 12:25:06 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int statchekin(t_corewar *corewar)
 	int goin;
 
 	goin = 3;
-    while	(get_str(corewar->fd, &line) > 0 && goin != 0)
+    while	(goin != 0 && get_str(corewar->fd, &line) > 0)
 	{
         if (isitcomment(line) == 0 && *line != '\n')
             checknameorcomment(&line, corewar, &goin);

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:56:17 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 17:28:25 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 12:28:23 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int getnumofcommand(char *line)
 		j = 0;
 		while(line[j] != ' ')
 		{
-			if (line[j] == commandstable[i].name[j])
+			if (line[j] == table[i].name[j])
 				j++;
 			else
 				break ;
 		}
-		if ((line[j] == ' ' || line[j] == '\t' || line[j] == DIRECT_CHAR) && commandstable[i].name[j] == '\0')
+		if ((line[j] == ' ' || line[j] == '\t' || line[j] == DIRECT_CHAR) && table[i].name[j] == '\0')
 			return (i);
 		i++;
 	}
@@ -42,7 +42,7 @@ int		expectations(char *line, int numcommand, int now)
 	i = 0;
 	while(line[i] ==  ' ' || line[i] ==  '\t')
 		i++;
-	if (now == commandstable[numcommand].countofparams - 1)
+	if (now == table[numcommand].countofparams - 1)
 	{
 		while(line[i] !=  ' ' && line[i] !=  '\t' && line[i] != '\n')
 			i++;
@@ -51,7 +51,7 @@ int		expectations(char *line, int numcommand, int now)
 		else
 			return (1);
 	}
-	else if (now < commandstable[numcommand].countofparams - 1)
+	else if (now < table[numcommand].countofparams - 1)
 	{
 		while(line[i] !=  ',' && line[i] != '\n')
 			i++;
@@ -77,22 +77,24 @@ int		isitcommand(char *line, int r)
 		return (-1);
 }
 
-int		parsecommandsargstostruct(t_corewar *corewar, char *line, int numcommand, int now)
+int		parsecommandsargstostruct(t_corewar *c, char *l, int num, int now)
 {
 	int i;
 
 	i = 0;
-	while(line[i] ==  ' ' || line[i] ==  '\t')
+	if (c->now->command == NULL)
+		c->now->command = createcommand(num);
+	while(l[i] ==  ' ' || l[i] ==  '\t')
 		i++;
-	if (line[i] == 'r' && ((commandstable[numcommand].typeparams[now] & T_REG) > 0))
-		connecttoasmreg(corewar, now, &(line[i]), numcommand);
-	else if (line[i] == (char)DIRECT_CHAR && ((commandstable[numcommand].typeparams[now] & T_DIR) > 0))
-		connecttoasmdir(corewar, now,  &(line[i]), numcommand);
-	else if ((line[i] == (char)LABEL_CHAR || ft_isdigit(line[i]) == 1 || line[i] == '-') && ((commandstable[numcommand].typeparams[now] & T_IND) > 0))
-		connecttoasmind(corewar, now,  &(line[i]), numcommand);
+	if (l[i] == 'r' && ((table[num].typeparams[now] & T_REG) > 0))
+		connecttoasm(c, now, &(l[i]), T_REG);
+	else if (l[i] == DIRECT_CHAR && ((table[num].typeparams[now] & T_DIR) > 0))
+		connecttoasm(c, now,  &(l[i]), T_DIR);
+	else if ((l[i] == LABEL_CHAR || ft_isdigit(l[i]) == 1 || l[i] == '-') && ((table[num].typeparams[now] & T_IND) > 0))
+		connecttoasm(c, now,  &(l[i]), T_IND);
 	else
 		return (-1);
-	return (expectations(line, numcommand, now));
+	return (expectations(l, num, now));
 }
 
 int iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i)
@@ -106,7 +108,7 @@ int iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i)
 		i++;
 	while (line[i] !=  ' ' && line[i] !=  '\t' && line[i] != DIRECT_CHAR && line[i] != '-')
 		i++;
-	while (now < commandstable[numcommand].countofparams)
+	while (now < table[numcommand].countofparams)
 	{
 		if ((j = parsecommandsargstostruct(corewar, &(line[i]), numcommand, now)) > 0)
 			i = i + j;

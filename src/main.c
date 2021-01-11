@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/09 16:31:25 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 12:35:06 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_corewar *initstruct()
 	newcorewar = (t_corewar*)malloc(sizeof(t_corewar));
 	newcorewar->initial = (t_header*)malloc(sizeof(t_header));
 	newcorewar->head = NULL;
-	newcorewar->commandstable = NULL;
 	return (newcorewar);
 }
 
@@ -84,9 +83,9 @@ int main(int argc, char **argv)
 		else
 		{
 			corewar = initstruct();
-			ft_printf("here we start workin");
 			validator(argv[1], corewar);
 			commandparser(corewar);
+			getsizeall(corewar);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/10 17:27:19 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 12:33:42 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct	s_diretcommand
 {
 	int					commandnum;
 	int                	typeparams[3];
-	void				*param1;
-	void				*param2;
-	void				*param3;
+	char				*param1;
+	char				*param2;
+	char				*param3;
 }				t_diretcommand;
 
 typedef struct	s_command
@@ -51,7 +51,7 @@ typedef struct	s_command
 }				t_command;
 
 
-static t_command		commandstable[16] = {
+static t_command		table[16] = {
 	{
 		.name = "live",
 		.code = 0x01,
@@ -204,28 +204,27 @@ typedef struct	s_corewar
 	t_header			*initial;
 	t_asm				*head;
 	t_asm				*now;
-	t_command			*commandstable;
 	int					fd;
 	int					currentline;
 	
 }				t_corewar;
 
-int		validator(char *filename, t_corewar *corewar);
-void	exitcorewar(t_corewar **corewar, char *strtoprint, int online, char *line);
-void	getnext(char **line, int *i, t_corewar *corewar);
-int		isitcomment(char *line);
-int		getcurrentstring2(char **line, t_corewar *corewar, int i, int *goin);
-int		get_str(const int fd, char **row);
-int		commandparser(t_corewar *corewar);
-int		isitcommand(char *line, int r);
-void	addlabel(t_corewar *corewar, char *line, int i);
-int		iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i);
-void	connecttoasmdir(t_corewar *corewar, int now, char *line, int numcommand);
-void	connecttoasmind(t_corewar *corewar, int now, char *line, int numcommand);
-void	connecttoasmreg(t_corewar *corewar, int now, char *line, int numcommand);
-int		correctend(char *line);
-t_asm	*initasm();
-void	addcommand(t_corewar *corewar);
+int				validator(char *filename, t_corewar *corewar);
+void			exitcorewar(t_corewar **corewar, char *strtoprint, int online, char *line);
+void			getnext(char **line, int *i, t_corewar *corewar);
+int				isitcomment(char *line);
+int				getcurrentstring2(char **line, t_corewar *corewar, int i, int *goin);
+int				get_str(const int fd, char **row);
+int				commandparser(t_corewar *corewar);
+int				isitcommand(char *line, int r);
+void			addlabel(t_corewar *corewar, char *line, int i);
+int				iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i);
+void			connecttoasm(t_corewar *corewar, int now, char *line, int type);
+int				correctend(char *line);
+t_asm			*initasm();
+void			addcommand(t_corewar *corewar);
+t_diretcommand	*createcommand(int numcommand);
+void			getsizeall(t_corewar *corewar);
 
 /*t_op    op_tab[17] =
 {
