@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 12:33:42 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 18:58:53 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 
 typedef struct	s_diretcommand
 {
+	int					online;
 	int					commandnum;
 	int                	typeparams[3];
-	char				*param1;
-	char				*param2;
-	char				*param3;
+	char				**param;
+	int					*paramtransmited;
 }				t_diretcommand;
 
 typedef struct	s_command
@@ -225,6 +225,8 @@ t_asm			*initasm();
 void			addcommand(t_corewar *corewar);
 t_diretcommand	*createcommand(int numcommand);
 void			getsizeall(t_corewar *corewar);
+int				exitn(t_corewar **corewar, char *strtoprint, int online, int nbr);
+void			checkallarguments(t_corewar *corewar);
 
 /*t_op    op_tab[17] =
 {

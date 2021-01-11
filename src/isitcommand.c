@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:56:17 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 12:28:23 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 16:03:33 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int iscommandcorrect(t_corewar *corewar, char *line, int numcommand, int i)
 			exitcorewar(&corewar, "Error with command argument", corewar->currentline, line);
 		now++;
 	}
+	corewar->now->command->online = corewar->currentline;
 	addcommand(corewar);
 	return (1);
 }

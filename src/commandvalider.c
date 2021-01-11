@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 13:05:23 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 14:14:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int		isitlabel(t_corewar *corewar, char *line)
 				exitcorewar(&corewar, "invalid symbols for Label", corewar->currentline, line);
 			i++;
 		}
+		if (i == 0)
+			exitcorewar(&corewar, "Error, there is no symbols for Label", corewar->currentline, line);
 		return (i);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:54:47 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 12:58:22 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 17:49:17 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 t_diretcommand *createcommand(int numcommand)
 {
 	t_diretcommand *head;
+	int i;
 
+	i = 0;
 	if (!(head = (t_diretcommand*)malloc(sizeof(t_diretcommand))))
 		return (NULL);
 	head->commandnum = numcommand;
-	head->param1 = NULL;
-	head->param2 = NULL;
-	head->param3 = NULL;
+	head->param = (char**)malloc(sizeof(char*) * table[numcommand].countofparams);
+	while (i < table[numcommand].countofparams)
+	{
+		head->param[i] = NULL;
+		i++;
+	}
+	head->paramtransmited = (int*)malloc(sizeof(int) * table[numcommand].countofparams);
 	head->typeparams[0] = 0;
 	head->typeparams[1] = 0;
 	head->typeparams[2] = 0;
@@ -52,10 +58,5 @@ char *argcopy(char *line)
 void connecttoasm(t_corewar *corewar, int now, char *line, int type)
 {
 	corewar->now->command->typeparams[now] = type;
-	if (now == 0)
-		corewar->now->command->param1 = argcopy(line);
-	if (now == 1)
-		corewar->now->command->param2 = argcopy(line);
-	if (now == 2)
-		corewar->now->command->param3 = argcopy(line);
+	corewar->now->command->param[now] = argcopy(line);
 }

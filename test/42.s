@@ -1,7 +1,7 @@
 .name           "42"
 .comment        "Just a basic Winner Program"
 
-:	live	%42		# entree
+entree:	live	%42		# entree
 	ld	%0,r5
 	ld	%0,r5
 	zjmp	%:bite
@@ -209,7 +209,7 @@ p64deb:	zjmp	%0
 
 p64:	ld	%10,r8
 	sub	r6,r8,r6
-	and	r6,%2147483648,r8
+	and	r6,%2147483649,r8
 	zjmp	%:cont
 	ld	%118,r8
 	add	r6,r8,r6

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 12:35:06 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/11 21:07:04 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int main(int argc, char **argv)
 {
 	t_corewar *corewar;
 
-
 	if (argc != 2)
 		ft_printf("Usage: ./asm player.s\n");
 	else
@@ -86,32 +85,8 @@ int main(int argc, char **argv)
 			validator(argv[1], corewar);
 			commandparser(corewar);
 			getsizeall(corewar);
+			checkallarguments(corewar);
 		}
 	}
 	return (0);
-}
-
-void exitcorewar(t_corewar **corewar, char *strtoprint, int online, char *line)
-{
-	t_header	*header;
-
-	if (line != NULL)
-		ft_strdel(&line);
-	if (strtoprint != NULL)
-	{
-		if (online != -1)
-			ft_printf("%s on line %d", strtoprint, online);
-		else
-			ft_printf("%s", strtoprint);
-	}
-	if (*corewar != NULL)
-	{
-		header = (*corewar)->initial;
-		if (header != NULL)
-		{
-			free(header);
-			(*corewar)->initial = NULL;
-		}
-		exit(0);
-	}
 }
