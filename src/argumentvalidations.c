@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:08:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 21:06:31 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/12 10:56:04 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	getadressdown(char *line, int i, t_corewar *corewar, int n)
 		label = realnow->label;
 		while (label != NULL)
 		{
-			if (ft_strcmp(realnow->label->label, (&line[i])))
+			if (ft_strcmp(realnow->label->label, (&line[i])) == 0)
 				return (size);
 			label = label->next;
 		}
@@ -77,7 +77,7 @@ double	getadressup(char *line, int i, t_corewar *corewar, int n)
 		label = realnow->label;
 		while (label != NULL)
 		{
-			if (ft_strcmp(realnow->label->label, &(line[i])))
+			if (ft_strcmp(realnow->label->label, &(line[i])) == 0)
 				return (size * -1);
 			label = label->next;
 		}
@@ -116,7 +116,7 @@ int  checkdir(t_corewar *corewar, char *line, int n, t_asm *now)
 	{
 		i++;
 		if (line[i] == ':')
-			result = getadressup(line, 0, corewar, n);
+			result = getadressup(line, i + 1, corewar, n);
 		else
 		{
 			if (line[i] == '%' && line[i + 1] == '\0')

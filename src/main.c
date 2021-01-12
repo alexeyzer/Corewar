@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 21:07:04 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/12 16:16:48 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int main(int argc, char **argv)
 			commandparser(corewar);
 			getsizeall(corewar);
 			checkallarguments(corewar);
+			exitcorewar(&corewar, NULL, -1, NULL);
 		}
 	}
 	return (0);
