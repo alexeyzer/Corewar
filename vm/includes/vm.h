@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/17 17:08:16 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/18 11:08:52 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct	s_field
   champ_first - корень списка чемпионов 
   begin_list - начало списка клеток, составляющих поле
    */
-t_field *validation_and_reading(int argc, char *argv[]);
+t_field *validation_and_reading(int argc, char **argv);
+t_champ *champ_parse(char *filename, t_field *field, int counter);
 /*ядро валидации*/
 #endif

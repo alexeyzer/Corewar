@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = valid.c
+SRC = valid.c champ_parse.c
 
 SRC_DIR = src/
 
@@ -21,11 +21,11 @@ LIB_H =	-I libftprintf/libft/
 
 SRCS=$(addprefix $(SRC_DIR), $(SRC))
 
-NAME = asm
+NAME = corewar
 
 OBJ = $(SRCS:%.c=%.o)
 
-INCNAME1 = includes/corewar.h
+INCNAME1 = includes/vm.h
 INCNAME2 = includes/op.h
 
 all: $(NAME)
@@ -33,7 +33,7 @@ all: $(NAME)
 $(NAME): $(OBJ) 
 	@cd libftprintf && $(MAKE) all
 	@cp libftprintf/libftprintf.a ./
-	@gcc -Wall -Wextra -o $(NAME) $(OBJ) libftprintf.a
+	@gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) libftprintf.a
 
 
 %.o:%.c $(INCNAME1)
