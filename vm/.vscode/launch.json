@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["./test/zork.cor"],
+			"args": ["./test/42.cor"],
 			"cwd": "${workspaceFolder}"
 		}
 	]
