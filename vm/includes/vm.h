@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/18 11:08:52 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/18 17:28:25 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 #include <fcntl.h>
+#define MISTAKESYMB -1
 typedef struct	s_process
 {
     int pos;
@@ -37,9 +38,9 @@ parent - указание на родителя, если нулл -
  процесс первый и порожден в начале игры*/
 typedef struct	s_cell
 {
-    char meaning;
    // int number;
     char color;
+    unsigned char cell;
    // t_cell *prev;
    /// t_cell *next;
 }				t_cell;
@@ -49,9 +50,9 @@ typedef struct	s_champ
    // int idle;
     t_header *inf;
     //int hp;
+    unsigned char *execcode;
     int number;
     t_process *first_proc;
-    struct	s_champ *next;
 }				t_champ;
 /*
 нейм - имя
@@ -59,12 +60,19 @@ typedef struct	s_champ
 first_proc - ссылка на каретку(ки) 
 next - следующий чемпион в списке
 у игрока есть N регистров для хранения данных */
+typedef struct	s_champlist
+{
+    t_champ *nowchamp;
+    int     place;
+    struct	s_champlist *next;
+}               t_champlist;
 typedef struct	s_field
 {
     int counter;
     int dump;
     int cycle;
-    t_champ *champ_first;
+    t_champlist *champlist;
+    t_champlist *now;
     t_cell mass[MEM_SIZE];
 }				t_field;
 /*counter - количество чемпионов
@@ -73,6 +81,10 @@ typedef struct	s_field
   begin_list - начало списка клеток, составляющих поле
    */
 t_field *validation_and_reading(int argc, char **argv);
-t_champ *champ_parse(char *filename, t_field *field, int counter);
+void champ_parse(char *filename, t_field *field);
+t_champlist *isitbusy(t_champlist *head, int number);
+t_champlist *addchamtolist(t_champlist *now);
+t_field        *init();
+void place(t_field *field);
 /*ядро валидации*/
 #endif
