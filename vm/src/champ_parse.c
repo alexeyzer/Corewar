@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   champ_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 16:24:14 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/18 18:12:25 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/19 09:41:42 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int read_int(int fd, int count)
     int             status;
     int             result;
 
-    status = read(fd, &buff, count);
+    status = read(fd, buff, count);
     if (status < count)
         exit(-1);
     result = bytecode_to_int(buff, count);
@@ -49,28 +49,27 @@ int read_int(int fd, int count)
 
 void read_char(int fd, int count, char *dest)
 {
-    char    buff[count];
+    char   *buff;
     int         status;
 
-    status = read(fd, &buff, count);
+    buff = (char*)malloc(sizeof(unsigned char) * count);
+    status = read(fd, buff, count);
     if (status < count)
         exit(-1);
-    ft_strcpy(dest, buff);
+    dest = buff;
 }
 
-void read_code(int fd, size_t sizeofexec, t_champ *champ)
+void read_code(int fd, int sizeofexec, t_champ *champ)
 {
     unsigned char    *buff;
-    size_t     status;
+    int     status;
     unsigned char a;
 
-    if (!(buff = malloc(sizeofexec)))
+    if (!(buff = (unsigned char*)malloc(sizeof(unsigned char) * sizeofexec)))
         exit(-1);//не выделилась память
-    status = read(fd, &buff, sizeofexec);
+    status = read(fd, buff, sizeofexec);
     if (status < sizeofexec || read(fd, &a, 1) > 0)
         exit(-1);//считано меньше байтов чем заявленно или за исполняемым кодом присутствуют еще символы
-    a = buff[0];
-    //ft_memmove(buff1, buff, sizeofexec);
     champ->execcode = buff;
 }
 
