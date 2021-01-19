@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/18 17:28:47 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/19 17:56:57 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int  is_key_n(char *curr, char *next, char *nextnext,  t_field *field)
     t_champlist *change;
 
     number = 0;
+    field->now->nowchamp = createchamp();
     if (curr == NULL || next == NULL || nextnext == NULL)
         return(MISTAKESYMB);
     if ((ft_atoi(next) || ft_strequ(next,"0")) && ft_strequ(curr,"-n"))
@@ -54,12 +55,11 @@ static int  is_key_n(char *curr, char *next, char *nextnext,  t_field *field)
             return (MISTAKESYMB);
         if ((change = isitbusy(field->champlist, number)))
         {
-            change->place = field->counter;
-            change->nowchamp->number = field->counter;
-            field->now->place = number;
+            change->nowchamp->number = getmin(field);
+            field->now->nowchamp->number = number;
         }
         else
-            field->now->place = number;
+            field->now->nowchamp->number = number;
         return (1);
     }
     return (-1);
@@ -81,8 +81,13 @@ t_field     *validation_and_reading(int argc, char **argv)
     {
         if (is_champ(argv[i]))
         {
-            champ_parse(argv[i], field);
-            (field->counter)++;
+            if (field->now->nowchamp != NULL)
+                champ_parse(argv[i], field);
+            else
+            {
+                champ_parse(argv[i], field);
+                (field->counter)++;
+            }
         }
         else
         {
@@ -98,7 +103,7 @@ t_field     *validation_and_reading(int argc, char **argv)
         }
         i++;
     }
-    if (field->counter > MAX_PLAYERS)
+    if (getcountoflist(field->champlist) > MAX_PLAYERS)
         return (NULL);
     return (field);
 }
@@ -108,5 +113,9 @@ int main(int argc, char **argv)
     t_field *fild;
     
     fild = validation_and_reading(argc, argv);
+    currectnum(fild);
+    makecolor(fild->champlist);
     place(fild);
+
+    field_print(fild);
 }

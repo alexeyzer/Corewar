@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/18 17:28:25 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/19 17:56:27 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,27 @@
 # include "libft.h"
 #include <fcntl.h>
 #define MISTAKESYMB -1
+
+# define COLOR
+# define RED		"\033[31m"
+# define GREEN		"\033[32m"
+# define YELLOW		"\033[33m"
+# define BLUE		"\033[34m"
+# define PINK		"\033[35m"
+# define GRBL		"\033[36m"
+# define GREY		"\033[37m"
+# define NO			"\033[0m"
+
 typedef struct	s_process
 {
     int pos;
     int idle;
     int carry;
+    char color;
     //int hp;
     //t_champ *host;
-    struct	s_process *child;
-    struct	s_process *parent;
+    int reg[REG_NUMBER];
+    struct  s_process *next;
 }				t_process;
 /*
 host - породивший его чемпион
@@ -51,6 +63,7 @@ typedef struct	s_champ
     t_header *inf;
     //int hp;
     unsigned char *execcode;
+    char color;
     int number;
     t_process *first_proc;
 }				t_champ;
@@ -63,7 +76,7 @@ next - следующий чемпион в списке
 typedef struct	s_champlist
 {
     t_champ *nowchamp;
-    int     place;
+    int sorted;
     struct	s_champlist *next;
 }               t_champlist;
 typedef struct	s_field
@@ -80,11 +93,17 @@ typedef struct	s_field
   champ_first - корень списка чемпионов 
   begin_list - начало списка клеток, составляющих поле
    */
+int getcountoflist(t_champlist *head);
 t_field *validation_and_reading(int argc, char **argv);
 void champ_parse(char *filename, t_field *field);
 t_champlist *isitbusy(t_champlist *head, int number);
 t_champlist *addchamtolist(t_champlist *now);
 t_field        *init();
 void place(t_field *field);
+void field_print(t_field *field);
+t_champ *createchamp();
+void makecolor(t_champlist *head);
+void currectnum(t_field *field);
+int getmin(t_field *field);
 /*ядро валидации*/
 #endif

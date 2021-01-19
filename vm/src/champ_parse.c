@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   champ_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 16:24:14 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/19 09:41:42 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/19 17:57:16 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void read_code(int fd, int sizeofexec, t_champ *champ)
     champ->execcode = buff;
 }
 
-t_champ *createchamp(int counter)
+t_champ *createchamp()
 {
     t_champ *newchamp;
 
@@ -82,34 +82,33 @@ t_champ *createchamp(int counter)
     newchamp->first_proc = NULL;
     newchamp->inf = (t_header*)malloc(sizeof(t_header));
     newchamp->execcode = NULL;
-    newchamp->number = counter;
+    newchamp->number = -1;
+    newchamp->color = 'c';
     return (newchamp);
 }
 
 void champ_parse(char *filename, t_field *field)
 {
     int fd;
-    t_champ *new;
 
-    if (field->now->place == -1)
-        new = createchamp(field->counter);
-    else
-        new = createchamp(field->now->place);
-    field->now->place = new->number;
+    if (field->now->nowchamp == NULL)
+    {
+        field->now->nowchamp = createchamp();
+        field->now->nowchamp->number = getmin(field);
+    }   
     fd = open(filename, O_RDONLY);
     if (read_int(fd, 4) != COREWAR_EXEC_MAGIC)
         exit(-1);//маджик неправильный
-    read_char(fd, PROG_NAME_LENGTH, new->inf->prog_name);
+    read_char(fd, PROG_NAME_LENGTH, field->now->nowchamp->inf->prog_name);
     if (read_int(fd, 4) != 0)
         exit(-1);//отсутсвует 0 в виде 4 байт
-    new->inf->prog_size =read_int(fd, 4);
-    if (new->inf->prog_size > CHAMP_MAX_SIZE)
+    field->now->nowchamp->inf->prog_size =read_int(fd, 4);
+    if (field->now->nowchamp->inf->prog_size > CHAMP_MAX_SIZE)
         exit(-1);//размер исполняемого кода больше максимума. какой минимум?
-    read_char(fd, COMMENT_LENGTH, new->inf->comment);
+    read_char(fd, COMMENT_LENGTH, field->now->nowchamp->inf->comment);
     if (read_int(fd, 4) != 0)
         exit(-1);//отсутсвует 0 в виде 4 байт
-    read_code(fd, new->inf->prog_size, new);
-    field->now->nowchamp = new;
+    read_code(fd, field->now->nowchamp->inf->prog_size, field->now->nowchamp);
     field->now =  addchamtolist(field->now);
     close(fd);
 }
