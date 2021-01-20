@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/19 17:56:27 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 17:40:43 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_process
     int idle;
     int carry;
     char color;
+    int  nextop;
     //int hp;
     //t_champ *host;
     int reg[REG_NUMBER];
@@ -65,7 +66,7 @@ typedef struct	s_champ
     unsigned char *execcode;
     char color;
     int number;
-    t_process *first_proc;
+    int alive;
 }				t_champ;
 /*
 нейм - имя
@@ -76,7 +77,7 @@ next - следующий чемпион в списке
 typedef struct	s_champlist
 {
     t_champ *nowchamp;
-    int sorted;
+    struct	s_champlist *prev;
     struct	s_champlist *next;
 }               t_champlist;
 typedef struct	s_field
@@ -84,6 +85,8 @@ typedef struct	s_field
     int counter;
     int dump;
     int cycle;
+    t_process *first;
+    t_process *current;
     t_champlist *champlist;
     t_champlist *now;
     t_cell mass[MEM_SIZE];
@@ -91,8 +94,167 @@ typedef struct	s_field
 /*counter - количество чемпионов
  dump - когда выгрузить состояние поля, если "-1", то выгружать его каждую итерацию
   champ_first - корень списка чемпионов 
-  begin_list - начало списка клеток, составляющих поле
+  
    */
+
+typedef struct	s_command
+{
+	char                *name;
+	int					code;
+    int                 countofparams;
+	int                	typeparams[3];
+	int					argumentcode;
+	int					dir_size;
+    int                 carry;
+}				t_command;
+
+static t_command		table[16] = {
+	{
+		.name = "live",
+		.code = 0x01,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 4,
+		.argumentcode = 0,
+        .carry = 0,
+	},
+	{
+		.name = "ld",
+		.code = 0x02,
+		.countofparams = 2,
+		.typeparams = {T_DIR | T_IND, T_REG, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "st",
+		.code = 0x03,
+		.countofparams = 2,
+		.typeparams = {T_REG, T_REG | T_IND, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 0,
+	},
+	{
+		.name = "add",
+		.code = 0x04,
+		.countofparams = 3,
+		.typeparams = {T_REG, T_REG, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "sub",
+		.code = 0x05,
+		.countofparams = 3,
+		.typeparams = {T_REG, T_REG, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "and",
+		.code = 0x06,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "or",
+		.code = 0x07,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "xor",
+		.code = 0x08,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "zjmp",
+		.code = 0x09,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 2,
+		.argumentcode = 0,
+        .carry = 0,
+	},
+	{
+		.name = "ldi",
+		.code = 0x0A,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
+		.dir_size = 2,
+		.argumentcode = 1,
+        .carry = 0,
+	},
+	{
+		.name = "sti",
+		.code = 0x0B,
+		.countofparams = 3,
+		.typeparams = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
+		.dir_size = 2,
+		.argumentcode = 1,
+        .carry = 0,
+	},
+	{
+		.name = "fork",
+		.code = 0x0C,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 2,
+		.argumentcode = 0,
+        .carry = 0,
+	},
+	{
+		.name = "lld",
+		.code = 0x0D,
+		.countofparams = 2,
+		.typeparams = {T_DIR | T_IND, T_REG, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "lldi",
+		.code = 0x0E,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
+		.dir_size = 2,
+		.argumentcode = 1,
+        .carry = 1,
+	},
+	{
+		.name = "lfork",
+		.code = 0x0F,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 2,
+		.argumentcode = 0,
+        .carry = 0,
+	},
+	{
+		.name = "aff",
+		.code = 0x10,
+		.countofparams = 1,
+		.typeparams = {T_REG, 0, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+        .carry = 0,
+	}
+};
+
 int getcountoflist(t_champlist *head);
 t_field *validation_and_reading(int argc, char **argv);
 void champ_parse(char *filename, t_field *field);
@@ -105,5 +267,7 @@ t_champ *createchamp();
 void makecolor(t_champlist *head);
 void currectnum(t_field *field);
 int getmin(t_field *field);
+void init_proc(t_field *field);
+int	bytecode_to_int(unsigned char *byte, int size);
 /*ядро валидации*/
 #endif

@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/19 17:56:57 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 17:28:49 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int  is_key_n(char *curr, char *next, char *nextnext,  t_field *field)
     {
         if (!(ft_strequ(next,"0")))
             number = ft_atoi(next);
-        if (number > 3 || number < 0 || !(is_champ(nextnext)))
+        if (number > 4 || number < 1 || !(is_champ(nextnext)))
             return (MISTAKESYMB);
         if ((change = isitbusy(field->champlist, number)))
         {
@@ -62,7 +62,7 @@ static int  is_key_n(char *curr, char *next, char *nextnext,  t_field *field)
             field->now->nowchamp->number = number;
         return (1);
     }
-    return (-1);
+    return (MISTAKESYMB);
 }
 /*является ли ключом, в идеале пусть возвращает значение */
 
@@ -116,6 +116,6 @@ int main(int argc, char **argv)
     currectnum(fild);
     makecolor(fild->champlist);
     place(fild);
-
+    init_proc(fild);
     field_print(fild);
 }

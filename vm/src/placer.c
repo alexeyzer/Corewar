@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:19:30 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/19 17:40:30 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 17:33:19 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void place(t_field *field)
         j = 0;
         while(j < (int)now->nowchamp->inf->prog_size)
         {
-            field->mass[now->nowchamp->number * delta + j].cell = now->nowchamp->execcode[j];
-            field->mass[now->nowchamp->number * delta + j].color = now->nowchamp->color;
+            field->mass[(now->nowchamp->number - 1) * delta + j].cell = now->nowchamp->execcode[j];
+            field->mass[(now->nowchamp->number - 1) * delta + j].color = now->nowchamp->color;
             j++;
         }
         now = now->next;
@@ -48,13 +48,13 @@ void place(t_field *field)
 
 void printcurrentcolor(t_cell *cell)
 {
-    if (cell->color == 'a')
-        ft_printf(GREEN"%02x "NO, cell->cell);
     if (cell->color == 'b')
-        ft_printf(RED"%02x "NO, cell->cell);
+        ft_printf(GREEN"%02x "NO, cell->cell);
     if (cell->color == 'c')
-        ft_printf(BLUE"%02x "NO, cell->cell);
+        ft_printf(RED"%02x "NO, cell->cell);
     if (cell->color == 'd')
+        ft_printf(BLUE"%02x "NO, cell->cell);
+    if (cell->color == 'e')
         ft_printf(PINK"%02x "NO, cell->cell);
     if (cell->color == 'z')
         ft_printf("%02x ", cell->cell);

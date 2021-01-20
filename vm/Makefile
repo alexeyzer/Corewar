@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = valid.c champ_parse.c valider.c placer.c func.c
+SRC = valid.c champ_parse.c valider.c placer.c func.c proccore.c
 
 SRC_DIR = src/
 

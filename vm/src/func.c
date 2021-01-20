@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:53:47 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/19 17:56:17 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 17:31:22 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int findmin(t_champlist *now)
     min = now->nowchamp->number;
     while (now != NULL && now->nowchamp != NULL)
     {
-        if (min > now->nowchamp->number && now->sorted == 0)
+        if (min > now->nowchamp->number)
             min = now->nowchamp->number;
         now = now->next;
     }
@@ -72,7 +72,7 @@ int getmin(t_field *field)
     int nowi;
 
     nowi = 0;
-    min = 0;
+    min = 1;
 
     sortlist(field->champlist);
     now = field->champlist;
@@ -94,23 +94,19 @@ void currectnum(t_field *field)
     int nowi;
 
     nowi = 0;
-    min = 0;
+    min = 1;
 
+    sortlist(field->champlist);
     now = field->champlist;
     while (now != NULL && now->nowchamp != NULL)
     {
         if (min >= (nowi = findmin(now)))
-        {
-            getminbyb(nowi, now)->sorted = 1;
             min++;
-        }
         else
         {
-            getminbyb(nowi, now)->sorted = 1;
             getminbyb(nowi, now)->nowchamp->number = min;
             min++;
         }
-        if (now->sorted == 1)
-            now = now->next;
+        now = now->next;
     }
 }

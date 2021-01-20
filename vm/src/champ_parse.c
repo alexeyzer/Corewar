@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 16:24:14 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/19 17:57:16 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 17:27:01 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int read_int(int fd, int count)
 
 void read_char(int fd, int count, char *dest)
 {
-    char   *buff;
+    char        buff[count];
     int         status;
 
-    buff = (char*)malloc(sizeof(unsigned char) * count);
+
     status = read(fd, buff, count);
     if (status < count)
         exit(-1);
-    dest = buff;
+    ft_memmove(dest, buff, count);
 }
 
 void read_code(int fd, int sizeofexec, t_champ *champ)
@@ -82,7 +82,7 @@ t_champ *createchamp()
     newchamp->first_proc = NULL;
     newchamp->inf = (t_header*)malloc(sizeof(t_header));
     newchamp->execcode = NULL;
-    newchamp->number = -1;
+    newchamp->number = 100;
     newchamp->color = 'c';
     return (newchamp);
 }
@@ -104,7 +104,7 @@ void champ_parse(char *filename, t_field *field)
         exit(-1);//отсутсвует 0 в виде 4 байт
     field->now->nowchamp->inf->prog_size =read_int(fd, 4);
     if (field->now->nowchamp->inf->prog_size > CHAMP_MAX_SIZE)
-        exit(-1);//размер исполняемого кода больше максимума. какой минимум?
+        exit(-1);//размер исполняемого кода больше максимума. какой минимум?s
     read_char(fd, COMMENT_LENGTH, field->now->nowchamp->inf->comment);
     if (read_int(fd, 4) != 0)
         exit(-1);//отсутсвует 0 в виде 4 байт
