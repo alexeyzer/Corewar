@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proccore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 16:38:11 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 18:40:57 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_process *createproc(t_champlist *parent, int num)
     res->color = parent->nowchamp->color;
     res->idle = 0;
     res->next = NULL;
-    res->reg[0] = -1 * parent->nowchamp->number;
+    res->reg[0] = parent->nowchamp->number;
     while(i<REG_NUMBER)
     {
         res->reg[i]=0;
@@ -63,6 +63,9 @@ t_process *createproc(t_champlist *parent, int num)
 
 void init_proc(t_field *field)
 {
+    field->first = createproc(field->now,getcountoflist(field->champlist));
+    field->current = field->first;
+    field->current = field->current->next;
     while(field->now != NULL)
     {
         if (field->now->nowchamp != NULL)
@@ -72,5 +75,4 @@ void init_proc(t_field *field)
         }
         field->now = field->now->prev;
     }
-    //revert_list(field);
 }

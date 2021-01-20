@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 17:40:43 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/20 18:04:56 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct	s_field
     int counter;
     int dump;
     int cycle;
+	int	checks;
+	int countlive;
     t_process *first;
     t_process *current;
     t_champlist *champlist;
@@ -92,8 +94,10 @@ typedef struct	s_field
     t_cell mass[MEM_SIZE];
 }				t_field;
 /*counter - количество чемпионов
- dump - когда выгрузить состояние поля, если "-1", то выгружать его каждую итерацию
-  champ_first - корень списка чемпионов 
+checks - количество циклов без уменьшения
+dump - когда выгрузить состояние поля, если "-1", то выгружать его каждую итерацию
+champ_first - корень списка чемпионов
+countlive - количество выполненных операций live
   
    */
 
