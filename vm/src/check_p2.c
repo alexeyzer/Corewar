@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/21 15:33:59 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/21 18:39:33 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,13 @@ void deleteall(t_field *field)
 		deleter(field->first);
 		field->first = NULL;
 	}
+}
+
+int getcyclesforcop(t_process *now)
+{
+	if (now->cop == -1)
+		return (0);
+	else
+		return(table[now->cop].cycle);
+	
 }

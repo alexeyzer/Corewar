@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/21 15:52:15 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/21 18:24:41 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ t_process *createproc(t_champlist *parent, int num)
     res->color = parent->nowchamp->color;
     res->idle = 0;
     res->lastcyclelive = -1;
+    res->moved = 1;
+    res->cop = -1;
+    res->bytetonextсop = 0;
     res->next = NULL;
     res->prev = NULL;
     res->reg[0] = -1 * parent->nowchamp->number;

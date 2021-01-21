@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/21 15:43:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/21 18:33:27 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ typedef struct	s_process
     int idle;
     int carry;
     char color;
-    int  nextop;
+    int  bytetonextсop;
 	int	 lastcyclelive;
+	int  moved;
+	int	 cop;
     //int hp;
     //t_champ *host;
     int reg[REG_NUMBER];
@@ -82,6 +84,7 @@ typedef struct	s_champlist
     struct	s_champlist *prev;
     struct	s_champlist *next;
 }               t_champlist;
+
 typedef struct	s_field
 {
     int counter;
@@ -113,6 +116,7 @@ typedef struct	s_command
 	int					argumentcode;
 	int					dir_size;
     int                 carry;
+	int					cycle;
 }				t_command;
 
 static t_command		table[16] = {
@@ -124,6 +128,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 0,
         .carry = 0,
+		.cycle = 10,
 	},
 	{
 		.name = "ld",
@@ -133,6 +138,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 5,
 	},
 	{
 		.name = "st",
@@ -142,6 +148,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 0,
+		.cycle = 5,
 	},
 	{
 		.name = "add",
@@ -151,6 +158,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 10,
 	},
 	{
 		.name = "sub",
@@ -160,6 +168,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 10,
 	},
 	{
 		.name = "and",
@@ -169,6 +178,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 6,
 	},
 	{
 		.name = "or",
@@ -178,6 +188,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 6,
 	},
 	{
 		.name = "xor",
@@ -187,6 +198,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 6,
 	},
 	{
 		.name = "zjmp",
@@ -196,6 +208,7 @@ static t_command		table[16] = {
 		.dir_size = 2,
 		.argumentcode = 0,
         .carry = 0,
+		.cycle = 20,
 	},
 	{
 		.name = "ldi",
@@ -205,6 +218,7 @@ static t_command		table[16] = {
 		.dir_size = 2,
 		.argumentcode = 1,
         .carry = 0,
+		.cycle = 25,
 	},
 	{
 		.name = "sti",
@@ -214,6 +228,7 @@ static t_command		table[16] = {
 		.dir_size = 2,
 		.argumentcode = 1,
         .carry = 0,
+		.cycle = 25,
 	},
 	{
 		.name = "fork",
@@ -223,6 +238,7 @@ static t_command		table[16] = {
 		.dir_size = 2,
 		.argumentcode = 0,
         .carry = 0,
+		.cycle = 800,
 	},
 	{
 		.name = "lld",
@@ -232,6 +248,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 10,
 	},
 	{
 		.name = "lldi",
@@ -241,6 +258,7 @@ static t_command		table[16] = {
 		.dir_size = 2,
 		.argumentcode = 1,
         .carry = 1,
+		.cycle = 50,
 	},
 	{
 		.name = "lfork",
@@ -250,6 +268,7 @@ static t_command		table[16] = {
 		.dir_size = 2,
 		.argumentcode = 0,
         .carry = 0,
+		.cycle = 1000,
 	},
 	{
 		.name = "aff",
@@ -259,6 +278,7 @@ static t_command		table[16] = {
 		.dir_size = 4,
 		.argumentcode = 1,
         .carry = 0,
+		.cycle = 2,
 	}
 };
 
@@ -279,5 +299,6 @@ int	bytecode_to_int(unsigned char *byte, int size);
 void deleteall(t_field *field);
 void check(t_field *field);
 void play(t_field *field);
+int getcyclesforcop(t_process *now);
 /*ядро валидации*/
 #endif
