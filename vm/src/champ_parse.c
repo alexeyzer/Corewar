@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   champ_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 16:24:14 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/20 17:27:01 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/21 14:20:54 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ t_champ *createchamp()
 
     newchamp = NULL;
     newchamp = (t_champ*)malloc(sizeof(t_champ));
-    newchamp->first_proc = NULL;
     newchamp->inf = (t_header*)malloc(sizeof(t_header));
     newchamp->execcode = NULL;
     newchamp->number = 100;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 18:04:56 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:43:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ typedef struct	s_process
     int carry;
     char color;
     int  nextop;
+	int	 lastcyclelive;
     //int hp;
     //t_champ *host;
     int reg[REG_NUMBER];
+	struct  s_process *prev;
     struct  s_process *next;
 }				t_process;
 /*
@@ -87,6 +89,7 @@ typedef struct	s_field
     int cycle;
 	int	checks;
 	int countlive;
+	int cycles_to_die;
     t_process *first;
     t_process *current;
     t_champlist *champlist;
@@ -273,5 +276,8 @@ void currectnum(t_field *field);
 int getmin(t_field *field);
 void init_proc(t_field *field);
 int	bytecode_to_int(unsigned char *byte, int size);
+void deleteall(t_field *field);
+void check(t_field *field);
+void play(t_field *field);
 /*ядро валидации*/
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 17:36:37 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/21 15:46:20 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_champlist *isitbusy(t_champlist *head, int number)
     field->now = field->champlist;
     field->first =NULL;
     field->cycle = 0;
+    field->countlive = 0;
+    field->checks = 0;
+    field->cycles_to_die = CYCLE_TO_DIE;
     field->current = field->first;
     while(i < MEM_SIZE)
     {

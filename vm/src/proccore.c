@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proccore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 18:40:57 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:52:15 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ t_process *createproc(t_champlist *parent, int num)
     i = 1;
     res = (t_process*)malloc(sizeof(t_process));
     res->carry = 0;
-    res->pos = MEM_SIZE / num * parent->nowchamp->number;
+    res->pos = (MEM_SIZE / num) * (parent->nowchamp->number - 1);
     res->color = parent->nowchamp->color;
     res->idle = 0;
+    res->lastcyclelive = -1;
     res->next = NULL;
-    res->reg[0] = parent->nowchamp->number;
+    res->prev = NULL;
+    res->reg[0] = -1 * parent->nowchamp->number;
     while(i<REG_NUMBER)
     {
         res->reg[i]=0;
@@ -61,18 +63,27 @@ t_process *createproc(t_champlist *parent, int num)
     return res;
 }
 
+t_process *addproc(t_champlist *parent, int num, t_process *head)
+{
+    t_process *proc;
+
+    proc = createproc(parent, num);
+    head->next = proc;
+    proc->prev = head;
+    return (proc);
+}
+
 void init_proc(t_field *field)
 {
+    if (field->now->nowchamp == NULL)
+        field->now = field->now->prev;
     field->first = createproc(field->now,getcountoflist(field->champlist));
     field->current = field->first;
-    field->current = field->current->next;
+    field->now = field->now->prev;
     while(field->now != NULL)
     {
         if (field->now->nowchamp != NULL)
-        {
-            field->current = createproc(field->now,getcountoflist(field->champlist));
-            field->current = field->current->next;
-        }
+            field->current = addproc(field->now, getcountoflist(field->champlist), field->current);
         field->now = field->now->prev;
     }
 }

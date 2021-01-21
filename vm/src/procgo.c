@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   procgo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 18:38:22 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/21 15:54:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ int is_op(unsigned char c)
     return MISTAKESYMB;
 }
 
-int is_live(t_process *proc)
-{
-    return (0);
-}
-
+/*
 void node_op(t_field *field, t_process *proc)
 {
     int number;
@@ -41,9 +37,30 @@ void node_op(t_field *field, t_process *proc)
     {
         
     }
+}*/
+
+int countoflivepc(t_field *field)
+{
+    t_process *head;
+    int count;
+
+    count = 0;
+    head = field->first;
+    if (head != NULL)
+    {
+        count++;
+        head = head->next;
+    }
+    return (count);
 }
 
 void play(t_field *field)
 {
+    while(countoflivepc(field) > 0)
+    {
+        field->cycle++;
+        //exec or take op code forprocess
+        check(field);//проверяет каждый cycle_to_die коретки
+    }
 
 }
