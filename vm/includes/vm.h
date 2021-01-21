@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/21 18:33:27 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/21 20:55:03 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,5 +300,6 @@ void deleteall(t_field *field);
 void check(t_field *field);
 void play(t_field *field);
 int getcyclesforcop(t_process *now);
+void executer(t_field *field, t_process *process);
 /*ядро валидации*/
 #endif
