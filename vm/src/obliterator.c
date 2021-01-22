@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obliterator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:48:00 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 15:23:32 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/22 11:35:18 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,12 @@ void destroy_champ_list()
 
 }
 
-
-void destroy_proc_list(t_process *head)
-{
-    
-}
-
 void destroy_field (t_field **field)
 {
     t_field *feld;
 
     feld = &field;
-    destroy_proc_list(feld->first);
+    deleteallproc(feld);
     destroy_champ_list(feld->champlist);
     free(&field);
     free(feld);

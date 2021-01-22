@@ -1,41 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_p2.c                                         :+:      :+:    :+:   */
+/*   mainexecuter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/22 11:34:48 by aguiller         ###   ########.fr       */
+/*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
+/*   Updated: 2021/01/22 10:47:18 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void deleter(t_process *head)
+void mainexecuter(t_field *field, t_process *process)
 {
-	while (head->next != NULL)
-	{
-		deleter(head->next);
-		head->next = NULL;
-	}
-	free(head);
-}
-
-void deleteallproc(t_field *field)
-{
-	if (field->first != NULL)
-	{
-		deleter(field->first);
-		field->first = NULL;
-	}
-}
-
-int getcyclesforcop(t_process *now)
-{
-	if (now->cop == -1)
-		return (0);
-	else
-		return(table[now->cop].cycle);
-	
+    field->now = field->now;
+    process->cop = process->cop;
 }

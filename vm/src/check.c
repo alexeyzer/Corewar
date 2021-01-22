@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/21 15:35:50 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/22 11:36:24 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void findanddeletedied(t_field *field)
 void check(t_field *field)
 {
     if (field->cycles_to_die < 0)
-        deleteall(field);
+        deleteallproc(field);
     else
     {
         if (field->cycle % field->cycles_to_die == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/21 20:55:03 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/22 11:36:14 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,10 +296,11 @@ void currectnum(t_field *field);
 int getmin(t_field *field);
 void init_proc(t_field *field);
 int	bytecode_to_int(unsigned char *byte, int size);
-void deleteall(t_field *field);
+void deleteallproc(t_field *field);
 void check(t_field *field);
 void play(t_field *field);
 int getcyclesforcop(t_process *now);
 void executer(t_field *field, t_process *process);
+void mainexecuter(t_field *field, t_process *process);
 /*ядро валидации*/
 #endif
