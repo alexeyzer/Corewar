@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   champ_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 16:24:14 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/21 14:20:54 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/24 14:45:22 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_champ *createchamp()
     newchamp->execcode = NULL;
     newchamp->number = 100;
     newchamp->color = 'c';
+    newchamp->alive = -1;
     return (newchamp);
 }
 
@@ -97,16 +98,16 @@ void champ_parse(char *filename, t_field *field)
     }   
     fd = open(filename, O_RDONLY);
     if (read_int(fd, 4) != COREWAR_EXEC_MAGIC)
-        exit(-1);//маджик неправильный
+        exiter(field, "Error with magic in file");//маджик неправильный
     read_char(fd, PROG_NAME_LENGTH, field->now->nowchamp->inf->prog_name);
     if (read_int(fd, 4) != 0)
-        exit(-1);//отсутсвует 0 в виде 4 байт
+        exiter(field, "Error. No NULL in file");//отсутсвует 0 в виде 4 байт
     field->now->nowchamp->inf->prog_size =read_int(fd, 4);
     if (field->now->nowchamp->inf->prog_size > CHAMP_MAX_SIZE)
-        exit(-1);//размер исполняемого кода больше максимума. какой минимум?s
+        exiter(field, "Error. Exec size is too big.");//размер исполняемого кода больше максимума. какой минимум?s
     read_char(fd, COMMENT_LENGTH, field->now->nowchamp->inf->comment);
     if (read_int(fd, 4) != 0)
-        exit(-1);//отсутсвует 0 в виде 4 байт
+        exiter(field, "Error. No NULL in file");//отсутсвует 0 в виде 4 байт
     read_code(fd, field->now->nowchamp->inf->prog_size, field->now->nowchamp);
     field->now =  addchamtolist(field->now);
     close(fd);

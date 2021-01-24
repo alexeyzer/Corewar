@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/21 15:43:16 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/24 14:46:40 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 static int  is_champ(char *filename)
 {
+    char *filename1;
+
+    filename1 = NULL;
     if (!filename)
-        exit(-1);
+        exiter(NULL, "Error with file name ocured");
     if(ft_strlen(filename) < 4)
         return (0);
-    if (!ft_strcmp(ft_strsub(filename,ft_strlen(filename) - 4, 4), ".cor"))
+    filename1 = ft_strsub(filename,ft_strlen(filename) - 4, 4);
+    if (!ft_strcmp(filename1, ".cor"))
     {
+        if (filename1 != NULL)
+            free (filename1);
         return (1);
     }
+    if (filename1 != NULL)
+        free (filename1);
     return (0);
 }
 /*соотвествует ли имя файла(первичное тестирование пройдено)*/
@@ -96,7 +104,7 @@ t_field     *validation_and_reading(int argc, char **argv)
             else
             {
                 if(is_key_n(argv[i],argv[i+1], argv[i+ 2], field) == MISTAKESYMB)
-                    exit(-1);
+                    exiter(field, "Error with param parse");
                 else
                     i+=1;
             }
@@ -117,6 +125,9 @@ int main(int argc, char **argv)
     makecolor(fild->champlist);
     place(fild);
     init_proc(fild);
+    printplayers(fild);
     play(fild);
-    field_print(fild);
+    simpleresult(fild);
+    //field_print(fild);
+    destroy_field(&fild);
 }

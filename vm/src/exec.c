@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/22 12:10:15 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 16:09:57 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int istypecorrect(t_field *field, t_process *process)
 	argtype = 0;
 	i = 0;
 	reg = 0;
-	argtype = bytecode_to_int(&(field->mass[process->pos + 1].cell), 1);
+	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < table[process->cop].countofparams)
 	{
 		if ((result = ((argtype >> (5 - (i * 2))) & table[process->cop].typeparams[i])) == 0)
 			return (MISTAKESYMB);
-		if (result == T_REG)
+		if (result == REG_CODE)
 			reg++;
 		i++;
 	}
@@ -49,19 +49,19 @@ int isregcorret(t_field *field, t_process *process)
 	bytes = 0;
 	while (i < table[process->cop].countofparams)
 	{
-		argtype = (bytecode_to_int(&(field->mass[process->pos + 1].cell), 1) >> (5 - (i * 2))) & table[process->cop].typeparams[i] ;
-		if (argtype == T_REG)
+		argtype = ((map_to_int(field, process->pos + 1, 1) >> (5 - (i * 2))) & table[process->cop].typeparams[i]);
+		if (argtype == REG_CODE)
 		{
-			reg = bytecode_to_int(&(field->mass[process->pos + 2 + bytes].cell), 1);
+			reg = map_to_int(field, process->pos + 2 + bytes, 1);
 			if (reg >= REG_NUMBER)
 				return (MISTAKESYMB);
 			else
 				bytes += 1;
 		}
 		else
-			if (argtype == T_IND)
+			if (argtype == IND_CODE)
 				bytes += IND_SIZE;
-			else if (argtype == T_DIR)
+			else if (argtype == DIR_CODE)
 				bytes += table[process->cop].dir_size;
 		i++;
 	}
@@ -77,17 +77,17 @@ int	skip(t_field *field, t_process *process)
 
 	argtype = 0;
 	i = 0;
-	result = 0;
+	result = 2;
 	temporary = 0;
-	argtype = bytecode_to_int(&(field->mass[process->pos + 1].cell), 1);
+	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < table[process->cop].countofparams)
 	{
-		temporary = (argtype  >> (6 - (i * 2))) & (T_REG | T_DIR | T_IND);
-		if (temporary == T_REG)
+		temporary = (argtype  >> (6 - (i * 2))) & (REG_CODE | DIR_CODE | IND_CODE);
+		if (temporary == REG_CODE)
 			result += 1;
-		else if (temporary == T_IND)
+		else if (temporary == IND_CODE)
 			result += IND_SIZE;
-		else if (temporary == T_DIR)
+		else if (temporary == DIR_CODE)
 			result += table[process->cop].dir_size;
 		i++;
 	}
@@ -108,11 +108,13 @@ void executer(t_field *field, t_process *process)//в процессе если 
 			else if (result == 2 && isregcorret(field, process))//присуттвует регистр надо сначала проверить корректен ли номер регистра если да выполнить команду; если нет пропустить
 				mainexecuter(field, process);
 			//переходи на байтов вперед
-			process->bytetonextсop = 1 + 1 + skip(field, process);
+			process->bytetonextсop = skip(field, process);
 		}
-		else//если кода типа аргумента нет
+		else//если кода типов аргумента нет
 		{
-			
+			if (istypecorrectnoargreg(field, process) == 1)
+				mainexecuter(field, process);
+			process->bytetonextсop = skipnoarg(process);
 		}
 	}
 	else// команда не валидна переместиться на один байт вперед

@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/22 10:47:18 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 16:44:35 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void mainexecuter(t_field *field, t_process *process)
 {
-    field->now = field->now;
-    process->cop = process->cop;
+    if (process->cop == 0)
+        live(field, process);
+    if(process->cop == 8)
+        zjmp(field, process);
 }

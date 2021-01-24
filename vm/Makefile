@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 SRC = valid.c champ_parse.c valider.c placer.c func.c proccore.c check.c \
-		check_p2.c procgo.c exec.c mainexecuter.c
+		check_p2.c procgo.c exec.c mainexecuter.c gamesult.c obliterator.c \
+		commands_p1.c
 
 SRC_DIR = src/
 

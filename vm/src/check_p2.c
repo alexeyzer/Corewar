@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/22 11:34:48 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 16:10:27 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,50 @@ int getcyclesforcop(t_process *now)
 	else
 		return(table[now->cop].cycle);
 	
+}
+
+int istypecorrectnoargreg(t_field *field, t_process *process)
+{
+	int i;
+	int size;
+
+	i = 0;
+	size = 1;
+	while (i < table[process->cop].countofparams)
+	{
+		if (table[process->cop].typeparams[i] == T_REG)
+		{
+			if (bytecode_to_int(&(field->mass[process->pos + size].cell), 1) >= REG_NUMBER)
+				return(MISTAKESYMB);
+			size += 1;
+		}
+		else
+		{
+			if (table[process->cop].typeparams[i] == T_DIR)
+				size += table[process->cop].dir_size;
+			if (table[process->cop].typeparams[i] == T_IND)
+				size += IND_SIZE;
+		}
+		i++;
+	}
+	return (1);	
+}
+
+int skipnoarg(t_process *process)
+{
+	int result;
+	int i;
+	result = 1;
+	i = 0;
+	while (i < table[process->cop].countofparams)
+	{
+		if (table[process->cop].typeparams[i] == T_REG)
+			result +=1;
+		else if (table[process->cop].typeparams[i] == T_DIR)
+			result += table[process->cop].dir_size;
+		else if (table[process->cop].typeparams[i] == T_IND)
+			result += IND_SIZE;
+		i++;
+	}
+	return (result);
 }

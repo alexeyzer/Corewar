@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/22 10:27:30 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 17:03:12 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void workwithproc(t_field *field)
         if (now->moved == 0 && now->idle == 0)
         {
             executer(field, now); //выполняет операцию если она валидна; проверяет код аргументов на валидность; если присутстувует 
-            //move(); перемещает на сколько то байт и ставит now->moved = 1
+            if (now->cop != 8)
+                now->pos = (now->pos + now->bytetonextсop) % MEM_SIZE; //move(); перемещает на сколько то байт и ставит now->moved = 1
+            now->bytetonextсop = 0;
+            now->moved = 1;
         }
         now = now->next;
     }
@@ -60,7 +63,7 @@ int countoflivepc(t_field *field)
 
     count = 0;
     head = field->first;
-    if (head != NULL)
+    while (head != NULL)
     {
         count++;
         head = head->next;
@@ -70,11 +73,10 @@ int countoflivepc(t_field *field)
 
 void play(t_field *field)
 {
-    while(countoflivepc(field) > 0)
+    while(countoflivepc(field) > 1)
     {
         field->cycle++;
         workwithproc(field);
         check(field);//проверяет каждый cycle_to_die коретки
     }
-
 }

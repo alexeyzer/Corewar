@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/22 10:48:19 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 17:04:22 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_process *for_fork(t_field *field, t_process *parent)
     res = (t_process*)malloc(sizeof(t_process));
     i = 0;
     
+
+    res->parent = parent -> parent;
     while(i < REG_NUMBER)
     {
         res->reg[i] = parent->reg[i];
@@ -57,6 +59,7 @@ t_process *createproc(t_champlist *parent, int num)
     res->bytetonextсop = 0;
     res->next = NULL;
     res->prev = NULL;
+    res->parent = parent;
     res->reg[0] = -1 * parent->nowchamp->number;
     while(i<REG_NUMBER)
     {

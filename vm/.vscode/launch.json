@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/corewar",
-            "args": ["vm_champs/champs/Car.cor", "./vm_champs/champs/jumper.cor"],
+            "args": ["./vm_champs/champs/examples/zork1.cor", "./vm_champs/champs/examples/zork3.cor", "./vm_champs/champs/examples/zork2.cor"],
             "cwd": "${workspaceFolder}"
         }
     ]

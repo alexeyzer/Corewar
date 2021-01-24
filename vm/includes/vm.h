@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/22 11:36:14 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 16:41:51 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,6 @@
 # define GREY		"\033[37m"
 # define NO			"\033[0m"
 
-typedef struct	s_process
-{
-    int pos;
-    int idle;
-    int carry;
-    char color;
-    int  bytetonextсop;
-	int	 lastcyclelive;
-	int  moved;
-	int	 cop;
-    //int hp;
-    //t_champ *host;
-    int reg[REG_NUMBER];
-	struct  s_process *prev;
-    struct  s_process *next;
-}				t_process;
-/*
-host - породивший его чемпион
-pos -позиция
-carry - равен 0 или 1, связан со всеми операциями, 
-его значение зависит от результата команды
-idle - спит?может выполнить команду только если idle - 0
-child - если юзнул форк, для порождения другого процесса
-parent - указание на родителя, если нулл -
- процесс первый и порожден в начале игры*/
 typedef struct	s_cell
 {
    // int number;
@@ -84,6 +59,31 @@ typedef struct	s_champlist
     struct	s_champlist *prev;
     struct	s_champlist *next;
 }               t_champlist;
+
+typedef struct	s_process
+{
+    int pos;
+    int idle;
+    int carry;
+    char color;
+    int  bytetonextсop;
+	int	 lastcyclelive;
+	int  moved;
+	int	 cop;
+    int reg[REG_NUMBER];
+	t_champlist *parent;
+	struct  s_process *prev;
+    struct  s_process *next;
+}				t_process;
+/*
+host - породивший его чемпион
+pos -позиция
+carry - равен 0 или 1, связан со всеми операциями, 
+его значение зависит от результата команды
+idle - спит?может выполнить команду только если idle - 0
+child - если юзнул форк, для порождения другого процесса
+parent - указание на родителя, если нулл -
+ процесс первый и порожден в начале игры*/
 
 typedef struct	s_field
 {
@@ -302,5 +302,14 @@ void play(t_field *field);
 int getcyclesforcop(t_process *now);
 void executer(t_field *field, t_process *process);
 void mainexecuter(t_field *field, t_process *process);
+int istypecorrectnoargreg(t_field *field, t_process *process);
+int skipnoarg(t_process *process);
+void printplayers(t_field *field);
+void simpleresult(t_field *field);
+void destroy_field (t_field **field);
+int exiter(t_field *field, char *strtoprint);
+int	map_to_int(t_field *field, int pos, int size);
+void live(t_field *field, t_process *process);
+void zjmp(t_field *field, t_process *process);
 /*ядро валидации*/
 #endif
