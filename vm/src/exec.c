@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/24 16:09:57 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 18:01:58 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int istypecorrect(t_field *field, t_process *process)
 	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < table[process->cop].countofparams)
 	{
-		if ((result = ((argtype >> (5 - (i * 2))) & table[process->cop].typeparams[i])) == 0)
+		if ((result = ((argtype >> (6 - (i * 2))) & table[process->cop].typeparams[i])) == 0)
 			return (MISTAKESYMB);
 		if (result == REG_CODE)
 			reg++;

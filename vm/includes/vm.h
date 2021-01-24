@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/24 16:41:51 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/24 17:54:36 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,5 +311,6 @@ int exiter(t_field *field, char *strtoprint);
 int	map_to_int(t_field *field, int pos, int size);
 void live(t_field *field, t_process *process);
 void zjmp(t_field *field, t_process *process);
+void and(t_field *field, t_process *process);
 /*ядро валидации*/
 #endif
