@@ -6,12 +6,23 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/24 13:51:43 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 14:27:23 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+int is_key_a(char *curr, t_field *field)
+{
+    if(!curr)
+        return (MISTAKESYMB);
+    if(ft_strequ(curr,"-a")) 
+    {
+        field->aff = 1;
+        return (1);
+    }
+    return (MISTAKESYMB);
+}
 t_champlist *isitbusy(t_champlist *head, int number)
  {
     while (head != NULL)
@@ -33,10 +44,10 @@ t_champlist *isitbusy(t_champlist *head, int number)
     field->champlist->next = NULL;
     field->champlist->prev = NULL;
     field->champlist->nowchamp = NULL;
-    field->counter = 0;
     field->now = field->champlist;
     field->first =NULL;
     field->cycle = 0;
+    field->aff = 0;
     field->countlive = 0;
     field->checks = 0;
     field->cycles_to_die = CYCLE_TO_DIE;

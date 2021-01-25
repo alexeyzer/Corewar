@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/24 17:22:24 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 14:29:06 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,19 @@ t_field     *validation_and_reading(int argc, char **argv)
 {
     int     i;
     t_field *field;
-    //int     miss;
-    //char * *input;
 
     i = 1;
-    //input = ft_strsplit(argv,' ');
     field = init();
     while (i < argc)
     {
         if (is_champ(argv[i]))
-        {
-            if (field->now->nowchamp != NULL)
-                champ_parse(argv[i], field);
-            else
-            {
-                champ_parse(argv[i], field);
-                (field->counter)++;
-            }
-        }
+            champ_parse(argv[i], field);
         else
         {
             if (is_key_dump(argv[i],argv[i+1], field) != MISTAKESYMB)
                 i+=1;
+            else if(is_key_a(argv[i], field))
+                i+=0;
             else
             {
                 if(is_key_n(argv[i],argv[i+1], argv[i+ 2], field) == MISTAKESYMB)
@@ -109,6 +100,7 @@ t_field     *validation_and_reading(int argc, char **argv)
                     i+=1;
             }
         }
+
         i++;
     }
     if (getcountoflist(field->champlist) > MAX_PLAYERS)

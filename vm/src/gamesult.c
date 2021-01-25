@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/24 17:09:24 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 15:28:00 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,35 @@ int	map_to_int(t_field *field, int pos, int size)
 	while (size)
 	{
         if (sign)
-			result += ((field->mass[pos + size - 1].cell ^ 0xFF) << (i * 8));
+			result += ((field->mass[(pos + size - 1) % MEM_SIZE].cell ^ 0xFF) << (i * 8));
         else
-            result += (field->mass[pos + size - 1].cell << (i * 8));
+            result += (field->mass[(pos + size - 1) % MEM_SIZE].cell << (i * 8));
 		size--;
         i++;
 	}
 	if (sign)
 	    result = ~(result);
 	return (result);
+}
+
+void	int_to_map(t_field *field, int pos, int size, int data)
+{
+	int		i;
+
+	i = 0;
+	while (size)
+	{
+        field->mass[(pos + size - 1) % MEM_SIZE].cell = (unsigned char)((data >> i) & 0xFF);
+		size--;
+        i +=8;
+	}
+}
+
+void	color_to_map(t_field *field, int pos, int size, char color)
+{
+	while (size)
+	{
+        field->mass[pos + size - 1].color = color;
+		size--;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/24 17:03:12 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 14:06:37 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void play(t_field *field)
         field->cycle++;
         workwithproc(field);
         check(field);//проверяет каждый cycle_to_die коретки
+        if (field->cycle == field->dump)
+            field_print(field);
     }
 }

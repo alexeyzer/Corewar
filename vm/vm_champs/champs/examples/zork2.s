@@ -1,8 +1,8 @@
 .name "zork2"
 .comment "I'M ALIIIIVE"
 
-l2:		sti r1, %:live, %1
-		and 8, 8, r1
+l2:		st r1, :live
+		and r1, %0, r1
 
 live:
 		zjmp %:live

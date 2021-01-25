@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/24 17:54:36 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 16:18:43 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ parent - указание на родителя, если нулл -
 
 typedef struct	s_field
 {
-    int counter;
+	int aff;
     int dump;
     int cycle;
 	int	checks;
@@ -283,6 +283,7 @@ static t_command		table[16] = {
 };
 
 int getcountoflist(t_champlist *head);
+int is_key_a(char *curr, t_field *field);
 t_field *validation_and_reading(int argc, char **argv);
 void champ_parse(char *filename, t_field *field);
 t_champlist *isitbusy(t_champlist *head, int number);
@@ -311,6 +312,19 @@ int exiter(t_field *field, char *strtoprint);
 int	map_to_int(t_field *field, int pos, int size);
 void live(t_field *field, t_process *process);
 void zjmp(t_field *field, t_process *process);
-void and(t_field *field, t_process *process);
+int gettype(int argumentcode, int number);
+int res(int *bytesize, int type, t_field * field, t_process *process);
+void	int_to_map(t_field *field, int pos, int size, int data);
+void	color_to_map(t_field *field, int pos, int size, char color);
+void	st(t_field *field, t_process *process);
+t_process *for_fork(t_field *field, t_process *parent, int adr);
+void	my_fork(t_field *field, t_process *process);
+void	aff(t_field *field, t_process *process);
+void	helpfunc(int regnbr, int param1, int param2, t_process *process);
+void	multiplyfunc(t_field *field, t_process *process);
+void	arith(t_field *field, t_process *process);
+void	load(t_field *field, t_process *process);
+void	ldi(t_field *field, t_process *process);
+void	lld(t_field *field, t_process *process);
 /*ядро валидации*/
 #endif

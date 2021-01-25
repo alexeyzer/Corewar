@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   placer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:19:30 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 17:33:19 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/25 14:20:09 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,18 @@ void field_print(t_field *field)
     int i;
 
     i = 0;
+    ft_printf("0x%04x : ", i);
     while (i < MEM_SIZE)
     {
         if(i % 32 == 0 && i != 0)
+        {
             ft_printf("\n");
+            ft_printf("0x%04x : ", i);
+        }
         printcurrentcolor(&(field->mass[i]));
         i++;
     }
+    ft_printf("\n");
 }
 
 void makecolor(t_champlist *head)
