@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 14:55:23 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/25 16:39:08 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:02:12 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,11 @@ void ldi(t_field *field, t_process *process)
     }
     param[i + 1] = map_to_int(field, process->pos + bytesize, 1);
     if (process->cop == 10)
-        process->reg[param[3] - 1] = map_to_int(field, (process->pos + param[0] + param[1]) % IDX_MOD, 4);
+		process->reg[param[3] - 1] = map_to_int(field,\
+			(process->pos + param[0] + param[1]) % IDX_MOD, 4);
     else
-        process->reg[param[3] - 1] = map_to_int(field, (process->pos + param[0] + param[1]), 4);
+		process->reg[param[3] - 1] = map_to_int(field,\
+			(process->pos + param[0] + param[1]), 4);
     process->carry = (process->reg[param[3] - 1] == 0)? 1 : 0;
 }
 
@@ -96,12 +98,14 @@ void lld(t_field *field, t_process *process)
     type = gettype(argumentcode, 0);
     if (type == DIR_CODE)
     {
-        param[0] = map_to_int(field, process->pos + bytesize, table[process->cop].dir_size);
+        param[0] = map_to_int(field, process->pos +
+			bytesize, table[process->cop].dir_size);
         bytesize += table[process->cop].dir_size;
     }
     else if (type == IND_CODE)
     {
-        param[0] = map_to_int(field, process->pos + map_to_int(field, process->pos + bytesize, IND_SIZE), 4);
+        param[0] = map_to_int(field, process->pos +
+			map_to_int(field, process->pos + bytesize, IND_SIZE), 4);
         bytesize += IND_SIZE;
     }
     param[1] = map_to_int(field, process->pos + bytesize, 1);

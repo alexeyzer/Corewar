@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 14:06:37 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:18:16 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void workwithproc(t_field *field)
             now->idle--;
         if (now->moved == 0 && now->idle == 0)
         {
-            executer(field, now); //выполняет операцию если она валидна; проверяет код аргументов на валидность; если присутстувует 
+            executer(field, now);
             if (now->cop != 8)
-                now->pos = (now->pos + now->bytetonextсop) % MEM_SIZE; //move(); перемещает на сколько то байт и ставит now->moved = 1
+                now->pos = (now->pos + now->bytetonextсop) % MEM_SIZE;
             now->bytetonextсop = 0;
             now->moved = 1;
         }

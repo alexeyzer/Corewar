@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/24 18:01:58 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:10:46 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int istypecorrect(t_field *field, t_process *process)
 	int reg;
 	int result;
 
-	argtype = 0;
 	i = 0;
 	reg = 0;
 	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < table[process->cop].countofparams)
 	{
-		if ((result = ((argtype >> (6 - (i * 2))) & table[process->cop].typeparams[i])) == 0)
+		if ((result = ((argtype >> (6 - (i * 2)))
+			& table[process->cop].typeparams[i])) == 0)
 			return (MISTAKESYMB);
 		if (result == REG_CODE)
 			reg++;
@@ -36,20 +36,17 @@ int istypecorrect(t_field *field, t_process *process)
 	return (1);
 }
 
-int isregcorret(t_field *field, t_process *process)
+int isregcorret(t_field *field, t_process *process, int i)
 {
-	int i;
 	int reg;
 	int	bytes;
 	int argtype;
 
-	i = 0;
-	argtype = 0;
-	reg = 0;
 	bytes = 0;
-	while (i < table[process->cop].countofparams)
+	while (i++ < table[process->cop].countofparams)
 	{
-		argtype = ((map_to_int(field, process->pos + 1, 1) >> (5 - (i * 2))) & table[process->cop].typeparams[i]);
+		argtype = ((map_to_int(field, process->pos + 1, 1)\
+			>> (5 - (i * 2))) & table[process->cop].typeparams[i]);
 		if (argtype == REG_CODE)
 		{
 			reg = map_to_int(field, process->pos + 2 + bytes, 1);
@@ -63,7 +60,6 @@ int isregcorret(t_field *field, t_process *process)
 				bytes += IND_SIZE;
 			else if (argtype == DIR_CODE)
 				bytes += table[process->cop].dir_size;
-		i++;
 	}
 	return (1);
 }
@@ -82,7 +78,8 @@ int	skip(t_field *field, t_process *process)
 	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < table[process->cop].countofparams)
 	{
-		temporary = (argtype  >> (6 - (i * 2))) & (REG_CODE | DIR_CODE | IND_CODE);
+		temporary = (argtype  >> (6 - (i * 2)))
+			& (REG_CODE | DIR_CODE | IND_CODE);
 		if (temporary == REG_CODE)
 			result += 1;
 		else if (temporary == IND_CODE)
@@ -94,7 +91,7 @@ int	skip(t_field *field, t_process *process)
 	return result;	
 }
 
-void executer(t_field *field, t_process *process)//в процессе если команда без типов аргументов
+void executer(t_field *field, t_process *process)
 {
 	int result;
 
@@ -103,20 +100,19 @@ void executer(t_field *field, t_process *process)//в процессе если 
 	{
 		if (table[process->cop].argumentcode == 1)
 		{
-			if ((result = istypecorrect(field, process)) == 1)//валидный без регистра выполнить
+			if ((result = istypecorrect(field, process)) == 1)
 				mainexecuter(field, process);
-			else if (result == 2 && isregcorret(field, process))//присуттвует регистр надо сначала проверить корректен ли номер регистра если да выполнить команду; если нет пропустить
+			else if (result == 2 && isregcorret(field, process, -1))
 				mainexecuter(field, process);
-			//переходи на байтов вперед
 			process->bytetonextсop = skip(field, process);
 		}
-		else//если кода типов аргумента нет
+		else
 		{
 			if (istypecorrectnoargreg(field, process) == 1)
 				mainexecuter(field, process);
 			process->bytetonextсop = skipnoarg(process);
 		}
 	}
-	else// команда не валидна переместиться на один байт вперед
+	else
 		process->bytetonextсop = 1;
 }

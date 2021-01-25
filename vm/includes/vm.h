@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 16:18:43 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:22:07 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,6 @@ static t_command		table[16] = {
 
 int getcountoflist(t_champlist *head);
 int is_key_a(char *curr, t_field *field);
-t_field *validation_and_reading(int argc, char **argv);
 void champ_parse(char *filename, t_field *field);
 t_champlist *isitbusy(t_champlist *head, int number);
 t_champlist *addchamtolist(t_champlist *now);

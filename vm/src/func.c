@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 16:53:47 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/20 17:31:22 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/25 17:12:18 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void sortlist(t_champlist *list)
     while (i < count)
     {
         now = list;
-        while (now != NULL && now->nowchamp != NULL && now->next != NULL && now->next->nowchamp != NULL)
+        while (now != NULL && now->nowchamp != NULL && now->next\
+			!= NULL && now->next->nowchamp != NULL)
         {
             if (now->nowchamp->number > now->next->nowchamp->number)
             {

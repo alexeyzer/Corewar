@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 14:39:04 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:17:34 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void init_proc(t_field *field)
     while(field->now != NULL)
     {
         if (field->now->nowchamp != NULL)
-            field->current = addproc(field->now, getcountoflist(field->champlist), field->current);
+            field->current = addproc(field->now,
+				getcountoflist(field->champlist), field->current);
         field->now = field->now->prev;
     }
 }

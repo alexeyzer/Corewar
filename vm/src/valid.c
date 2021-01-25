@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 14:29:06 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:25:02 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,44 +75,38 @@ static int  is_key_n(char *curr, char *next, char *nextnext,  t_field *field)
 /*является ли ключом, в идеале пусть возвращает значение */
 
 /*парсинг чемпиона*/
-t_field     *validation_and_reading(int argc, char **argv)
+static void v_and_r(int argc, char **av, int i, t_field *field)
 {
-    int     i;
-    t_field *field;
-
-    i = 1;
-    field = init();
     while (i < argc)
     {
-        if (is_champ(argv[i]))
-            champ_parse(argv[i], field);
+        if (is_champ(av[i]))
+            champ_parse(av[i], field);
         else
         {
-            if (is_key_dump(argv[i],argv[i+1], field) != MISTAKESYMB)
+            if (is_key_dump(av[i],av[i+1], field) != MISTAKESYMB)
                 i+=1;
-            else if(is_key_a(argv[i], field))
+            else if(is_key_a(av[i], field))
                 i+=0;
             else
             {
-                if(is_key_n(argv[i],argv[i+1], argv[i+ 2], field) == MISTAKESYMB)
+                if(is_key_n(av[i],av[i+1], av[i+ 2], field) == MISTAKESYMB)
                     exiter(field, "Error with param parse");
                 else
                     i+=1;
             }
         }
-
         i++;
     }
     if (getcountoflist(field->champlist) > MAX_PLAYERS)
-        return (NULL);
-    return (field);
+        exiter(field, "Error more then 4 players");
 }
 
 int main(int argc, char **argv)
 {
     t_field *fild;
     
-    fild = validation_and_reading(argc, argv);
+	fild = init();
+    v_and_r(argc, argv, 1, fild);
     currectnum(fild);
     makecolor(fild->champlist);
     place(fild);

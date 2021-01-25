@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/24 16:10:27 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:11:34 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int istypecorrectnoargreg(t_field *field, t_process *process)
 	{
 		if (table[process->cop].typeparams[i] == T_REG)
 		{
-			if (bytecode_to_int(&(field->mass[process->pos + size].cell), 1) >= REG_NUMBER)
+			if (bytecode_to_int(&(field->mass[process->pos + size].cell)\
+				, 1) >= REG_NUMBER)
 				return(MISTAKESYMB);
 			size += 1;
 		}

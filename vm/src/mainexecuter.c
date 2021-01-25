@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/25 16:30:10 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:16:14 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void sti(t_field *field, t_process *process)
         param[i] = res(&bytesize, type, field, process);
         i++;
     }
-    int_to_map(field, process->pos + ((param[1] + param[2] )% IDX_MOD), 4, process->reg[param[0] - 1]);
+    int_to_map(field, process->pos + ((param[1] + param[2] )% IDX_MOD)\
+		, 4, process->reg[param[0] - 1]);
     process->carry = (process->reg[param[0] - 1] == 0)? 1 : 0;
 }
 
@@ -57,4 +58,27 @@ void mainexecuter(t_field *field, t_process *process)
         ldi(field, process);
     else if (process->cop == 12)
         lld(field, process);
+}
+
+void	int_to_map(t_field *field, int pos, int size, int data)
+{
+	int		i;
+
+	i = 0;
+	while (size)
+	{
+        field->mass[(pos + size - 1) % MEM_SIZE].cell =\
+			(unsigned char)((data >> i) & 0xFF);
+		size--;
+        i +=8;
+	}
+}
+
+void	color_to_map(t_field *field, int pos, int size, char color)
+{
+	while (size)
+	{
+        field->mass[pos + size - 1].color = color;
+		size--;
+	}
 }

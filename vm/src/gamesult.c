@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/25 15:28:00 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:15:28 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void printplayers(t_field *field)
     i = 1;
     while (now != NULL && now->nowchamp != NULL)
     {
-        ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i, now->nowchamp->inf->prog_size, now->nowchamp->inf->prog_name, now->nowchamp->inf->comment);
+        ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i,\
+			now->nowchamp->inf->prog_size, now->nowchamp->inf->prog_name,\
+				now->nowchamp->inf->comment);
         i++;
         now = now->next;
     }
@@ -44,7 +46,8 @@ static void winner(t_field *field, int max)
     {
         if (now->nowchamp->alive == max)
         {
-            ft_printf("Contestant %d, \"%s\", has won !\n", now->nowchamp->number, now->nowchamp->inf->prog_name);
+            ft_printf("Contestant %d, \"%s\", has won !\n",\
+				now->nowchamp->number, now->nowchamp->inf->prog_name);
             return ;
         }
         now = now->next;
@@ -67,10 +70,13 @@ void simpleresult(t_field *field)
     if (max == -1 && field->first == NULL)
     {
         now = brcomelust(field->champlist);
-        ft_printf("Contestant %d, \"%s\", has won !\n", now->nowchamp->number, now->nowchamp->inf->prog_name);
+        ft_printf("Contestant %d, \"%s\", has won !\n",\
+			now->nowchamp->number, now->nowchamp->inf->prog_name);
     }
     else if (field->first != NULL && max == -1)
-        ft_printf("Contestant %d, \"%s\", has won !\n", field->first->parent->nowchamp->number, field->first->parent->nowchamp->inf->prog_name);
+        ft_printf("Contestant %d, \"%s\", has won !\n",\
+			field->first->parent->nowchamp->number,\
+				field->first->parent->nowchamp->inf->prog_name);
     else if (max != -1)
         winner(field, max);
 }
@@ -87,35 +93,15 @@ int	map_to_int(t_field *field, int pos, int size)
 	while (size)
 	{
         if (sign)
-			result += ((field->mass[(pos + size - 1) % MEM_SIZE].cell ^ 0xFF) << (i * 8));
+			result += ((field->mass[(pos + size - 1)\
+				% MEM_SIZE].cell ^ 0xFF) << (i * 8));
         else
-            result += (field->mass[(pos + size - 1) % MEM_SIZE].cell << (i * 8));
+            result += (field->mass[(pos + size - 1)\
+				% MEM_SIZE].cell << (i * 8));
 		size--;
         i++;
 	}
 	if (sign)
 	    result = ~(result);
 	return (result);
-}
-
-void	int_to_map(t_field *field, int pos, int size, int data)
-{
-	int		i;
-
-	i = 0;
-	while (size)
-	{
-        field->mass[(pos + size - 1) % MEM_SIZE].cell = (unsigned char)((data >> i) & 0xFF);
-		size--;
-        i +=8;
-	}
-}
-
-void	color_to_map(t_field *field, int pos, int size, char color)
-{
-	while (size)
-	{
-        field->mass[pos + size - 1].color = color;
-		size--;
-	}
 }

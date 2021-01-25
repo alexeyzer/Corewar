@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:19:30 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 14:20:09 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/25 17:17:05 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void place(t_field *field)
         j = 0;
         while(j < (int)now->nowchamp->inf->prog_size)
         {
-            field->mass[(now->nowchamp->number - 1) * delta + j].cell = now->nowchamp->execcode[j];
-            field->mass[(now->nowchamp->number - 1) * delta + j].color = now->nowchamp->color;
+            field->mass[(now->nowchamp->number - 1) * delta + j].cell\
+				= now->nowchamp->execcode[j];
+            field->mass[(now->nowchamp->number - 1) * delta + j].color\
+				= now->nowchamp->color;
             j++;
         }
         now = now->next;
