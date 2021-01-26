@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 14:55:23 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/26 14:50:09 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 21:09:02 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 void	helpfunc(int regnbr, int param1, int param2, t_process *process)
 {
-	if (process->cop == 5)
-		process->reg[regnbr] = param1 & param2;
-	else if (process->cop == 6)
-		process->reg[regnbr] = param1 | param2;
-	else if (process->cop == 7)
-		process->reg[regnbr] = param1 ^ param2;
-	process->carry = (process->reg[regnbr] == 0) ? 1 : 0;
+	if (regnbr >0 && regnbr < REG_NUMBER)
+	{
+		if (process->cop == 5)
+			process->reg[regnbr] = param1 & param2;
+		else if (process->cop == 6)
+			process->reg[regnbr] = param1 | param2;
+		else if (process->cop == 7)
+			process->reg[regnbr] = param1 ^ param2;
+		process->carry = (process->reg[regnbr] == 0) ? 1 : 0;
+	}
 }
 
 void	arith(t_field *field, t_process *process)
@@ -32,11 +35,15 @@ void	arith(t_field *field, t_process *process)
 	num = map_to_int(field, process->pos + 4, 1) - 1;
 	first = map_to_int(field, process->pos + 2, 1) - 1;
 	second = map_to_int(field, process->pos + 3, 1) - 1;
-	if (process->cop == 3)
-		process->reg[num] = process->reg[first] + process->reg[second];
-	if (process->cop == 4)
-		process->reg[num] = process->reg[first] - process->reg[second];
-	process->carry = (process->reg[num] == 0) ? 1 : 0;
+	
+	if (num >0 && num < REG_NUMBER)
+	{
+		if (process->cop == 3)
+			process->reg[num] = process->reg[first] + process->reg[second];
+		if (process->cop == 4)
+			process->reg[num] = process->reg[first] - process->reg[second];
+		process->carry = (process->reg[num % REG_NUMBER] == 0) ? 1 : 0;
+	}
 }
 
 void	load(t_field *field, t_process *process)
@@ -55,8 +62,11 @@ void	load(t_field *field, t_process *process)
 	type = gettype(argumentcode, i);
 	param[0] = res(&bytesize, type, field, process);
 	param[1] = map_to_int(field, process->pos + bytesize, 1);
-	process->reg[param[1] - 1] = param[0];
-	process->carry = (process->reg[param[1] - 1] == 0) ? 1 : 0;
+	if (param[1] >0 && param[1] < REG_NUMBER)
+	{
+		process->reg[(param[1] - 1)] = param[0];
+		process->carry = (process->reg[(param[1] - 1)] == 0) ? 1 : 0;
+	}
 }
 
 void	ldi(t_field *field, t_process *process)
@@ -77,13 +87,13 @@ void	ldi(t_field *field, t_process *process)
 		i++;
 	}
 	param[i + 1] = map_to_int(field, process->pos + bytesize, 1);
-	if (process->cop == 10)
-		process->reg[param[3] - 1] = map_to_int(field,\
+	if (process->cop == 9)
+		process->reg[(param[3] - 1)] = map_to_int(field,\
 			(process->pos + param[0] + param[1]) % IDX_MOD, 4);
 	else
-		process->reg[param[3] - 1] = map_to_int(field,\
+		process->reg[(param[3] - 1)] = map_to_int(field,\
 			(process->pos + param[0] + param[1]), 4);
-	process->carry = (process->reg[param[3] - 1] == 0) ? 1 : 0;
+	process->carry = (process->reg[(param[3] - 1)] == 0 && process->cop == 13) ? 1 : 0;
 }
 
 void	lld(t_field *field, t_process *process)
@@ -109,6 +119,6 @@ void	lld(t_field *field, t_process *process)
 		bytesize += IND_SIZE;
 	}
 	param[1] = map_to_int(field, process->pos + bytesize, 1);
-	process->reg[param[1] - 1] = param[0];
+	process->reg[(param[1] - 1)] = param[0];
 	process->carry = (process->reg[param[1] - 1] == 0) ? 1 : 0;
 }

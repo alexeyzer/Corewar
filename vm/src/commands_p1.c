@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:49:36 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 20:07:50 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	live(t_field *field, t_process *process)
 	int nbrplayer;
 
 	nbrplayer = map_to_int(field, process->pos + 1, 4);
-	if (nbrplayer < 0)
-		nbrplayer = nbrplayer * -1;
+	field->countlive++;
 	isindex(field, nbrplayer);
 	process->lastcyclelive = field->cycle;
 }
@@ -59,7 +58,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	result = 0;
 	if (type == REG_CODE)
 	{
-		result = (process->reg[map_to_int(field, process->pos + *byte, 1)]);
+		result = (process->reg[map_to_int(field, process->pos + *byte, 1) - 1]);
 		*byte += 1;
 	}
 	else if (type == DIR_CODE)

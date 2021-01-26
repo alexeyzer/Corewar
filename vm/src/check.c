@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/26 14:49:17 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:21:05 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		findanddeletedied(t_field *field)
 
 void		check(t_field *field)
 {
-	if (field->cycles_to_die < 0)
+	if (field->cycles_to_die <= 0)
 		deleteallproc(field);
 	else
 	{

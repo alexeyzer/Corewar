@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/26 14:50:44 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 21:05:52 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@ void	sti(t_field *field, t_process *process)
 	bytesize = 2;
 	i = 0;
 	argumentcode = map_to_int(field, process->pos + 1, 1);
-	while (i < g_table[process->cop].countofparams - 1)
+	while (i < g_table[process->cop].countofparams)
 	{
 		type = gettype(argumentcode, i);
 		param[i] = res(&bytesize, type, field, process);
 		i++;
 	}
 	int_to_map(field, process->pos + ((param[1] + param[2]) % IDX_MOD),\
-		4, process->reg[param[0] - 1]);
-	process->carry = (process->reg[param[0] - 1] == 0) ? 1 : 0;
+		4, param[0]);
 }
 
 void	mainexecuter(t_field *field, t_process *process)
 {
+	if (process->lastcyclelive == 13610 && process->pos == 1917 && process->color == 'b')
+		ft_printf("here");
 	if (process->cop == 0)
 		live(field, process);
 	else if (process->cop == 8)
@@ -44,9 +45,7 @@ void	mainexecuter(t_field *field, t_process *process)
 		multiplyfunc(field, process);
 	else if (process->cop == 2)
 		st(field, process);
-	else if (process->cop == 14)
-		my_fork(field, process);
-	else if (process->cop == 11)
+	else if (process->cop == 11 || process->cop == 14)
 		my_fork(field, process);
 	else if (process->cop == 15)
 		aff(field, process);
@@ -54,10 +53,12 @@ void	mainexecuter(t_field *field, t_process *process)
 		arith(field, process);
 	else if (process->cop == 1)
 		load(field, process);
-	else if (process->cop == 10 || process->cop == 14)
+	else if (process->cop == 9 || process->cop == 13)
 		ldi(field, process);
 	else if (process->cop == 12)
 		lld(field, process);
+	else if (process->cop == 10)
+		sti(field, process);
 }
 
 void	int_to_map(t_field *field, int pos, int size, int data)
@@ -67,7 +68,7 @@ void	int_to_map(t_field *field, int pos, int size, int data)
 	i = 0;
 	while (size)
 	{
-		field->mass[(pos + size - 1) % MEM_SIZE].cell =\
+		field->mass[calcpos(pos, size)].cell =\
 			(unsigned char)((data >> i) & 0xFF);
 		size--;
 		i += 8;
@@ -78,7 +79,7 @@ void	color_to_map(t_field *field, int pos, int size, char color)
 {
 	while (size)
 	{
-		field->mass[pos + size - 1].color = color;
+		field->mass[calcpos(pos, size)].color = color;
 		size--;
 	}
 }

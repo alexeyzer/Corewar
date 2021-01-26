@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:13:51 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:29:07 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_process	*for_fork(t_field *field, t_process *parent, int adr)
 	res->bytetonextсop = 0;
 	res->carry = res->carry;
 	res->moved = 1;
-	res->pos = adr;
+	res->pos = parent->pos + adr;
 	res->parent = parent->parent;
 	second = field->first;
 	second->prev = res;
@@ -59,7 +59,7 @@ t_process	*createproc(t_champlist *parent, int num)
 	res->next = NULL;
 	res->prev = NULL;
 	res->parent = parent;
-	res->reg[0] = -1 * parent->nowchamp->number;
+	res->reg[0] = parent->nowchamp->number;
 	while (i < REG_NUMBER)
 	{
 		res->reg[i] = 0;

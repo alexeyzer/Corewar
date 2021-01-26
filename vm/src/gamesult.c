@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/26 14:10:21 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:47:22 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,15 @@ int			map_to_int(t_field *field, int pos, int size)
 	int	i;
 
 	result = 0;
-	sign = (field->mass[pos].cell & 0x80);
+	sign = (field->mass[calcpos(pos, 1)].cell & 0x80);
 	i = 0;
 	while (size)
 	{
 		if (sign)
-			result += ((field->mass[(pos + size - 1)\
-				% MEM_SIZE].cell ^ 0xFF) << (i * 8));
+			result += ((field->mass[calcpos(pos, size)].cell ^ 0xFF)\
+				<< (i * 8));
 		else
-			result += (field->mass[(pos + size - 1)\
-				% MEM_SIZE].cell << (i * 8));
+			result += (field->mass[calcpos(pos, size)].cell << (i * 8));
 		size--;
 		i++;
 	}

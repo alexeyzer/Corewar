@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:54:05 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 15:33:50 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,4 +300,5 @@ void				load(t_field *field, t_process *process);
 void				ldi(t_field *field, t_process *process);
 void				lld(t_field *field, t_process *process);
 t_champ				*createchamp();
+int					calcpos(int pos, int size);
 #endif

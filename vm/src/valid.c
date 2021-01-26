@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:06:07 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:20:19 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	v_and_r(int argc, char **av, int i, t_field *field)
 		{
 			if (key_dump(av[i], av[i + 1], field) != MISTAKESYMB)
 				i += 1;
-			else if (is_key_a(av[i], field))
+			else if (is_key_a(av[i], field) != MISTAKESYMB)
 				i += 0;
 			else
 			{
@@ -94,8 +94,8 @@ static void	v_and_r(int argc, char **av, int i, t_field *field)
 		}
 		i++;
 	}
-	if (getcountoflist(field->champlist) > MAX_PLAYERS)
-		exiter(field, "Error more then 4 players");
+	if (getcountoflist(field->champlist) > MAX_PLAYERS || getcountoflist(field->champlist) <= 0)
+		exiter(field, "Error more then 4 players or less than 1");
 }
 
 int			main(int argc, char **argv)

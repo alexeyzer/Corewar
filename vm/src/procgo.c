@@ -6,18 +6,18 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:51:19 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 20:56:54 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		is_op(unsigned char c)
+int		is_op(t_field *field, t_process *process)
 {
 	int i;
 	int code;
 
-	code = bytecode_to_int(&c, 1);
+	code = map_to_int(field, process->pos, 1);
 	i = 0;
 	while (i < 16)
 	{
@@ -35,9 +35,9 @@ void	workwithproc(t_field *field)
 	now = field->first;
 	while (now != NULL)
 	{
-		if (now->moved == 1 && now->bytetonextсop == 0)
+		if (now->moved == 1 && now->idle == 0)
 		{
-			now->cop = is_op(field->mass[now->pos].cell);
+			now->cop = is_op(field, now);
 			now->idle = getcyclesforcop(now);
 			now->moved = 0;
 		}
@@ -46,10 +46,11 @@ void	workwithproc(t_field *field)
 		if (now->moved == 0 && now->idle == 0)
 		{
 			executer(field, now);
-			if (now->cop != 8)
+			if (now->cop != 8 || (now->cop == 8 && now->carry == 0))
 				now->pos = (now->pos + now->bytetonextсop) % MEM_SIZE;
 			now->bytetonextсop = 0;
 			now->moved = 1;
+			now->cop = -1;
 		}
 		now = now->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:02:22 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/26 14:49:49 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 21:10:34 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ void	st(t_field *field, t_process *process)
 	reg1 = map_to_int(field, process->pos + bytesize, 1);
 	bytesize += 1;
 	type = gettype(argumentcode, 1);
-	if (type == REG_CODE)
-		process->reg[map_to_int(field, process->pos + bytesize, 1)] = \
+	if (type == REG_CODE && reg1 - 1 < REG_NUMBER && reg1 - 1 >= 0 )
+		process->reg[map_to_int(field, process->pos + bytesize, 1) - 1] = \
 			process->reg[reg1 - 1];
 	else if (type == IND_CODE)
 	{
 		int_to_map(field, process->pos + (map_to_int(field, process->pos + \
 			bytesize, IND_SIZE) % IDX_MOD), REG_SIZE, process->reg[reg1 - 1]);
-		color_to_map(field, process->pos + (map_to_int(field, process->pos + \
-			bytesize, IND_SIZE) % IDX_MOD), REG_SIZE, process->color);
+		color_to_map(field, calcpos(process->pos + (map_to_int(field, process->pos + \
+			bytesize, IND_SIZE) % IDX_MOD), 1), REG_SIZE, process->color);
 	}
 }
 
@@ -63,7 +63,7 @@ void	my_fork(t_field *field, t_process *process)
 {
 	int	addr;
 
-	addr = map_to_int(field, process->pos + 1, DIR_SIZE) % MEM_SIZE;
+	addr = map_to_int(field, process->pos + 1, 2) % MEM_SIZE;
 	if (process->cop == 11)
 		addr = addr % IDX_MOD;
 	for_fork(field, process, addr);
