@@ -6,17 +6,17 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 17:22:07 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:54:05 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_H
 # define VM_H
-#include "op.h"
+# include "op.h"
 # include "ft_printf.h"
 # include "libft.h"
-#include <fcntl.h>
-#define MISTAKESYMB -1
+# include <fcntl.h>
+# define MISTAKESYMB -1
 
 # define COLOR
 # define RED		"\033[31m"
@@ -28,98 +28,72 @@
 # define GREY		"\033[37m"
 # define NO			"\033[0m"
 
-typedef struct	s_cell
+typedef struct		s_cell
 {
-   // int number;
-    char color;
-    unsigned char cell;
-   // t_cell *prev;
-   /// t_cell *next;
-}				t_cell;
-/*meaning - значение в клетке number - номер prev/next -указатели на соседей*/
-typedef struct	s_champ
-{
-   // int idle;
-    t_header *inf;
-    //int hp;
-    unsigned char *execcode;
-    char color;
-    int number;
-    int alive;
-}				t_champ;
-/*
-нейм - имя
-коммент - коммент 
-first_proc - ссылка на каретку(ки) 
-next - следующий чемпион в списке
-у игрока есть N регистров для хранения данных */
-typedef struct	s_champlist
-{
-    t_champ *nowchamp;
-    struct	s_champlist *prev;
-    struct	s_champlist *next;
-}               t_champlist;
+	char			color;
+	unsigned char	cell;
+}					t_cell;
 
-typedef struct	s_process
+typedef struct		s_champ
 {
-    int pos;
-    int idle;
-    int carry;
-    char color;
-    int  bytetonextсop;
-	int	 lastcyclelive;
-	int  moved;
-	int	 cop;
-    int reg[REG_NUMBER];
-	t_champlist *parent;
-	struct  s_process *prev;
-    struct  s_process *next;
-}				t_process;
-/*
-host - породивший его чемпион
-pos -позиция
-carry - равен 0 или 1, связан со всеми операциями, 
-его значение зависит от результата команды
-idle - спит?может выполнить команду только если idle - 0
-child - если юзнул форк, для порождения другого процесса
-parent - указание на родителя, если нулл -
- процесс первый и порожден в начале игры*/
+	t_header		*inf;
+	unsigned char	*execcode;
+	char			color;
+	int				number;
+	int				alive;
+}					t_champ;
 
-typedef struct	s_field
+typedef struct		s_champlist
 {
-	int aff;
-    int dump;
-    int cycle;
-	int	checks;
-	int countlive;
-	int cycles_to_die;
-    t_process *first;
-    t_process *current;
-    t_champlist *champlist;
-    t_champlist *now;
-    t_cell mass[MEM_SIZE];
-}				t_field;
-/*counter - количество чемпионов
-checks - количество циклов без уменьшения
-dump - когда выгрузить состояние поля, если "-1", то выгружать его каждую итерацию
-champ_first - корень списка чемпионов
-countlive - количество выполненных операций live
-  
-   */
+	t_champ				*nowchamp;
+	struct s_champlist	*prev;
+	struct s_champlist	*next;
+}					t_champlist;
 
-typedef struct	s_command
+typedef struct		s_process
 {
-	char                *name;
-	int					code;
-    int                 countofparams;
-	int                	typeparams[3];
-	int					argumentcode;
-	int					dir_size;
-    int                 carry;
-	int					cycle;
-}				t_command;
+	int					pos;
+	int					idle;
+	int					carry;
+	char				color;
+	int					bytetonextсop;
+	int					lastcyclelive;
+	int					moved;
+	int					cop;
+	int					reg[REG_NUMBER];
+	t_champlist			*parent;
+	struct s_process	*prev;
+	struct s_process	*next;
+}					t_process;
 
-static t_command		table[16] = {
+typedef struct		s_field
+{
+	int				aff;
+	int				dump;
+	int				cycle;
+	int				checks;
+	int				countlive;
+	int				cycles_to_die;
+	t_process		*first;
+	t_process		*current;
+	t_champlist		*champlist;
+	t_champlist		*now;
+	t_cell			mass[MEM_SIZE];
+}					t_field;
+
+typedef struct		s_command
+{
+	char			*name;
+	int				code;
+	int				countofparams;
+	int				typeparams[3];
+	int				argumentcode;
+	int				dir_size;
+	int				carry;
+	int				cycle;
+}					t_command;
+
+static t_command	g_table[16] = {
 	{
 		.name = "live",
 		.code = 0x01,
@@ -127,7 +101,7 @@ static t_command		table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 4,
 		.argumentcode = 0,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 10,
 	},
 	{
@@ -137,7 +111,7 @@ static t_command		table[16] = {
 		.typeparams = {T_DIR | T_IND, T_REG, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 5,
 	},
 	{
@@ -147,7 +121,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG, T_REG | T_IND, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 5,
 	},
 	{
@@ -157,7 +131,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG, T_REG, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 10,
 	},
 	{
@@ -167,7 +141,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG, T_REG, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 10,
 	},
 	{
@@ -177,7 +151,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 6,
 	},
 	{
@@ -187,7 +161,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 6,
 	},
 	{
@@ -197,7 +171,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 6,
 	},
 	{
@@ -207,7 +181,7 @@ static t_command		table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 2,
 		.argumentcode = 0,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 20,
 	},
 	{
@@ -217,7 +191,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 		.dir_size = 2,
 		.argumentcode = 1,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 25,
 	},
 	{
@@ -227,7 +201,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
 		.dir_size = 2,
 		.argumentcode = 1,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 25,
 	},
 	{
@@ -237,7 +211,7 @@ static t_command		table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 2,
 		.argumentcode = 0,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 800,
 	},
 	{
@@ -247,7 +221,7 @@ static t_command		table[16] = {
 		.typeparams = {T_DIR | T_IND, T_REG, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 10,
 	},
 	{
@@ -257,7 +231,7 @@ static t_command		table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 		.dir_size = 2,
 		.argumentcode = 1,
-        .carry = 1,
+		.carry = 1,
 		.cycle = 50,
 	},
 	{
@@ -267,7 +241,7 @@ static t_command		table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 2,
 		.argumentcode = 0,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 1000,
 	},
 	{
@@ -277,53 +251,53 @@ static t_command		table[16] = {
 		.typeparams = {T_REG, 0, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-        .carry = 0,
+		.carry = 0,
 		.cycle = 2,
 	}
 };
 
-int getcountoflist(t_champlist *head);
-int is_key_a(char *curr, t_field *field);
-void champ_parse(char *filename, t_field *field);
-t_champlist *isitbusy(t_champlist *head, int number);
-t_champlist *addchamtolist(t_champlist *now);
-t_field        *init();
-void place(t_field *field);
-void field_print(t_field *field);
-t_champ *createchamp();
-void makecolor(t_champlist *head);
-void currectnum(t_field *field);
-int getmin(t_field *field);
-void init_proc(t_field *field);
-int	bytecode_to_int(unsigned char *byte, int size);
-void deleteallproc(t_field *field);
-void check(t_field *field);
-void play(t_field *field);
-int getcyclesforcop(t_process *now);
-void executer(t_field *field, t_process *process);
-void mainexecuter(t_field *field, t_process *process);
-int istypecorrectnoargreg(t_field *field, t_process *process);
-int skipnoarg(t_process *process);
-void printplayers(t_field *field);
-void simpleresult(t_field *field);
-void destroy_field (t_field **field);
-int exiter(t_field *field, char *strtoprint);
-int	map_to_int(t_field *field, int pos, int size);
-void live(t_field *field, t_process *process);
-void zjmp(t_field *field, t_process *process);
-int gettype(int argumentcode, int number);
-int res(int *bytesize, int type, t_field * field, t_process *process);
-void	int_to_map(t_field *field, int pos, int size, int data);
-void	color_to_map(t_field *field, int pos, int size, char color);
-void	st(t_field *field, t_process *process);
-t_process *for_fork(t_field *field, t_process *parent, int adr);
-void	my_fork(t_field *field, t_process *process);
-void	aff(t_field *field, t_process *process);
-void	helpfunc(int regnbr, int param1, int param2, t_process *process);
-void	multiplyfunc(t_field *field, t_process *process);
-void	arith(t_field *field, t_process *process);
-void	load(t_field *field, t_process *process);
-void	ldi(t_field *field, t_process *process);
-void	lld(t_field *field, t_process *process);
-/*ядро валидации*/
+int					getcountoflist(t_champlist *head);
+int					is_key_a(char *curr, t_field *field);
+void				champ_parse(char *filename, t_field *field);
+t_champlist			*isitbusy(t_champlist *head, int number);
+t_champlist			*addchamtolist(t_champlist *now);
+t_field				*init();
+void				place(t_field *field);
+void				field_print(t_field *field);
+t_champ				*createchamp();
+void				makecolor(t_champlist *head);
+void				currectnum(t_field *field);
+int					getmin(t_field *field);
+void				init_proc(t_field *field);
+int					bytecode_to_int(unsigned char *byte, int size);
+void				deleteallproc(t_field *field);
+void				check(t_field *field);
+void				play(t_field *field);
+int					getcyclesforcop(t_process *now);
+void				executer(t_field *field, t_process *process);
+void				mainexecuter(t_field *field, t_process *process);
+int					istypecorrectnoargreg(t_field *field, t_process *process);
+int					skipnoarg(t_process *process);
+void				printplayers(t_field *field);
+void				simpleresult(t_field *field);
+void				destroy_field (t_field **field);
+int					exiter(t_field *field, char *strtoprint);
+int					map_to_int(t_field *field, int pos, int size);
+void				live(t_field *field, t_process *process);
+void				zjmp(t_field *field, t_process *process);
+int					gettype(int argumentcode, int number);
+int					res(int *bytes, int type, t_field *field, t_process *p);
+void				int_to_map(t_field *field, int pos, int size, int data);
+void				color_to_map(t_field *field, int pos, int size, char color);
+void				st(t_field *field, t_process *process);
+t_process			*for_fork(t_field *field, t_process *parent, int adr);
+void				my_fork(t_field *field, t_process *process);
+void				aff(t_field *field, t_process *process);
+void				helpfunc(int reg, int p1, int p2, t_process *process);
+void				multiplyfunc(t_field *field, t_process *process);
+void				arith(t_field *field, t_process *process);
+void				load(t_field *field, t_process *process);
+void				ldi(t_field *field, t_process *process);
+void				lld(t_field *field, t_process *process);
+t_champ				*createchamp();
 #endif

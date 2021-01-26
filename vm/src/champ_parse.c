@@ -6,109 +6,95 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/17 16:24:14 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/24 14:45:22 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:25:30 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-int	bytecode_to_int(unsigned char *byte, int size)
+
+int		bytecode_to_int(unsigned char *byte, int size)
 {
-	int     result;
-	int     sign;
-	int		i;
+	int	result;
+	int	sign;
+	int	i;
 
 	result = 0;
 	sign = (byte[0] & 0x80);
 	i = 0;
 	while (size)
 	{
-        if (sign)
+		if (sign)
 			result += ((byte[size - 1] ^ 0xFF) << (i * 8));
-        else
-            result += (byte[size - 1] << (i * 8));
+		else
+			result += (byte[size - 1] << (i * 8));
 		size--;
-        i++;
+		i++;
 	}
 	if (sign)
-	    result = ~(result);
+		result = ~(result);
 	return (result);
 }
 
-int read_int(int fd, int count)
+int		read_int(int fd, int count, t_field *field)
 {
-    unsigned char   buff[count];
-    int             status;
-    int             result;
+	unsigned char	buff[count];
+	int				status;
+	int				result;
 
-    status = read(fd, buff, count);
-    if (status < count)
-        exit(-1);
-    result = bytecode_to_int(buff, count);
-    return (result);
+	status = read(fd, buff, count);
+	if (status < count)
+		exiter(field, "Error. size of executing code invalid");
+	result = bytecode_to_int(buff, count);
+	return (result);
 }
 
-void read_char(int fd, int count, char *dest)
+void	read_char(int fd, int count, char *dest)
 {
-    char        buff[count];
-    int         status;
+	char	buff[count];
+	int		status;
 
-
-    status = read(fd, buff, count);
-    if (status < count)
-        exit(-1);
-    ft_memmove(dest, buff, count);
+	status = read(fd, buff, count);
+	if (status < count)
+		exit(-1);
+	ft_memmove(dest, buff, count);
 }
 
-void read_code(int fd, int sizeofexec, t_champ *champ)
+void	read_code(int fd, int sizeofexec, t_champ *champ, t_field *field)
 {
-    unsigned char    *buff;
-    int     status;
-    unsigned char a;
+	unsigned char	*buff;
+	int				status;
+	unsigned char	a;
 
-    if (!(buff = (unsigned char*)malloc(sizeof(unsigned char) * sizeofexec)))
-        exit(-1);//не выделилась память
-    status = read(fd, buff, sizeofexec);
-    if (status < sizeofexec || read(fd, &a, 1) > 0)
-        exit(-1);//считано меньше байтов чем заявленно или за исполняемым кодом присутствуют еще символы
-    champ->execcode = buff;
+	if (!(buff = (unsigned char*)malloc(sizeof(unsigned char) * sizeofexec)))
+		exiter(field, "Error. Malloc don't allocate memory");
+	champ->execcode = buff;
+	status = read(fd, buff, sizeofexec);
+	if (status < sizeofexec || read(fd, &a, 1) > 0)
+		exiter(field, "Error. size of executing code invalid");
 }
 
-t_champ *createchamp()
+void	champ_parse(char *filename, t_field *f)
 {
-    t_champ *newchamp;
+	int fd;
 
-    newchamp = NULL;
-    newchamp = (t_champ*)malloc(sizeof(t_champ));
-    newchamp->inf = (t_header*)malloc(sizeof(t_header));
-    newchamp->execcode = NULL;
-    newchamp->number = 100;
-    newchamp->color = 'c';
-    newchamp->alive = -1;
-    return (newchamp);
-}
-
-void champ_parse(char *filename, t_field *field)
-{
-    int fd;
-
-    if (field->now->nowchamp == NULL)
-    {
-        field->now->nowchamp = createchamp();
-        field->now->nowchamp->number = getmin(field);
-    }   
-    fd = open(filename, O_RDONLY);
-    if (read_int(fd, 4) != COREWAR_EXEC_MAGIC)
-        exiter(field, "Error with magic in file");//маджик неправильный
-    read_char(fd, PROG_NAME_LENGTH, field->now->nowchamp->inf->prog_name);
-    if (read_int(fd, 4) != 0)
-        exiter(field, "Error. No NULL in file");//отсутсвует 0 в виде 4 байт
-    field->now->nowchamp->inf->prog_size =read_int(fd, 4);
-    if (field->now->nowchamp->inf->prog_size > CHAMP_MAX_SIZE)
-        exiter(field, "Error. Exec size is too big.");//размер исполняемого кода больше максимума. какой минимум?s
-    read_char(fd, COMMENT_LENGTH, field->now->nowchamp->inf->comment);
-    if (read_int(fd, 4) != 0)
-        exiter(field, "Error. No NULL in file");//отсутсвует 0 в виде 4 байт
-    read_code(fd, field->now->nowchamp->inf->prog_size, field->now->nowchamp);
-    field->now =  addchamtolist(field->now);
-    close(fd);
+	if (f->now->nowchamp == NULL)
+	{
+		f->now->nowchamp = createchamp();
+		f->now->nowchamp->number = getmin(f);
+	}
+	fd = open(filename, O_RDONLY);
+	if (read_int(fd, 4, f) != COREWAR_EXEC_MAGIC)
+		exiter(f, "Error with magic in file");
+	read_char(fd, PROG_NAME_LENGTH, f->now->nowchamp->inf->prog_name);
+	if (read_int(fd, 4, f) != 0)
+		exiter(f, "Error. No NULL in file");
+	f->now->nowchamp->inf->prog_size = read_int(fd, 4, f);
+	if (f->now->nowchamp->inf->prog_size > CHAMP_MAX_SIZE)
+		exiter(f, "Error. Exec size is too big.");
+	read_char(fd, COMMENT_LENGTH, f->now->nowchamp->inf->comment);
+	if (read_int(fd, 4, f) != 0)
+		exiter(f, "Error. No NULL in file");
+	read_code(fd, f->now->nowchamp->inf->prog_size, f->now->nowchamp, f);
+	f->now = addchamtolist(f->now);
+	close(fd);
 }

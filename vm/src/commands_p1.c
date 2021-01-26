@@ -6,13 +6,13 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/25 16:57:48 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:49:36 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void isindex(t_field *field, int nbr)
+void	isindex(t_field *field, int nbr)
 {
 	t_champlist *now;
 
@@ -25,7 +25,7 @@ void isindex(t_field *field, int nbr)
 	}
 }
 
-void live(t_field *field, t_process *process)
+void	live(t_field *field, t_process *process)
 {
 	int nbrplayer;
 
@@ -36,23 +36,23 @@ void live(t_field *field, t_process *process)
 	process->lastcyclelive = field->cycle;
 }
 
-void zjmp(t_field *field, t_process *process)
+void	zjmp(t_field *field, t_process *process)
 {
 	if (process->carry == 1)
 		process->pos = (process->pos +
 			(map_to_int(field, process->pos + 1, 2) % IDX_MOD)) % MEM_SIZE;
 }
 
-int gettype(int argumentcode, int number)
+int		gettype(int argumentcode, int number)
 {
 	int type;
 
 	type = argumentcode >> (6 - (number * 2))
 		& (REG_CODE | DIR_CODE | IND_CODE);
-	return (type); 
+	return (type);
 }
 
-int res(int *byte, int type, t_field *field, t_process *process)
+int		res(int *byte, int type, t_field *field, t_process *process)
 {
 	int result;
 
@@ -65,8 +65,8 @@ int res(int *byte, int type, t_field *field, t_process *process)
 	else if (type == DIR_CODE)
 	{
 		result = map_to_int(field, process->pos
-			+ *byte, table[process->cop].dir_size);
-		*byte += table[process->cop].dir_size;
+			+ *byte, g_table[process->cop].dir_size);
+		*byte += g_table[process->cop].dir_size;
 	}
 	else if (type == IND_CODE)
 	{

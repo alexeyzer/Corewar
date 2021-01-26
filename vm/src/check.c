@@ -6,13 +6,13 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/22 11:36:24 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:49:17 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void checklivenbr(t_field *field)
+void		checklivenbr(t_field *field)
 {
 	if (field->countlive >= NBR_LIVE)
 	{
@@ -29,10 +29,10 @@ void checklivenbr(t_field *field)
 	field->countlive = 0;
 }
 
-t_process *delete2(t_field *field, t_process *current)
+t_process	*delete2(t_field *field, t_process *current)
 {
-	t_process *head;
-	t_process *ret;
+	t_process	*head;
+	t_process	*ret;
 
 	head = field->first;
 	ret = current->next;
@@ -53,7 +53,7 @@ t_process *delete2(t_field *field, t_process *current)
 	return (ret);
 }
 
-t_process *delete(t_field *field, t_process *current)
+t_process	*delete(t_field *field, t_process *current)
 {
 	t_process *head;
 
@@ -65,15 +65,15 @@ t_process *delete(t_field *field, t_process *current)
 			field->first->prev = NULL;
 		current->next = NULL;
 		free(current);
-		return(field->first);
+		return (field->first);
 	}
 	else
 		return (delete2(field, current));
 }
 
-void findanddeletedied(t_field *field)
+void		findanddeletedied(t_field *field)
 {
-	t_process *now;
+	t_process	*now;
 
 	now = field->first;
 	while (now != NULL)
@@ -85,16 +85,16 @@ void findanddeletedied(t_field *field)
 	}
 }
 
-void check(t_field *field)
+void		check(t_field *field)
 {
-    if (field->cycles_to_die < 0)
-        deleteallproc(field);
-    else
-    {
-        if (field->cycle % field->cycles_to_die == 0)
-        {
-            findanddeletedied(field);//убивает коретки которые выполнили операцию live больше чем cycles_to_die назад
-            checklivenbr(field);//уменьшается если countlive >= nbrlive|| live обнуляется|nbr chekcs обнуляется при live >= nbrlive или когда nbrcheck = NBRCHEKSMAX
-        }
-    }
+	if (field->cycles_to_die < 0)
+		deleteallproc(field);
+	else
+	{
+		if (field->cycle % field->cycles_to_die == 0)
+		{
+			findanddeletedied(field);
+			checklivenbr(field);
+		}
+	}
 }
