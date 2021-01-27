@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/27 08:37:00 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 17:15:23 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ int		istypecorrect(t_field *field, t_process *process)
 	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < g_table[process->cop].countofparams)
 	{
-		if ((result = ((argtype >> (6 - (i * 2)))
-			& g_table[process->cop].typeparams[i])) == 0)
+		result = gettype(argtype, i);
+		if ((result & g_table[process->cop].typeparams[i]) == 0)
 			return (MISTAKESYMB);
 		if (result == REG_CODE)
 			reg++;
+		else if (result != DIR_CODE && result != IND_CODE)
+			return (MISTAKESYMB);
+		
 		i++;
 	}
 	if (reg != 0)
@@ -41,24 +44,28 @@ int		isregcorret(t_field *field, t_process *process, int i)
 	int reg;
 	int	bytes;
 	int argtype;
+	int type;
 
+	i = 0;
+	argtype = map_to_int(field, process->pos + 1, 1);
 	bytes = 0;
-	while (i++ < g_table[process->cop].countofparams)
+	while (i < g_table[process->cop].countofparams)
 	{
-		argtype = ((map_to_int(field, process->pos + 1, 1)\
-			>> (5 - (i * 2))) & g_table[process->cop].typeparams[i]);
-		if (argtype == REG_CODE)
+		
+		type = gettype(argtype, i);
+		if (type == REG_CODE)
 		{
 			reg = map_to_int(field, process->pos + 2 + bytes, 1);
-			if (reg >= REG_NUMBER)
+			if (reg > REG_NUMBER || reg <= 0)
 				return (MISTAKESYMB);
 			else
 				bytes += 1;
 		}
-		else if (argtype == IND_CODE)
+		else if (type == IND_CODE)
 			bytes += IND_SIZE;
-		else if (argtype == DIR_CODE)
+		else if (type == DIR_CODE)
 			bytes += g_table[process->cop].dir_size;
+		i++;
 	}
 	return (1);
 }
@@ -77,8 +84,7 @@ int		skip(t_field *field, t_process *process)
 	argtype = map_to_int(field, process->pos + 1, 1);
 	while (i < g_table[process->cop].countofparams)
 	{
-		temporary = (argtype >> (6 - (i * 2)))\
-			& (REG_CODE | DIR_CODE | IND_CODE);
+		temporary = gettype(argtype, i);
 		if (temporary == REG_CODE)
 			result += 1;
 		else if (temporary == IND_CODE)
@@ -101,7 +107,7 @@ void	executer(t_field *field, t_process *process)
 		{
 			if ((result = istypecorrect(field, process)) == 1)
 				mainexecuter(field, process);
-			else if (result == 2 && isregcorret(field, process, -1))
+			else if (result == 2 && isregcorret(field, process, 0) != -1)
 				mainexecuter(field, process);
 			process->bytetonextсop = skip(field, process);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 11:32:01 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 15:54:30 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_field			*init(void)
 	field->countlive = 0;
 	field->checks = 0;
 	field->cycles_to_die = CYCLE_TO_DIE;
-	field->current = NULL;
 	while (i < MEM_SIZE)
 	{
 		field->mass[i].color = 'z';
@@ -75,4 +74,13 @@ t_champlist		*addchamtolist(t_champlist *now)
 	now->next = newlist;
 	now = now->next;
 	return (now);
+}
+
+int				absreg(int reg)
+{
+	if (reg < 0)
+		return ((reg * -1) % REG_NUMBER);
+	else if (reg > REG_NUMBER)
+		return (reg % REG_NUMBER);
+	return (reg);
 }

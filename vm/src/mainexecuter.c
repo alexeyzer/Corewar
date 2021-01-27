@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainexecuter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/27 12:56:04 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 15:21:57 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	mainexecuter(t_field *field, t_process *process)
 		multiplyfunc(field, process);
 	else if (process->cop == 2)
 		st(field, process);
-	//else if (process->cop == 11 || process->cop == 14)
-	//	my_fork(field, process);
+	else if (process->cop == 11 || process->cop == 14)
+		my_fork(field, process);
 	else if (process->cop == 15)
 		aff(field, process);
 	else if (process->cop == 3 || process->cop == 4)

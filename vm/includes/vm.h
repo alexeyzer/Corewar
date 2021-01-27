@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 12:22:52 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 15:37:34 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_process
 	int					lastcyclelive;
 	int					moved;
 	int					cop;
-	int					*reg;
+	int					reg[REG_NUMBER];
 	t_champlist			*parent;
 	struct s_process	*prev;
 	struct s_process	*next;
@@ -74,8 +74,7 @@ typedef struct		s_field
 	int				checks;
 	int				countlive;
 	int				cycles_to_die;
-	t_process		**first;
-	t_process		*current;
+	t_process		*first;
 	t_champlist		*champlist;
 	t_champlist		*now;
 	t_cell			mass[MEM_SIZE];
@@ -302,4 +301,7 @@ void				lld(t_field *field, t_process *process);
 t_champ				*createchamp();
 int					calcpos(int pos, int size);
 t_process			*createproc(t_champlist *parent, int num);
+t_process			*becomelast(t_process *head);
+int					countoflivepc(t_field *field);
+int					absreg(int reg);
 #endif

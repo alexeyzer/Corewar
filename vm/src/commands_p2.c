@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:02:22 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/27 12:43:25 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 15:53:39 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	multiplyfunc(t_field *field, t_process *process)
 		param[i] = res(&bytesize, type, field, process);
 		i++;
 	}
-	helpfunc(map_to_int(field, process->pos + bytesize, 1)
-		- 1, param[0], param[1], process);
+	helpfunc(map_to_int(field, process->pos + bytesize, 1), \
+		param[0], param[1], process);
 }
 
 void	st(t_field *field, t_process *process)
@@ -48,12 +48,13 @@ void	st(t_field *field, t_process *process)
 	bytesize += 1;
 	type = gettype(argumentcode, 1);
 	if (type == REG_CODE)
-		process->reg[(map_to_int(field, process->pos + bytesize, 1) - 1)] = \
-			process->reg[(reg1 - 1)];
+		process->reg[absreg((map_to_int(field, process->pos + bytesize, 1) \
+			- 1))] = process->reg[(reg1 - 1) % REG_NUMBER];
 	else if (type == IND_CODE)
 	{
 		i = map_to_int(field, process->pos + bytesize, IND_SIZE) % IDX_MOD;
-		int_to_map(field, process->pos + i, REG_SIZE, process->reg[reg1 - 1]);
+		int_to_map(field, process->pos + i, REG_SIZE, \
+			process->reg[absreg(reg1 - 1)]);
 		color_to_map(field, process->pos + i, REG_SIZE, process->color);
 	}
 }
@@ -74,5 +75,5 @@ void	aff(t_field *field, t_process *process)
 
 	i = map_to_int(field, process->pos + 1, 1);
 	if (field->aff == 1)
-		ft_printf("%c", (char)process->reg[i - 1]);
+		ft_printf("%c", (char)process->reg[absreg(i - 1)]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 10:31:14 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 15:37:58 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	if (type == REG_CODE)
 	{
 		reg = map_to_int(field, process->pos + *byte, 1) - 1;
-		result = (process->reg[reg]);
+		result = (process->reg[absreg(reg)]);
 		*byte += 1;
 	}
 	else if (type == DIR_CODE)

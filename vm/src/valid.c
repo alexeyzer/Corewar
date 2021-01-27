@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 12:23:47 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 14:44:43 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,13 @@ static void	v_and_r(int argc, char **av, int i, t_field *field)
 int			main(int argc, char **argv)
 {
 	t_field *fild;
-	t_process *process;
 
 	fild = init();
 	v_and_r(argc, argv, 1, fild);
 	currectnum(fild);
 	makecolor(fild->champlist);
 	place(fild);
-	process = init_proc(fild);
-	fild->first = &process;
+	init_proc(fild);
 	printplayers(fild);
 	play(fild);
 	simpleresult(fild);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obliterator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:48:00 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:28:24 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:02:59 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	destroy_field(t_field **field)
 	if (*field != NULL)
 	{
 		deleteallproc(*field);
-		(*field)->current = NULL;
 		(*field)->first = NULL;
 		destroy_champ_list((*field)->champlist);
 		(*field)->champlist = NULL;

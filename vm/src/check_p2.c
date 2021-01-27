@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_p2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/27 14:14:54 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 16:18:35 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	deleter(t_process *head)
 
 void	deleteallproc(t_field *field)
 {
-	if ((*field->first) != NULL)
+	if (field->first != NULL)
 	{
-		deleter((*field->first));
-		(*field->first) = NULL;
+		deleter(field->first);
+		field->first = NULL;
 	}
 }
 
@@ -50,8 +50,7 @@ int		istypecorrectnoargreg(t_field *field, t_process *process)
 	{
 		if (g_table[process->cop].typeparams[i] == T_REG)
 		{
-			if (bytecode_to_int(&(field->mass[process->pos + size].cell)\
-				, 1) >= REG_NUMBER)
+			if (map_to_int(field, process->pos + size, 1) > REG_NUMBER || map_to_int(field, process->pos + size, 1) <= 0)
 				return (MISTAKESYMB);
 			size += 1;
 		}

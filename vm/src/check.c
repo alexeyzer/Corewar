@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/27 12:59:16 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/27 14:47:02 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ t_process	*delete(t_field *field, t_process *current)
 	t_process *head;
 	t_process *next;
 
-	head = *field->first;
+	head = field->first;
 	if (head == current)
 	{
 		next = (head->next);
 		if (next != NULL)
 			next->prev = NULL;
-		field->first = &next;
+		field->first = next;
 		free(current);
-		return ((*field->first));
+		return (field->first);
 	}
 	else
 		return (delete2(current));
@@ -74,7 +74,7 @@ void		findanddeletedied(t_field *field)
 {
 	t_process	*now;
 
-	now = (*field->first);
+	now = field->first;
 	while (now != NULL)
 	{
 		if (now->lastcyclelive < (field->cycle - field->cycles_to_die))
