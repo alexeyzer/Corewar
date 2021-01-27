@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 14:21:52 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 11:32:01 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ t_field			*init(void)
 	field->first = NULL;
 	field->cycle = 0;
 	field->aff = 0;
+	field->dump = -1;
 	field->countlive = 0;
 	field->checks = 0;
 	field->cycles_to_die = CYCLE_TO_DIE;
-	field->current = field->first;
+	field->current = NULL;
 	while (i < MEM_SIZE)
 	{
 		field->mass[i].color = 'z';

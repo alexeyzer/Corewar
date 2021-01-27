@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:02:22 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/26 21:10:34 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:43:25 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ void	st(t_field *field, t_process *process)
 	reg1 = map_to_int(field, process->pos + bytesize, 1);
 	bytesize += 1;
 	type = gettype(argumentcode, 1);
-	if (type == REG_CODE && reg1 - 1 < REG_NUMBER && reg1 - 1 >= 0 )
-		process->reg[map_to_int(field, process->pos + bytesize, 1) - 1] = \
-			process->reg[reg1 - 1];
+	if (type == REG_CODE)
+		process->reg[(map_to_int(field, process->pos + bytesize, 1) - 1)] = \
+			process->reg[(reg1 - 1)];
 	else if (type == IND_CODE)
 	{
-		int_to_map(field, process->pos + (map_to_int(field, process->pos + \
-			bytesize, IND_SIZE) % IDX_MOD), REG_SIZE, process->reg[reg1 - 1]);
-		color_to_map(field, calcpos(process->pos + (map_to_int(field, process->pos + \
-			bytesize, IND_SIZE) % IDX_MOD), 1), REG_SIZE, process->color);
+		i = map_to_int(field, process->pos + bytesize, IND_SIZE) % IDX_MOD;
+		int_to_map(field, process->pos + i, REG_SIZE, process->reg[reg1 - 1]);
+		color_to_map(field, process->pos + i, REG_SIZE, process->color);
 	}
 }
 

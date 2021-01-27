@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 17:20:19 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:23:47 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,23 @@ static void	v_and_r(int argc, char **av, int i, t_field *field)
 		}
 		i++;
 	}
-	if (getcountoflist(field->champlist) > MAX_PLAYERS || getcountoflist(field->champlist) <= 0)
+	if (getcountoflist(field->champlist) > MAX_PLAYERS ||\
+		getcountoflist(field->champlist) <= 0)
 		exiter(field, "Error more then 4 players or less than 1");
 }
 
 int			main(int argc, char **argv)
 {
 	t_field *fild;
+	t_process *process;
 
 	fild = init();
 	v_and_r(argc, argv, 1, fild);
 	currectnum(fild);
 	makecolor(fild->champlist);
 	place(fild);
-	init_proc(fild);
+	process = init_proc(fild);
+	fild->first = &process;
 	printplayers(fild);
 	play(fild);
 	simpleresult(fild);

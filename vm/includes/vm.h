@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 15:33:50 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:22:52 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_process
 	int					lastcyclelive;
 	int					moved;
 	int					cop;
-	int					reg[REG_NUMBER];
+	int					*reg;
 	t_champlist			*parent;
 	struct s_process	*prev;
 	struct s_process	*next;
@@ -74,7 +74,7 @@ typedef struct		s_field
 	int				checks;
 	int				countlive;
 	int				cycles_to_die;
-	t_process		*first;
+	t_process		**first;
 	t_process		*current;
 	t_champlist		*champlist;
 	t_champlist		*now;
@@ -268,7 +268,7 @@ t_champ				*createchamp();
 void				makecolor(t_champlist *head);
 void				currectnum(t_field *field);
 int					getmin(t_field *field);
-void				init_proc(t_field *field);
+t_process			*init_proc(t_field *field);
 int					bytecode_to_int(unsigned char *byte, int size);
 void				deleteallproc(t_field *field);
 void				check(t_field *field);
@@ -290,7 +290,7 @@ int					res(int *bytes, int type, t_field *field, t_process *p);
 void				int_to_map(t_field *field, int pos, int size, int data);
 void				color_to_map(t_field *field, int pos, int size, char color);
 void				st(t_field *field, t_process *process);
-t_process			*for_fork(t_field *field, t_process *parent, int adr);
+void				for_fork(t_field *field, t_process *parent, int adr);
 void				my_fork(t_field *field, t_process *process);
 void				aff(t_field *field, t_process *process);
 void				helpfunc(int reg, int p1, int p2, t_process *process);
@@ -301,4 +301,5 @@ void				ldi(t_field *field, t_process *process);
 void				lld(t_field *field, t_process *process);
 t_champ				*createchamp();
 int					calcpos(int pos, int size);
+t_process			*createproc(t_champlist *parent, int num);
 #endif

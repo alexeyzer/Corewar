@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainexecuter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/26 21:05:52 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:56:04 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	sti(t_field *field, t_process *process)
 
 void	mainexecuter(t_field *field, t_process *process)
 {
-	if (process->lastcyclelive == 13610 && process->pos == 1917 && process->color == 'b')
-		ft_printf("here");
 	if (process->cop == 0)
 		live(field, process);
 	else if (process->cop == 8)
@@ -45,8 +43,8 @@ void	mainexecuter(t_field *field, t_process *process)
 		multiplyfunc(field, process);
 	else if (process->cop == 2)
 		st(field, process);
-	else if (process->cop == 11 || process->cop == 14)
-		my_fork(field, process);
+	//else if (process->cop == 11 || process->cop == 14)
+	//	my_fork(field, process);
 	else if (process->cop == 15)
 		aff(field, process);
 	else if (process->cop == 3 || process->cop == 4)

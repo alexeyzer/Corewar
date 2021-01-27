@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/26 20:59:18 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 08:37:00 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	executer(t_field *field, t_process *process)
 				mainexecuter(field, process);
 			else if (result == 2 && isregcorret(field, process, -1))
 				mainexecuter(field, process);
-			if (process->cop > 16)
-				ft_printf("aaa");
 			process->bytetonextсop = skip(field, process);
 		}
 		else

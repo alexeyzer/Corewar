@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_p2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/26 14:49:19 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 14:14:54 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	deleter(t_process *head)
 
 void	deleteallproc(t_field *field)
 {
-	if (field->first != NULL)
+	if ((*field->first) != NULL)
 	{
-		deleter(field->first);
-		field->first = NULL;
+		deleter((*field->first));
+		(*field->first) = NULL;
 	}
 }
 

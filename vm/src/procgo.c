@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   procgo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/26 20:56:54 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:35:47 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	workwithproc(t_field *field)
 {
 	t_process *now;
 
-	now = field->first;
+	now = (*field->first);
 	while (now != NULL)
 	{
 		if (now->moved == 1 && now->idle == 0)
@@ -46,7 +46,7 @@ void	workwithproc(t_field *field)
 		if (now->moved == 0 && now->idle == 0)
 		{
 			executer(field, now);
-			if (now->cop != 8 || (now->cop == 8 && now->carry == 0))
+			if (now->cop != 8)
 				now->pos = (now->pos + now->bytetonextсop) % MEM_SIZE;
 			now->bytetonextсop = 0;
 			now->moved = 1;
@@ -62,7 +62,7 @@ int		countoflivepc(t_field *field)
 	int			count;
 
 	count = 0;
-	head = field->first;
+	head = *(field->first);
 	while (head != NULL)
 	{
 		count++;
@@ -75,6 +75,8 @@ void	play(t_field *field)
 {
 	while (countoflivepc(field) > 1)
 	{
+		if (field->cycle == 804)
+			ft_printf("рьь");
 		field->cycle++;
 		workwithproc(field);
 		check(field);

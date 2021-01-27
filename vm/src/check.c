@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/26 16:21:05 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/27 12:59:16 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ void		checklivenbr(t_field *field)
 	field->countlive = 0;
 }
 
-t_process	*delete2(t_field *field, t_process *current)
+t_process	*delete2(t_process *current)
 {
-	t_process	*head;
 	t_process	*ret;
 
-	head = field->first;
 	ret = current->next;
 	if (ret != NULL)
 	{
@@ -56,26 +54,27 @@ t_process	*delete2(t_field *field, t_process *current)
 t_process	*delete(t_field *field, t_process *current)
 {
 	t_process *head;
+	t_process *next;
 
-	head = field->first;
+	head = *field->first;
 	if (head == current)
 	{
-		field->first = field->first->next;
-		if (field->first != NULL)
-			field->first->prev = NULL;
-		current->next = NULL;
+		next = (head->next);
+		if (next != NULL)
+			next->prev = NULL;
+		field->first = &next;
 		free(current);
-		return (field->first);
+		return ((*field->first));
 	}
 	else
-		return (delete2(field, current));
+		return (delete2(current));
 }
 
 void		findanddeletedied(t_field *field)
 {
 	t_process	*now;
 
-	now = field->first;
+	now = (*field->first);
 	while (now != NULL)
 	{
 		if (now->lastcyclelive < (field->cycle - field->cycles_to_die))
