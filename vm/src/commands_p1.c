@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 15:37:58 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 08:52:56 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ void	zjmp(t_field *field, t_process *process)
 int		gettype(int argumentcode, int number)
 {
 	int type;
+	int	all;
+
+	all = (REG_CODE | DIR_CODE | IND_CODE);
 
 	type = argumentcode >> (6 - (number * 2))
-		& (REG_CODE | DIR_CODE | IND_CODE);
+		& all;
 	return (type);
 }
 
@@ -60,7 +63,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	if (type == REG_CODE)
 	{
 		reg = map_to_int(field, process->pos + *byte, 1) - 1;
-		result = (process->reg[absreg(reg)]);
+		result = (process->reg[(reg)]);
 		*byte += 1;
 	}
 	else if (type == DIR_CODE)

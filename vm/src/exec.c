@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/27 17:15:23 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 09:07:58 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+int checkmystake(t_process *p,int result, int i)
+{
+	if (result == REG_CODE)
+	{
+		if ((T_REG & g_table[p->cop].typeparams[i]) == 0)
+			return (MISTAKESYMB);
+		else
+			return (1);
+		
+	}
+	else if (result == DIR_CODE)
+	{
+		if ((T_DIR & g_table[p->cop].typeparams[i]) == 0)
+			return (MISTAKESYMB);
+		else
+			return (1);
+		
+	}
+	else if (result == IND_CODE)
+	{
+		if ((T_IND & g_table[p->cop].typeparams[i]) == 0)
+			return (MISTAKESYMB);
+		else
+			return (1);
+	}
+	return (MISTAKESYMB);
+}
 
 int		istypecorrect(t_field *field, t_process *process)
 {
@@ -22,16 +50,18 @@ int		istypecorrect(t_field *field, t_process *process)
 	i = 0;
 	reg = 0;
 	argtype = map_to_int(field, process->pos + 1, 1);
+	if (process->pos == 2660 && process->lastcyclelive == 3315)
+	{
+		ft_printf("yeap");
+		field_print(field);
+	}
 	while (i < g_table[process->cop].countofparams)
 	{
 		result = gettype(argtype, i);
-		if ((result & g_table[process->cop].typeparams[i]) == 0)
+		if (checkmystake(process, result, i) == -1)
 			return (MISTAKESYMB);
 		if (result == REG_CODE)
 			reg++;
-		else if (result != DIR_CODE && result != IND_CODE)
-			return (MISTAKESYMB);
-		
 		i++;
 	}
 	if (reg != 0)
@@ -51,7 +81,6 @@ int		isregcorret(t_field *field, t_process *process, int i)
 	bytes = 0;
 	while (i < g_table[process->cop].countofparams)
 	{
-		
 		type = gettype(argtype, i);
 		if (type == REG_CODE)
 		{

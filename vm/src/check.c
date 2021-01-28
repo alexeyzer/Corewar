@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/27 14:47:02 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 09:11:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		check(t_field *field)
 		deleteallproc(field);
 	else
 	{
-		if (field->cycle % field->cycles_to_die == 0)
+		if (field->cycle % field->cycles_to_die == 0 || field->cycles_to_die <= 0)
 		{
 			findanddeletedied(field);
 			checklivenbr(field);

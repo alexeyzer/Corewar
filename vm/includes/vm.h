@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 15:37:34 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/27 20:04:06 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,5 +303,4 @@ int					calcpos(int pos, int size);
 t_process			*createproc(t_champlist *parent, int num);
 t_process			*becomelast(t_process *head);
 int					countoflivepc(t_field *field);
-int					absreg(int reg);
 #endif

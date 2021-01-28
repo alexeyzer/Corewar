@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 15:54:30 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/27 20:03:08 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,4 @@ t_champlist		*addchamtolist(t_champlist *now)
 	now->next = newlist;
 	now = now->next;
 	return (now);
-}
-
-int				absreg(int reg)
-{
-	if (reg < 0)
-		return ((reg * -1) % REG_NUMBER);
-	else if (reg > REG_NUMBER)
-		return (reg % REG_NUMBER);
-	return (reg);
 }

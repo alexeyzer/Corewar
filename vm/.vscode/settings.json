@@ -1,6 +1,14 @@
 {
 	"files.associations": {
-		"locale": "c"
+		"locale": "c",
+		"memory": "c",
+		"utility": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"unordered_map": "c",
+		"__locale": "c"
 	},
 	"editor.insertSpaces": false
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   procgo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 17:00:13 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/27 20:40:35 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		countoflivepc(t_field *field)
 
 void	play(t_field *field)
 {
-	while (countoflivepc(field) > 1)
+	while (countoflivepc(field)  > 1)
 	{
 		field->cycle++;
 		workwithproc(field);
