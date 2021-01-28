@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 15:12:58 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 16:21:48 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_process	*delete2(t_process *current)
 		current->prev = NULL;
 		current->next = NULL;
 	}
+	free(current->reg);
 	free(current);
 	return (ret);
 }
@@ -63,6 +64,7 @@ t_process	*delete(t_field *field, t_process *current)
 		if (next != NULL)
 			next->prev = NULL;
 		field->first = next;
+		free(current->reg);
 		free(current);
 		return (field->first);
 	}
