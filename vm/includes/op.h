@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/01/26 14:57:04 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/28 17:52:50 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define REG_NUMBER				16
 
 # define CYCLE_TO_DIE			1536
-# define CYCLE_DELTA				50
-# define NBR_LIVE          21
+# define CYCLE_DELTA			50
+# define NBR_LIVE				21
 # define MAX_CHECKS				10
 
 typedef char	t_arg_type;

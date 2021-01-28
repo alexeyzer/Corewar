@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 13:53:06 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/28 18:48:40 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ void	live(t_field *field, t_process *process)
 
 void	zjmp(t_field *field, t_process *process)
 {
+	int pos;
+
+	pos = process->pos + (map_to_int(field, process->pos + 1, 2)) % IDX_MOD;
+	pos = calcpos(pos);
 	if (process->carry == 1)
-		process->pos = ((process->pos +
-			(map_to_int(field, process->pos + 1, 2)) % IDX_MOD)) % MEM_SIZE;
+		process->pos = pos;
 }
 
 int		gettype(int argumentcode, int number)

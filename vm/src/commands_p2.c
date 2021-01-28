@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:02:22 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/28 16:07:44 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 17:17:33 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	my_fork(t_field *field, t_process *process)
 {
 	int	addr;
 
-	addr = map_to_int(field, process->pos + 1, 2) % MEM_SIZE;
+	addr = map_to_int(field, process->pos + 1, 2);
 	if (process->cop == 11)
 		addr = addr % IDX_MOD;
 	for_fork(field, process, addr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   procgo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 16:38:32 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 17:56:00 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	workwithproc(t_field *field)
 		{
 			executer(field, now);
 			if (now->cop != 8 || (now->cop == 8 && now->carry == 0))
-				now->pos = (now->pos + now->bytetonextсop) % MEM_SIZE;
+				now->pos = calcpos(now->pos + now->bytetonextсop);
 			now->bytetonextсop = 0;
 			now->moved = 1;
 			now->cop = -1;
@@ -76,6 +76,7 @@ void	play(t_field *field)
 	while (countoflivepc(field) > 0)
 	{
 		field->cycle++;
+		field->cyclecheck++;
 		workwithproc(field);
 		check(field);
 		if (field->cycle == field->dump)

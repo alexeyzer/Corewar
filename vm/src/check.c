@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 16:38:52 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 18:48:51 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		checklivenbr(t_field *field)
 	{
 		field->cycles_to_die -= CYCLE_DELTA;
 		field->checks = 0;
+		field->countlive = 0;
 	}
 	else
 		field->checks++;
@@ -25,8 +26,8 @@ void		checklivenbr(t_field *field)
 	{
 		field->cycles_to_die -= CYCLE_DELTA;
 		field->checks = 0;
+		field->countlive = 0;
 	}
-	field->countlive = 0;
 }
 
 t_process	*delete2(t_process *current)
@@ -89,9 +90,10 @@ void		findanddeletedied(t_field *field)
 
 void		check(t_field *field)
 {
-	if (field->cycle % field->cycles_to_die == 0 || field->cycles_to_die <= 0)
+	if (field->cyclecheck == field->cycles_to_die || field->cycles_to_die <= 0)
 	{
 		findanddeletedied(field);
 		checklivenbr(field);
+		field->cyclecheck = 0;
 	}
 }

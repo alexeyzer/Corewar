@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 15:35:29 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 17:56:27 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_field			*init(int i)
 	field->first = NULL;
 	field->cycle = 0;
 	field->aff = 0;
+	field->cyclecheck = 0;
 	field->dump = -1;
 	field->lastprocesssadlust = -1;
 	field->countlive = 0;
