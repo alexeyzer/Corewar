@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gamesult.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/28 14:16:05 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/28 14:38:37 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void		printplayers(t_field *field)
 
 	now = field->champlist;
 	i = 1;
+	ft_printf("Introducing contestants...\n");
 	while (now != NULL && now->nowchamp != NULL)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i,\

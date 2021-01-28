@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainexecuter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/28 13:56:11 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/28 15:27:06 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	sti(t_field *field, t_process *process)
 	bytesize = (param[1] + param[2]) % IDX_MOD;
 	int_to_map(field, process->pos + bytesize,\
 		DIR_SIZE, param[0]);
+	color_to_map(field, process->pos + bytesize, DIR_SIZE, process->color);
 }
 
 void	mainexecuter(t_field *field, t_process *process)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:02:22 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/27 19:53:44 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/28 16:07:44 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void	aff(t_field *field, t_process *process)
 
 	i = map_to_int(field, process->pos + 1, 1);
 	if (field->aff == 1)
-		ft_printf("%c", (char)process->reg[(i - 1)]);
+		ft_printf("aff: %d\n", (char)(process->reg[(i - 1)]));
 }

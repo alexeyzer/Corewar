@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proccore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 13:27:19 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/28 15:46:35 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_process	*createproc(t_champlist *parent, int num)
 	res->next = NULL;
 	res->prev = NULL;
 	res->parent = parent;
+	res->reg = (int*)malloc(sizeof(int) * REG_NUMBER);
 	res->reg[0] = parent->nowchamp->number;
 	while (i < REG_NUMBER)
 	{
