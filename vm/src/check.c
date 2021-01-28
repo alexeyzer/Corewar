@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 16:21:48 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 16:38:52 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void		findanddeletedied(t_field *field)
 	now = field->first;
 	while (now != NULL)
 	{
-		if (now->lastcyclelive <= (field->cycle - field->cycles_to_die) || field->cycles_to_die <= 0)
+		if (now->lastcyclelive <= (field->cycle - field->cycles_to_die)\
+			|| field->cycles_to_die <= 0)
 			now = delete(field, now);
 		else
 			now = now->next;

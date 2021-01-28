@@ -6,7 +6,7 @@
 /*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:48:00 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 16:16:57 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 16:36:40 by cgonzo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	destroy_field(t_field **field)
 
 int		exiter(t_field *field, char *strtoprint)
 {
-	ft_printf("%s\n", strtoprint);
+	if (strtoprint != NULL)
+		ft_printf("%s\n", strtoprint);
 	destroy_field(&field);
 	exit(0);
 	return (1);
