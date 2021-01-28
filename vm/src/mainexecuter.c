@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainexecuter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/27 15:21:57 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 13:56:11 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	sti(t_field *field, t_process *process)
 		param[i] = res(&bytesize, type, field, process);
 		i++;
 	}
-	int_to_map(field, process->pos + ((param[1] + param[2]) % IDX_MOD),\
-		4, param[0]);
+	bytesize = (param[1] + param[2]) % IDX_MOD;
+	int_to_map(field, process->pos + bytesize,\
+		DIR_SIZE, param[0]);
 }
 
 void	mainexecuter(t_field *field, t_process *process)
@@ -66,7 +67,7 @@ void	int_to_map(t_field *field, int pos, int size, int data)
 	i = 0;
 	while (size)
 	{
-		field->mass[calcpos(pos, size)].cell =\
+		field->mass[calcpos(pos + size - 1)].cell =\
 			(unsigned char)((data >> i) & 0xFF);
 		size--;
 		i += 8;
@@ -77,7 +78,7 @@ void	color_to_map(t_field *field, int pos, int size, char color)
 {
 	while (size)
 	{
-		field->mass[calcpos(pos, size)].color = color;
+		field->mass[calcpos(pos + size - 1)].color = color;
 		size--;
 	}
 }

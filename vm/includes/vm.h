@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 20:04:06 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/28 14:16:48 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,11 @@ typedef struct		s_field
 	int				checks;
 	int				countlive;
 	int				cycles_to_die;
+	int				lastprocesssadlust;
 	t_process		*first;
 	t_champlist		*champlist;
 	t_champlist		*now;
-	t_cell			mass[MEM_SIZE];
+	t_cell			*mass;
 }					t_field;
 
 typedef struct		s_command
@@ -260,7 +261,7 @@ int					is_key_a(char *curr, t_field *field);
 void				champ_parse(char *filename, t_field *field);
 t_champlist			*isitbusy(t_champlist *head, int number);
 t_champlist			*addchamtolist(t_champlist *now);
-t_field				*init();
+t_field				*init(int i);
 void				place(t_field *field);
 void				field_print(t_field *field);
 t_champ				*createchamp();
@@ -299,8 +300,9 @@ void				load(t_field *field, t_process *process);
 void				ldi(t_field *field, t_process *process);
 void				lld(t_field *field, t_process *process);
 t_champ				*createchamp();
-int					calcpos(int pos, int size);
+int					calcpos(int pos);
 t_process			*createproc(t_champlist *parent, int num);
 t_process			*becomelast(t_process *head);
 int					countoflivepc(t_field *field);
+int					checkmystake(t_process *p, int result, int i);
 #endif

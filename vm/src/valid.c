@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 14:44:43 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 14:14:45 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			main(int argc, char **argv)
 {
 	t_field *fild;
 
-	fild = init();
+	fild = init(0);
 	v_and_r(argc, argv, 1, fild);
 	currectnum(fild);
 	makecolor(fild->champlist);
@@ -111,6 +111,7 @@ int			main(int argc, char **argv)
 	init_proc(fild);
 	printplayers(fild);
 	play(fild);
+	field_print(fild);
 	simpleresult(fild);
 	destroy_field(&fild);
 }

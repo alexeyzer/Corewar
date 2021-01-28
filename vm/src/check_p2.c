@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_p2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/27 16:18:35 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 11:55:37 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		istypecorrectnoargreg(t_field *field, t_process *process)
 {
 	int	i;
 	int	size;
+	int reg;
 
 	i = 0;
 	size = 1;
@@ -50,7 +51,8 @@ int		istypecorrectnoargreg(t_field *field, t_process *process)
 	{
 		if (g_table[process->cop].typeparams[i] == T_REG)
 		{
-			if (map_to_int(field, process->pos + size, 1) > REG_NUMBER || map_to_int(field, process->pos + size, 1) <= 0)
+			reg = map_to_int(field, process->pos + size, 1);
+			if (reg > REG_NUMBER || reg <= 0)
 				return (MISTAKESYMB);
 			size += 1;
 		}

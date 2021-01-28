@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gamesult.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/27 14:48:04 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 14:16:05 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,20 @@ t_champlist	*brcomelust(t_champlist *list)
 static void	winner(t_field *field, int max)
 {
 	t_champlist *now;
+	int			count;
 
 	now = field->champlist;
+	count = issamelustlive(field, max);
 	while (now != NULL && now->nowchamp != NULL)
 	{
-		if (now->nowchamp->alive == max)
+		if (now->nowchamp->alive == max && count == 1)
+		{
+			ft_printf("Contestant %d, \"%s\", has won !\n",\
+			now->nowchamp->number, now->nowchamp->inf->prog_name);
+			return ;
+		}
+		if (now->nowchamp->alive == max && count > 1 && now->nowchamp->number\
+			== field->lastprocesssadlust)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",\
 			now->nowchamp->number, now->nowchamp->inf->prog_name);
@@ -66,16 +75,12 @@ void		simpleresult(t_field *field)
 			max = now->nowchamp->alive;
 		now = now->next;
 	}
-	if (max == -1 && (field->first) == NULL)
+	if (max == -1)
 	{
 		now = brcomelust(field->champlist);
 		ft_printf("Contestant %d, \"%s\", has won !\n",\
 			now->nowchamp->number, now->nowchamp->inf->prog_name);
 	}
-	else if (field->first != NULL && max == -1)
-		ft_printf("Contestant %d, \"%s\", has won !\n",\
-			field->first->parent->nowchamp->number,\
-				field->first->parent->nowchamp->inf->prog_name);
 	else if (max != -1)
 		winner(field, max);
 }
@@ -87,15 +92,15 @@ int			map_to_int(t_field *field, int pos, int size)
 	int	i;
 
 	result = 0;
-	sign = (field->mass[calcpos(pos, 1)].cell & 0x80);
+	sign = (field->mass[calcpos(pos)].cell & 0x80);
 	i = 0;
 	while (size)
 	{
 		if (sign)
-			result += ((field->mass[calcpos(pos, size)].cell ^ 0xFF)\
+			result += ((field->mass[calcpos(pos + size - 1)].cell ^ 0xFF)\
 				<< (i * 8));
 		else
-			result += (field->mass[calcpos(pos, size)].cell << (i * 8));
+			result += (field->mass[calcpos(pos + size - 1)].cell << (i * 8));
 		size--;
 		i++;
 	}

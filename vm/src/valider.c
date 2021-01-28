@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 20:03:08 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/28 14:14:40 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ t_champlist		*isitbusy(t_champlist *head, int number)
 	return (NULL);
 }
 
-t_field			*init(void)
+t_field			*init(int i)
 {
 	t_field	*field;
-	int		i;
 
-	i = 0;
-	field = (t_field*)malloc(sizeof(t_field));
-	field->champlist = (t_champlist*)malloc(sizeof(t_champlist));
+	field = (t_field*)malloc(sizeof(t_field) * 1);
+	field->champlist = (t_champlist*)malloc(sizeof(t_champlist) * 1);
 	field->champlist->next = NULL;
 	field->champlist->prev = NULL;
 	field->champlist->nowchamp = NULL;
@@ -51,9 +49,11 @@ t_field			*init(void)
 	field->cycle = 0;
 	field->aff = 0;
 	field->dump = -1;
+	field->lastprocesssadlust = -1;
 	field->countlive = 0;
 	field->checks = 0;
 	field->cycles_to_die = CYCLE_TO_DIE;
+	field->mass = (t_cell*)malloc(sizeof(t_cell*) * MEM_SIZE);
 	while (i < MEM_SIZE)
 	{
 		field->mass[i].color = 'z';
@@ -67,7 +67,7 @@ t_champlist		*addchamtolist(t_champlist *now)
 {
 	t_champlist *newlist;
 
-	newlist = (t_champlist*)malloc(sizeof(t_champlist));
+	newlist = (t_champlist*)malloc(sizeof(t_champlist) * 1);
 	newlist->next = NULL;
 	newlist->prev = now;
 	newlist->nowchamp = NULL;

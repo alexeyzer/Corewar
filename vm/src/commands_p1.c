@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 08:52:56 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/28 13:53:06 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	live(t_field *field, t_process *process)
 
 	nbrplayer = map_to_int(field, process->pos + 1, 4);
 	field->countlive++;
+	field->lastprocesssadlust = process->parent->nowchamp->number;
 	isindex(field, nbrplayer);
 	process->lastcyclelive = field->cycle;
 }
@@ -48,7 +49,6 @@ int		gettype(int argumentcode, int number)
 	int	all;
 
 	all = (REG_CODE | DIR_CODE | IND_CODE);
-
 	type = argumentcode >> (6 - (number * 2))
 		& all;
 	return (type);

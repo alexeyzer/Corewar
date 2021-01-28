@@ -12,7 +12,7 @@
 
 SRC = valid.c champ_parse.c valider.c placer.c func.c proccore.c check.c \
 		check_p2.c procgo.c exec.c mainexecuter.c gamesult.c obliterator.c \
-		commands_p1.c commands_p2.c commands_p3.c
+		commands_p1.c commands_p2.c commands_p3.c correct.c
 
 SRC_DIR = src/
 
@@ -35,7 +35,7 @@ all: $(NAME)
 $(NAME): $(OBJ) 
 	@cd libftprintf && $(MAKE) all
 	@cp libftprintf/libftprintf.a ./
-	@gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) libftprintf.a
+	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME) $(OBJ) libftprintf.a
 
 
 %.o:%.c $(INCNAME1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proccore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/27 15:52:13 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/28 13:27:19 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		for_fork(t_field *field, t_process *parent, int adr)
 		i++;
 	}
 	res->pos = (parent->pos + adr) % MEM_SIZE;
+	if (res->pos < 0)
+		res->pos = MEM_SIZE + res->pos;
 	res->parent = parent->parent;
 	head = becomelast(field->first);
 	head->next = res;

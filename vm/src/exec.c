@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 09:07:58 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/28 14:15:13 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
-int checkmystake(t_process *p,int result, int i)
-{
-	if (result == REG_CODE)
-	{
-		if ((T_REG & g_table[p->cop].typeparams[i]) == 0)
-			return (MISTAKESYMB);
-		else
-			return (1);
-		
-	}
-	else if (result == DIR_CODE)
-	{
-		if ((T_DIR & g_table[p->cop].typeparams[i]) == 0)
-			return (MISTAKESYMB);
-		else
-			return (1);
-		
-	}
-	else if (result == IND_CODE)
-	{
-		if ((T_IND & g_table[p->cop].typeparams[i]) == 0)
-			return (MISTAKESYMB);
-		else
-			return (1);
-	}
-	return (MISTAKESYMB);
-}
 
 int		istypecorrect(t_field *field, t_process *process)
 {
@@ -50,11 +22,6 @@ int		istypecorrect(t_field *field, t_process *process)
 	i = 0;
 	reg = 0;
 	argtype = map_to_int(field, process->pos + 1, 1);
-	if (process->pos == 2660 && process->lastcyclelive == 3315)
-	{
-		ft_printf("yeap");
-		field_print(field);
-	}
 	while (i < g_table[process->cop].countofparams)
 	{
 		result = gettype(argtype, i);
@@ -76,7 +43,6 @@ int		isregcorret(t_field *field, t_process *process, int i)
 	int argtype;
 	int type;
 
-	i = 0;
 	argtype = map_to_int(field, process->pos + 1, 1);
 	bytes = 0;
 	while (i < g_table[process->cop].countofparams)
@@ -151,13 +117,9 @@ void	executer(t_field *field, t_process *process)
 		process->bytetonextсop = 1;
 }
 
-int		calcpos(int pos, int size)
+int		calcpos(int pos)
 {
-	int newpos;
-
-	newpos = pos + size - 1;
-	if (newpos < 0)
-		return (MEM_SIZE + newpos);
-	else
-		return (newpos % MEM_SIZE);
+	if (pos < 0)
+		pos = pos * -1;
+	return (pos % MEM_SIZE);
 }
