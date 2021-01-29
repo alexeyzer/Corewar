@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_p2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 16:18:58 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/29 09:36:02 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	deleter(t_process *head)
 		deleter(head->next);
 		head->next = NULL;
 	}
-	free(head->reg);
 	free(head);
 }
 

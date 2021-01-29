@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 14:15:13 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 10:27:20 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int		istypecorrect(t_field *field, t_process *process)
 {
-	int argtype;
+	signed char argtype;
 	int	i;
 	int reg;
 	int result;
 
 	i = 0;
 	reg = 0;
-	argtype = map_to_int(field, process->pos + 1, 1);
+	argtype = onebyte(field, process->pos + 1);
 	while (i < g_table[process->cop].countofparams)
 	{
 		result = gettype(argtype, i);
@@ -40,10 +40,10 @@ int		isregcorret(t_field *field, t_process *process, int i)
 {
 	int reg;
 	int	bytes;
-	int argtype;
+	signed char argtype;
 	int type;
 
-	argtype = map_to_int(field, process->pos + 1, 1);
+	argtype = onebyte(field, process->pos + 1);
 	bytes = 0;
 	while (i < g_table[process->cop].countofparams)
 	{
@@ -67,7 +67,7 @@ int		isregcorret(t_field *field, t_process *process, int i)
 
 int		skip(t_field *field, t_process *process)
 {
-	int	argtype;
+	signed char	argtype;
 	int	i;
 	int	result;
 	int	temporary;
@@ -76,7 +76,7 @@ int		skip(t_field *field, t_process *process)
 	i = 0;
 	result = 2;
 	temporary = 0;
-	argtype = map_to_int(field, process->pos + 1, 1);
+	argtype = onebyte(field, process->pos + 1);
 	while (i < g_table[process->cop].countofparams)
 	{
 		temporary = gettype(argtype, i);

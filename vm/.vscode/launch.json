@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/corewar",
-            "args": ["vm_champs/champs/examples/helltrain.cor", "./vm_champs/champs/Octobre_Rouge_V4.2.cor"],
+            "args": ["../vm/vm_champs/champs/Octobre_Rouge_V4.2.cor", "../vm/vm_champs/champs/Gagnant.cor"],
             "cwd": "${workspaceFolder}"
         }
     ]

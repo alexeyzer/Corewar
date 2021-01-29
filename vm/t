@@ -1,0 +1,1386 @@
+Introducing contestants...
+* Player 1, weighing 609 bytes, "Octobre Rouge V4.2" ("And the winner is ...") !
+* Player 2, weighing 325 bytes, "Celebration Funebre v0.99pl42" ("Jour J") !
+ld stor to r3 with 0
+command st set 19 with 1
+ld stor to r15 with 0
+zjmp 2135
+command sti set pos 2135 + -73 with 2
+command sti set pos 2142 + -66 with 2
+command sti set pos 2149 + -59 with 2
+command sti set pos 2156 + -52 with 2
+command sti set pos 2163 + -45 with 2
+command sti set pos 2170 + -38 with 2
+ld stor to r4 with 393216
+ld stor to r12 with 917504
+ld stor to r11 with 1
+ld stor to r10 with 6
+set live with 42
+command sti set pos 2210 + -154 with 393216
+zjmp fail
+zjmp 411
+set live with 42
+set live with 3
+set live with 42
+set live with 4
+set live with 42
+set live with 42
+ld stor to r14 with -186
+ld stor to r2 with 0
+zjmp 2055
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 57672448
+ld stor to r6 with 318992390
+ld stor to r3 with 0
+ld stor to r15 with 0
+zjmp 2061
+zjmp 594
+command st set 609 with 57672448
+set live with 2
+command st set 598 with 318992390
+set live with 42
+command st set 609 with 57672448
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + -186 with 2
+zjmp 1872
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+command sti set pos 2066 + 0 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+set live with 2
+command sti set pos 2080 + 0 with 0
+set live with 2
+set live with 2
+set live with 2
+command sti set pos 2094 + 0 with 0
+set live with 2
+set live with 2
+command sti set pos 2108 + 0 with 0
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+zjmp 1923
+ld stor to r3 with 0
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+ld stor to r3 with 0
+zjmp 2061
+set live with 2
+set live with 2
+set live with 2
+set live with 2
+zjmp 1923
+Contestant 2, "Celebration Funebre v0.99pl42", has won !

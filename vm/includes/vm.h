@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 17:55:43 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 10:55:36 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct		s_process
 	int					lastcyclelive;
 	int					moved;
 	int					cop;
-	int					*reg;
+	int					reg[REG_NUMBER];
 	t_champlist			*parent;
 	struct s_process	*prev;
 	struct s_process	*next;
@@ -92,170 +92,8 @@ typedef struct		s_command
 	int				dir_size;
 	int				carry;
 	int				cycle;
+	void			(*exec)(t_field *, t_process *);
 }					t_command;
-
-static t_command	g_table[16] = {
-	{
-		.name = "live",
-		.code = 0x01,
-		.countofparams = 1,
-		.typeparams = {T_DIR, 0, 0},
-		.dir_size = 4,
-		.argumentcode = 0,
-		.carry = 0,
-		.cycle = 10,
-	},
-	{
-		.name = "ld",
-		.code = 0x02,
-		.countofparams = 2,
-		.typeparams = {T_DIR | T_IND, T_REG, 0},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 5,
-	},
-	{
-		.name = "st",
-		.code = 0x03,
-		.countofparams = 2,
-		.typeparams = {T_REG, T_REG | T_IND, 0},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 0,
-		.cycle = 5,
-	},
-	{
-		.name = "add",
-		.code = 0x04,
-		.countofparams = 3,
-		.typeparams = {T_REG, T_REG, T_REG},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 10,
-	},
-	{
-		.name = "sub",
-		.code = 0x05,
-		.countofparams = 3,
-		.typeparams = {T_REG, T_REG, T_REG},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 10,
-	},
-	{
-		.name = "and",
-		.code = 0x06,
-		.countofparams = 3,
-		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 6,
-	},
-	{
-		.name = "or",
-		.code = 0x07,
-		.countofparams = 3,
-		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 6,
-	},
-	{
-		.name = "xor",
-		.code = 0x08,
-		.countofparams = 3,
-		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 6,
-	},
-	{
-		.name = "zjmp",
-		.code = 0x09,
-		.countofparams = 1,
-		.typeparams = {T_DIR, 0, 0},
-		.dir_size = 2,
-		.argumentcode = 0,
-		.carry = 0,
-		.cycle = 20,
-	},
-	{
-		.name = "ldi",
-		.code = 0x0A,
-		.countofparams = 3,
-		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
-		.dir_size = 2,
-		.argumentcode = 1,
-		.carry = 0,
-		.cycle = 25,
-	},
-	{
-		.name = "sti",
-		.code = 0x0B,
-		.countofparams = 3,
-		.typeparams = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
-		.dir_size = 2,
-		.argumentcode = 1,
-		.carry = 0,
-		.cycle = 25,
-	},
-	{
-		.name = "fork",
-		.code = 0x0C,
-		.countofparams = 1,
-		.typeparams = {T_DIR, 0, 0},
-		.dir_size = 2,
-		.argumentcode = 0,
-		.carry = 0,
-		.cycle = 800,
-	},
-	{
-		.name = "lld",
-		.code = 0x0D,
-		.countofparams = 2,
-		.typeparams = {T_DIR | T_IND, T_REG, 0},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 10,
-	},
-	{
-		.name = "lldi",
-		.code = 0x0E,
-		.countofparams = 3,
-		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
-		.dir_size = 2,
-		.argumentcode = 1,
-		.carry = 1,
-		.cycle = 50,
-	},
-	{
-		.name = "lfork",
-		.code = 0x0F,
-		.countofparams = 1,
-		.typeparams = {T_DIR, 0, 0},
-		.dir_size = 2,
-		.argumentcode = 0,
-		.carry = 0,
-		.cycle = 1000,
-	},
-	{
-		.name = "aff",
-		.code = 0x10,
-		.countofparams = 1,
-		.typeparams = {T_REG, 0, 0},
-		.dir_size = 4,
-		.argumentcode = 1,
-		.carry = 0,
-		.cycle = 2,
-	}
-};
 
 int					getcountoflist(t_champlist *head);
 int					is_key_a(char *curr, t_field *field);
@@ -286,7 +124,7 @@ int					exiter(t_field *field, char *strtoprint);
 int					map_to_int(t_field *field, int pos, int size);
 void				live(t_field *field, t_process *process);
 void				zjmp(t_field *field, t_process *process);
-int					gettype(int argumentcode, int number);
+int					gettype(signed char argumentcode, int number);
 int					res(int *bytes, int type, t_field *field, t_process *p);
 void				int_to_map(t_field *field, int pos, int size, int data);
 void				color_to_map(t_field *field, int pos, int size, char color);
@@ -307,4 +145,186 @@ t_process			*becomelast(t_process *head);
 int					countoflivepc(t_field *field);
 int					checkmystake(t_process *p, int result, int i);
 int					issamelustlive(t_field *field, int max);
+void				sti(t_field *field, t_process *process);
+signed char		onebyte(t_field *field, int pos);
+
+static t_command	g_table[16] = {
+	{
+		.name = "live",
+		.code = 0x01,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 4,
+		.argumentcode = 0,
+		.carry = 0,
+		.cycle = 10,
+		.exec = &live,
+	},
+	{
+		.name = "ld",
+		.code = 0x02,
+		.countofparams = 2,
+		.typeparams = {T_DIR | T_IND, T_REG, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 5,
+		.exec = &load,
+	},
+	{
+		.name = "st",
+		.code = 0x03,
+		.countofparams = 2,
+		.typeparams = {T_REG, T_REG | T_IND, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 0,
+		.cycle = 5,
+		.exec = &st,
+	},
+	{
+		.name = "add",
+		.code = 0x04,
+		.countofparams = 3,
+		.typeparams = {T_REG, T_REG, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 10,
+		.exec = &arith,
+	},
+	{
+		.name = "sub",
+		.code = 0x05,
+		.countofparams = 3,
+		.typeparams = {T_REG, T_REG, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 10,
+		.exec = &arith,
+	},
+	{
+		.name = "and",
+		.code = 0x06,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 6,
+		.exec = &multiplyfunc,
+	},
+	{
+		.name = "or",
+		.code = 0x07,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 6,
+		.exec = &multiplyfunc,
+	},
+	{
+		.name = "xor",
+		.code = 0x08,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 6,
+		.exec = &multiplyfunc,
+	},
+	{
+		.name = "zjmp",
+		.code = 0x09,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 2,
+		.argumentcode = 0,
+		.carry = 0,
+		.cycle = 20,
+		.exec = &zjmp,
+	},
+	{
+		.name = "ldi",
+		.code = 0x0A,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
+		.dir_size = 2,
+		.argumentcode = 1,
+		.carry = 0,
+		.cycle = 25,
+		.exec = &ldi,
+	},
+	{
+		.name = "sti",
+		.code = 0x0B,
+		.countofparams = 3,
+		.typeparams = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
+		.dir_size = 2,
+		.argumentcode = 1,
+		.carry = 0,
+		.cycle = 25,
+		.exec = &sti,
+	},
+	{
+		.name = "fork",
+		.code = 0x0C,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 2,
+		.argumentcode = 0,
+		.carry = 0,
+		.cycle = 800,
+		.exec = &my_fork,
+	},
+	{
+		.name = "lld",
+		.code = 0x0D,
+		.countofparams = 2,
+		.typeparams = {T_DIR | T_IND, T_REG, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 10,
+		.exec = &lld,
+	},
+	{
+		.name = "lldi",
+		.code = 0x0E,
+		.countofparams = 3,
+		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
+		.dir_size = 2,
+		.argumentcode = 1,
+		.carry = 1,
+		.cycle = 50,
+		.exec = &ldi,
+	},
+	{
+		.name = "lfork",
+		.code = 0x0F,
+		.countofparams = 1,
+		.typeparams = {T_DIR, 0, 0},
+		.dir_size = 2,
+		.argumentcode = 0,
+		.carry = 0,
+		.cycle = 1000,
+		.exec = &my_fork,
+	},
+	{
+		.name = "aff",
+		.code = 0x10,
+		.countofparams = 1,
+		.typeparams = {T_REG, 0, 0},
+		.dir_size = 4,
+		.argumentcode = 1,
+		.carry = 0,
+		.cycle = 2,
+		.exec = &aff,
+	}
+};
+
 #endif

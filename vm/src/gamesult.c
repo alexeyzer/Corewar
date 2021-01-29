@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gamesult.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgonzo <cgonzo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/28 14:38:37 by cgonzo           ###   ########.fr       */
+/*   Updated: 2021/01/29 10:47:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void		simpleresult(t_field *field)
 	}
 	if (max == -1)
 	{
+		if (issamelustlive(field, max) > 2)
+			winner(field, -1);
 		now = brcomelust(field->champlist);
 		ft_printf("Contestant %d, \"%s\", has won !\n",\
 			now->nowchamp->number, now->nowchamp->inf->prog_name);

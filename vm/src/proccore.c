@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proccore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 17:18:20 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 11:29:03 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void		for_fork(t_field *field, t_process *parent, int adr)
 		i++;
 	}
 	res->pos = calcpos(parent->pos + adr);
-	if (res->pos < 0)
-		res->pos = MEM_SIZE + res->pos;
 	res->parent = parent->parent;
-	head = becomelast(field->first);
-	head->next = res;
-	res->prev = head;
-	res->next = NULL;
+	head = field->first;
+    head->prev = res;
+    res->next = head;
+    field->first = head;
 }
 
 t_process	*createproc(t_champlist *parent, int num)
@@ -57,7 +55,6 @@ t_process	*createproc(t_champlist *parent, int num)
 	res->next = NULL;
 	res->prev = NULL;
 	res->parent = parent;
-	res->reg = (int*)malloc(sizeof(int) * REG_NUMBER);
 	res->reg[0] = parent->nowchamp->number;
 	while (i < REG_NUMBER)
 	{
@@ -77,28 +74,20 @@ t_process	*addproc(t_champlist *parent, int num, t_process *head)
 	return (proc);
 }
 
-t_process	*becomelast(t_process *head)
-{
-	while (head->next != NULL)
-		head = head->next;
-	return (head);
-}
-
 t_process	*init_proc(t_field *field)
 {
-	t_process	*newprocess;
-	t_champlist	*now;
-	int			num;
+	t_process *current;
 
-	num = getcountoflist(field->champlist);
-	now = field->champlist;
-	newprocess = createproc(now, num);
-	field->first = newprocess;
-	now = now->next;
-	while (now != NULL && now->nowchamp != NULL)
-	{
-		newprocess = addproc(now, num, newprocess);
-		now = now->next;
-	}
-	return (newprocess);
+	if (field->now->nowchamp == NULL)
+    	field->now = field->now->prev;
+    field->first = createproc(field->now,getcountoflist(field->champlist));
+    current = field->first;
+    field->now = field->now->prev;
+    while(field->now != NULL)
+    {
+        if (field->now->nowchamp != NULL)
+            current = addproc(field->now, getcountoflist(field->champlist), current);
+        field->now = field->now->prev;
+    }
+	return (field->first);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   correct.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 11:48:56 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/28 14:16:29 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 10:21:57 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,9 @@ int	issamelustlive(t_field *field, int max)
 		now = now->next;
 	}
 	return (count);
+}
+
+signed char onebyte(t_field *field, int pos)
+{
+	return (field->mass[pos].cell);
 }

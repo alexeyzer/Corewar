@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   procgo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 15:29:44 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 17:56:00 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 09:45:06 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	workwithproc(t_field *field)
 {
 	t_process *now;
 
-	now = becomelast(field->first);
+	now = field->first;
 	while (now != NULL)
 	{
 		if (now->moved == 1 && now->idle == 0)
@@ -52,7 +52,7 @@ void	workwithproc(t_field *field)
 			now->moved = 1;
 			now->cop = -1;
 		}
-		now = now->prev;
+		now = now->next;
 	}
 }
 

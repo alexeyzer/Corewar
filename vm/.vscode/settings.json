@@ -8,7 +8,8 @@
 		"bitset": "c",
 		"chrono": "c",
 		"unordered_map": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"iterator": "c"
 	},
 	"editor.insertSpaces": false
 }

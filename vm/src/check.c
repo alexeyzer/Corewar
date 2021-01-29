@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/28 18:48:51 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 09:45:53 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_process	*delete2(t_process *current)
 		current->prev = NULL;
 		current->next = NULL;
 	}
-	free(current->reg);
 	free(current);
 	return (ret);
 }
@@ -65,7 +64,6 @@ t_process	*delete(t_field *field, t_process *current)
 		if (next != NULL)
 			next->prev = NULL;
 		field->first = next;
-		free(current->reg);
 		free(current);
 		return (field->first);
 	}

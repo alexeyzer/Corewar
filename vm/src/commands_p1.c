@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 18:48:40 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/29 11:27:26 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	live(t_field *field, t_process *process)
 	field->lastprocesssadlust = process->parent->nowchamp->number;
 	isindex(field, nbrplayer);
 	process->lastcyclelive = field->cycle;
+	ft_printf("set live with %d\n", nbrplayer);
 }
 
 void	zjmp(t_field *field, t_process *process)
@@ -43,17 +44,31 @@ void	zjmp(t_field *field, t_process *process)
 	pos = process->pos + (map_to_int(field, process->pos + 1, 2)) % IDX_MOD;
 	pos = calcpos(pos);
 	if (process->carry == 1)
+	{
 		process->pos = pos;
+		ft_printf("zjmp %d\n", pos);
+	}
+	else
+		ft_printf("zjmp fail\n");
+	
 }
 
-int		gettype(int argumentcode, int number)
+
+int		gettype(signed char argumentcode, int number)
 {
-	int type;
+	signed char type;
 	int	all;
 
+	type = argumentcode;
 	all = (REG_CODE | DIR_CODE | IND_CODE);
-	type = argumentcode >> (6 - (number * 2))
-		& all;
+	if (number == 0)
+		type = type & 0xC0;
+	if (number == 1)
+		type = type & 0x30;
+	if (number == 2)
+		type = type & 0x0C;
+	type = type >> (6 - (number * 2));
+	type = type & all;
 	return (type);
 }
 
@@ -78,7 +93,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	else if (type == IND_CODE)
 	{
 		result = map_to_int(field, process->pos +
-			(map_to_int(field, process->pos + *byte, IND_SIZE)) % IDX_MOD, 4);
+			(map_to_int(field, process->pos + *byte, IND_SIZE)) % IDX_MOD,  g_table[process->cop].dir_size);
 		*byte += IND_SIZE;
 	}
 	return (result);
