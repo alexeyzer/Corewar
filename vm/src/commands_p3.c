@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 14:55:23 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/29 11:25:14 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/29 09:48:12 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,20 @@
 void	helpfunc(int regnbr, int param1, int param2, t_process *process)
 {
 	if (process->cop == 5)
+	{
 		process->reg[(regnbr - 1)] = param1 & param2;
+		//ft_printf("op and from %d = %d and %d\n", regnbr - 1, param1, param2);
+	}
 	else if (process->cop == 6)
+	{
 		process->reg[(regnbr - 1)] = param1 | param2;
+		//ft_printf("op or from %d = %d or %d\n", regnbr - 1, param1, param2);
+	}
 	else if (process->cop == 7)
+	{
 		process->reg[(regnbr - 1)] = param1 ^ param2;
+		//ft_printf("op xor from %d = %d xor %d\n", regnbr - 1, param1, param2);
+	}
 	process->carry = (process->reg[regnbr - 1] == 0) ? 1 : 0;
 }
 
@@ -33,11 +42,18 @@ void	arith(t_field *field, t_process *process)
 	first = map_to_int(field, process->pos + 2, 1) - 1;
 	second = map_to_int(field, process->pos + 3, 1) - 1;
 	if (process->cop == 3)
+	{
 		process->reg[(num)] = process->reg[(first)] \
 			+ process->reg[(second)];
+			//ft_printf("op plus  r%d = r%d or r%d\n", first + 1, second +1, num + 1);
+	}
 	if (process->cop == 4)
+	{
 		process->reg[(num)] = process->reg[(first)] \
 			- process->reg[(second)];
+		//ft_printf("op minus  r%d = r%d or r%d\n", first + 1, second + 1, num + 1);
+	}
+	//ft_printf("%d op %d\n", process->reg[first], process->reg[second]);
 	process->carry = (process->reg[(num)] == 0) ? 1 : 0;
 }
 
@@ -46,19 +62,17 @@ void	load(t_field *field, t_process *process)
 	signed char	argumentcode;
 	int	param[g_table[process->cop].countofparams];
 	int	type;
-	int	i;
 	int	bytesize;
 
-	i = 0;
 	bytesize = 2;
 	param[0] = 0;
 	param[1] = 0;
 	argumentcode = onebyte(field, process->pos + 1);
-	type = gettype(argumentcode, i);
+	type = gettype(argumentcode, 0);
 	param[0] = res(&bytesize, type, field, process);
 	param[1] = map_to_int(field, process->pos + bytesize, 1);
 	process->reg[(param[1] - 1)] = param[0];
-	ft_printf("ld stor to r%d with %d\n", (param[1]), param[0]);
+	//ft_printf("ld stor to r%d with %d\n", (param[1]), param[0]);
 	process->carry = (process->reg[(param[1] - 1)] == 0) ? 1 : 0;
 }
 
@@ -80,13 +94,20 @@ void	ldi(t_field *field, t_process *p)
 		i++;
 	}
 	param[2] = map_to_int(field, p->pos + bytesize, 1);
-	bytesize = (param[1] + param[2]) % IDX_MOD;
 	if (p->cop == 9)
+	{
+		bytesize = (param[1] + param[2]) % IDX_MOD;
 		p->reg[(param[2] - 1)] = map_to_int(field,\
 			p->pos + bytesize, 4);
+		//ft_printf("op ldi stor to r%d and read by pos %d + %d % IDX_MOD result%d value by \n", (param[2]), param[1], param[0], bytesize, map_to_int(field,
+			//calcpos(p->pos + bytesize), 4));
+	}
 	else
+	{
+		bytesize = (param[1] + param[2]);
 		p->reg[(param[2] - 1)] = map_to_int(field,\
-			p->pos + bytesize % IDX_MOD, 4);
+			calcpos(p->pos + bytesize), 4);
+	}
 	if (p->cop == 13)
 		p->carry = (p->reg[(param[2] - 1)] == 0) ? 1 : 0;
 }

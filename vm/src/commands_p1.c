@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/29 11:27:26 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/29 09:47:32 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,12 @@ void	zjmp(t_field *field, t_process *process)
 {
 	int pos;
 
-	pos = process->pos + (map_to_int(field, process->pos + 1, 2)) % IDX_MOD;
-	pos = calcpos(pos);
+	pos =  (map_to_int(field, process->pos + 1, 2)) % IDX_MOD;
 	if (process->carry == 1)
 	{
-		process->pos = pos;
-		ft_printf("zjmp %d\n", pos);
+		//ft_printf("zjmp new pos = %d and %d\n", process->pos, (map_to_int(field, process->pos + 1, 2) % IDX_MOD));
+		process->pos = process->pos + pos;
 	}
-	else
-		ft_printf("zjmp fail\n");
-	
 }
 
 
@@ -93,7 +89,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	else if (type == IND_CODE)
 	{
 		result = map_to_int(field, process->pos +
-			(map_to_int(field, process->pos + *byte, IND_SIZE)) % IDX_MOD,  g_table[process->cop].dir_size);
+			(map_to_int(field, process->pos + *byte, IND_SIZE)) % IDX_MOD,  DIR_SIZE);
 		*byte += IND_SIZE;
 	}
 	return (result);

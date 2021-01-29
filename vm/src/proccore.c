@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proccore.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 14:20:42 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/29 11:29:03 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/29 09:41:33 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		for_fork(t_field *field, t_process *parent, int adr)
 	head = field->first;
     head->prev = res;
     res->next = head;
-    field->first = head;
+    field->first = res;
 }
 
 t_process	*createproc(t_champlist *parent, int num)

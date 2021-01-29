@@ -9,7 +9,8 @@
 		"chrono": "c",
 		"unordered_map": "c",
 		"__locale": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"vm.h": "c"
 	},
 	"editor.insertSpaces": false
 }
