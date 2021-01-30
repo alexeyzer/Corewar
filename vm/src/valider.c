@@ -6,19 +6,24 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/28 17:56:27 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 17:40:52 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int				is_key_a(char *curr, t_field *field)
+int				is_key_aorv(char *curr, t_field *field)
 {
 	if (!curr)
 		return (MISTAKESYMB);
 	if (ft_strequ(curr, "-a"))
 	{
 		field->aff = 1;
+		return (1);
+	}
+	if (ft_strequ(curr, "-v"))
+	{
+		field->v = 1;
 		return (1);
 	}
 	return (MISTAKESYMB);
@@ -35,10 +40,8 @@ t_champlist		*isitbusy(t_champlist *head, int number)
 	return (NULL);
 }
 
-t_field			*init(int i)
+t_field			*init(int i, t_field *field)
 {
-	t_field	*field;
-
 	field = (t_field*)malloc(sizeof(t_field) * 1);
 	field->champlist = (t_champlist*)malloc(sizeof(t_champlist) * 1);
 	field->champlist->next = NULL;
@@ -48,6 +51,7 @@ t_field			*init(int i)
 	field->first = NULL;
 	field->cycle = 0;
 	field->aff = 0;
+	field->v = 0;
 	field->cyclecheck = 0;
 	field->dump = -1;
 	field->lastprocesssadlust = -1;

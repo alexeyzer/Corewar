@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 00:27:36 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 17:41:25 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	v_and_r(int argc, char **av, int i, t_field *field)
 		{
 			if (key_dump(av[i], av[i + 1], field) != MISTAKESYMB)
 				i += 1;
-			else if (is_key_a(av[i], field) != MISTAKESYMB)
+			else if (is_key_aorv(av[i], field) != MISTAKESYMB)
 				i += 0;
 			else
 			{
@@ -103,7 +103,8 @@ int			main(int argc, char **argv)
 {
 	t_field *fild;
 
-	fild = init(0);
+	fild = NULL;
+	fild = init(0, fild);
 	v_and_r(argc, argv, 1, fild);
 	currectnum(fild);
 	makecolor(fild->champlist);

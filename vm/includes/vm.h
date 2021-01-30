@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 01:48:31 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 17:44:37 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include <fcntl.h>
+# include "ncurses.h"
 # define MISTAKESYMB -1
 
 # define COLOR
@@ -75,6 +76,7 @@ typedef struct		s_field
 	int				countlive;
 	int				cyclecheck;
 	int				cycles_to_die;
+	int				v;
 	int				lastprocesssadlust;
 	t_process		*first;
 	t_champlist		*champlist;
@@ -96,11 +98,11 @@ typedef struct		s_command
 }					t_command;
 
 int					getcountoflist(t_champlist *head);
-int					is_key_a(char *curr, t_field *field);
+int					is_key_aorv(char *curr, t_field *field);
 void				champ_parse(char *filename, t_field *field);
 t_champlist			*isitbusy(t_champlist *head, int number);
 t_champlist			*addchamtolist(t_champlist *now);
-t_field				*init(int i);
+t_field				*init(int i, t_field *field);
 void				place(t_field *field);
 void				field_print(t_field *field);
 t_champ				*createchamp();
@@ -148,6 +150,11 @@ int					issamelustlive(t_field *field, int max);
 void				sti(t_field *field, t_process *process);
 signed char			onebyte(t_field *field, int pos);
 void				make(t_field *field);
+int					set_color(char c);
+int					search_parent(t_champlist *head, t_field *field);
+void				putborder(int i, int size);
+void				field_print_cur(t_field *field);
+void				start_pal(int i);
 
 static t_command	g_table[16] = {
 	{
