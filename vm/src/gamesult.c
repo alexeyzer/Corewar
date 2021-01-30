@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/30 00:34:27 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 03:12:17 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,14 @@ t_champlist	*brcomelust(t_champlist *list)
 	return (list);
 }
 
-static void	winner(t_field *field, int max)
+static void	winner(t_field *field)
 {
 	t_champlist *now;
-	int			count;
 
 	now = field->champlist;
-	count = issamelustlive(field, max);
 	while (now != NULL && now->nowchamp != NULL)
 	{
-		if (now->nowchamp->alive == max && count == 1)
-		{
-			ft_printf("Contestant %d, \"%s\", has won !\n",\
-			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
-			return ;
-		}
-		if (now->nowchamp->alive == max && count > 1 && now->nowchamp->number\
-			== field->lastprocesssadlust)
+		if (now->nowchamp->number == field->lastprocesssadlust)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",\
 			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
@@ -78,14 +69,12 @@ void		simpleresult(t_field *field)
 	}
 	if (max == -1)
 	{
-		if (issamelustlive(field, max) > 2)
-			winner(field, -1);
 		now = brcomelust(field->champlist);
 		ft_printf("Contestant %d, \"%s\", has won !\n",\
 			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
 	}
 	else if (max != -1)
-		winner(field, max);
+		winner(field);
 }
 
 int			map_to_int(t_field *field, int pos, int size)

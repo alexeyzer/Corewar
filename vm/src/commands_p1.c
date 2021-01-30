@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 01:46:02 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 02:44:19 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	{
 		reg = map_to_int(field, process->pos + *byte, 1) - 1;
 		result = (process->reg[(reg)]);
-		*byte += REG_SIZE;
+		*byte += 1;
 	}
 	else if (type == DIR_CODE)
 	{

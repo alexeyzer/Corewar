@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/30 01:45:28 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 02:44:45 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		skipnoarg(t_process *process)
 	while (i < g_table[process->cop].countofparams)
 	{
 		if (g_table[process->cop].typeparams[i] == T_REG)
-			result += REG_SIZE;
+			result += 1;
 		else if (g_table[process->cop].typeparams[i] == T_DIR)
 			result += g_table[process->cop].dir_size;
 		else if (g_table[process->cop].typeparams[i] == T_IND)
