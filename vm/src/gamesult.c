@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/30 03:12:17 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 18:51:41 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ t_champlist	*brcomelust(t_champlist *list)
 	return (list);
 }
 
-static void	winner(t_field *field)
+static void	winner(t_field *field, int max)
 {
 	t_champlist *now;
 
 	now = field->champlist;
 	while (now != NULL && now->nowchamp != NULL)
 	{
-		if (now->nowchamp->number == field->lastprocesssadlust)
+		if (now->nowchamp->alive == max)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",\
 			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
@@ -74,7 +74,7 @@ void		simpleresult(t_field *field)
 			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
 	}
 	else if (max != -1)
-		winner(field);
+		winner(field, max);
 }
 
 int			map_to_int(t_field *field, int pos, int size)

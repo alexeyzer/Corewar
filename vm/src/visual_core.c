@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:13:21 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 17:44:13 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 18:38:53 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void		start_pal(int i)
 {
 	init_pair(5, COLOR_WHITE, COLOR_BLACK);
+	init_pair(1, COLOR_RED, COLOR_BLACK);
 	if (i >= 2)
 	{
-		init_pair(1, COLOR_RED, COLOR_BLACK);
 		init_pair(2, COLOR_BLUE, COLOR_BLACK);
 	}
 	if (i >= 3)
@@ -50,7 +50,7 @@ static void	print_stat(t_field *field)
 	while (head->next != NULL)
 	{
 		wprintw(stdscr, "Player name: %s, player live %d\
-			live processes - %d \n", head->nowchamp->inf->prog_name,
+			count of processes - %d \n", head->nowchamp->inf->prog_name,
 			head->nowchamp->alive, search_parent(head, field));
 		head = head->next;
 	}
@@ -74,6 +74,6 @@ void		field_print_cur(t_field *field)
 		attroff(A_UNDERLINE);
 	}
 	wrefresh(stdscr);
-	usleep(75);
+	usleep(200);
 	erase();
 }

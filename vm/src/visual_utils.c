@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 15:52:23 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 17:46:14 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 18:42:30 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int		search_parent(t_champlist *head, t_field *field)
 
 	i = 0;
 	iter = field->first;
-	while (iter->next != NULL)
+	while (iter != NULL)
 	{
-		if (iter->parent == head)
+		if (iter->parent->nowchamp->number == head->nowchamp->number)
 			i++;
 		iter = iter->next;
 	}
