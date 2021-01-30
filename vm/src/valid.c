@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/29 09:41:25 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 00:27:36 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			main(int argc, char **argv)
 	currectnum(fild);
 	makecolor(fild->champlist);
 	place(fild);
+	make(fild);
 	init_proc(fild);
 	printplayers(fild);
 	play(fild);

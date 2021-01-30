@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_p2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:30:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/29 09:36:02 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/30 01:45:28 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		istypecorrectnoargreg(t_field *field, t_process *process)
 			reg = map_to_int(field, process->pos + size, 1);
 			if (reg > REG_NUMBER || reg <= 0)
 				return (MISTAKESYMB);
-			size += 1;
+			size += REG_SIZE;
 		}
 		else
 		{
@@ -78,7 +78,7 @@ int		skipnoarg(t_process *process)
 	while (i < g_table[process->cop].countofparams)
 	{
 		if (g_table[process->cop].typeparams[i] == T_REG)
-			result += 1;
+			result += REG_SIZE;
 		else if (g_table[process->cop].typeparams[i] == T_DIR)
 			result += g_table[process->cop].dir_size;
 		else if (g_table[process->cop].typeparams[i] == T_IND)

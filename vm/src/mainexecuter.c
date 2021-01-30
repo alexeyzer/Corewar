@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainexecuter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 10:31:11 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/29 11:18:28 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/30 01:29:13 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	sti(t_field *field, t_process *process)
 {
 	signed char	argumentcode;
-	int	param[g_table[process->cop].countofparams];
-	int	type;
-	int	i;
-	int	bytesize;
+	int			param[g_table[process->cop].countofparams];
+	int			type;
+	int			i;
+	int			bytesize;
 
 	bytesize = 2;
 	i = 0;
@@ -33,7 +33,6 @@ void	sti(t_field *field, t_process *process)
 	int_to_map(field, process->pos + bytesize,\
 		DIR_SIZE, param[0]);
 	color_to_map(field, process->pos + bytesize, DIR_SIZE, process->color);
-	ft_printf("command sti set pos %d + %d with %d\n", process->pos, bytesize, param[0]);
 }
 
 void	mainexecuter(t_field *field, t_process *process)

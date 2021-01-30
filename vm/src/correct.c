@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   correct.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 11:48:56 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/29 10:21:57 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/30 01:47:59 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int	checkmystake(t_process *p, int result, int i)
+int				checkmystake(t_process *p, int result, int i)
 {
 	if (result == REG_CODE)
 	{
@@ -38,7 +38,7 @@ int	checkmystake(t_process *p, int result, int i)
 	return (MISTAKESYMB);
 }
 
-int	issamelustlive(t_field *field, int max)
+int				issamelustlive(t_field *field, int max)
 {
 	t_champlist *now;
 	int			count;
@@ -54,7 +54,19 @@ int	issamelustlive(t_field *field, int max)
 	return (count);
 }
 
-signed char onebyte(t_field *field, int pos)
+signed char		onebyte(t_field *field, int pos)
 {
 	return (field->mass[pos].cell);
+}
+
+void			make(t_field *field)
+{
+	t_champlist *now;
+
+	now = field->champlist;
+	while (now != NULL && now->nowchamp != NULL)
+	{
+		now->nowchamp->number = now->nowchamp->number * -1;
+		now = now->next;
+	}
 }

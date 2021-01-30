@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/29 10:55:36 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/30 01:48:31 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ int					countoflivepc(t_field *field);
 int					checkmystake(t_process *p, int result, int i);
 int					issamelustlive(t_field *field, int max);
 void				sti(t_field *field, t_process *process);
-signed char		onebyte(t_field *field, int pos);
+signed char			onebyte(t_field *field, int pos);
+void				make(t_field *field);
 
 static t_command	g_table[16] = {
 	{

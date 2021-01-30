@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/29 09:47:32 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 01:46:02 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,21 @@ void	live(t_field *field, t_process *process)
 	field->lastprocesssadlust = process->parent->nowchamp->number;
 	isindex(field, nbrplayer);
 	process->lastcyclelive = field->cycle;
-	ft_printf("set live with %d\n", nbrplayer);
 }
 
 void	zjmp(t_field *field, t_process *process)
 {
 	int pos;
 
-	pos =  (map_to_int(field, process->pos + 1, 2)) % IDX_MOD;
+	pos = (map_to_int(field, process->pos + 1, 2)) % IDX_MOD;
 	if (process->carry == 1)
-	{
-		//ft_printf("zjmp new pos = %d and %d\n", process->pos, (map_to_int(field, process->pos + 1, 2) % IDX_MOD));
 		process->pos = process->pos + pos;
-	}
 }
-
 
 int		gettype(signed char argumentcode, int number)
 {
-	signed char type;
-	int	all;
+	signed char	type;
+	int			all;
 
 	type = argumentcode;
 	all = (REG_CODE | DIR_CODE | IND_CODE);
@@ -78,7 +73,7 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	{
 		reg = map_to_int(field, process->pos + *byte, 1) - 1;
 		result = (process->reg[(reg)]);
-		*byte += 1;
+		*byte += REG_SIZE;
 	}
 	else if (type == DIR_CODE)
 	{
@@ -89,7 +84,8 @@ int		res(int *byte, int type, t_field *field, t_process *process)
 	else if (type == IND_CODE)
 	{
 		result = map_to_int(field, process->pos +
-			(map_to_int(field, process->pos + *byte, IND_SIZE)) % IDX_MOD,  DIR_SIZE);
+			(map_to_int(field, process->pos + *byte, IND_SIZE))\
+				% IDX_MOD, DIR_SIZE);
 		*byte += IND_SIZE;
 	}
 	return (result);

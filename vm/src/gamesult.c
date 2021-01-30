@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gamesult.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:38:17 by aguiller          #+#    #+#             */
-/*   Updated: 2021/01/29 10:47:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/30 00:34:27 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void	winner(t_field *field, int max)
 		if (now->nowchamp->alive == max && count == 1)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",\
-			now->nowchamp->number, now->nowchamp->inf->prog_name);
+			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
 			return ;
 		}
 		if (now->nowchamp->alive == max && count > 1 && now->nowchamp->number\
 			== field->lastprocesssadlust)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",\
-			now->nowchamp->number, now->nowchamp->inf->prog_name);
+			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
 			return ;
 		}
 		now = now->next;
@@ -82,7 +82,7 @@ void		simpleresult(t_field *field)
 			winner(field, -1);
 		now = brcomelust(field->champlist);
 		ft_printf("Contestant %d, \"%s\", has won !\n",\
-			now->nowchamp->number, now->nowchamp->inf->prog_name);
+			now->nowchamp->number * -1, now->nowchamp->inf->prog_name);
 	}
 	else if (max != -1)
 		winner(field, max);

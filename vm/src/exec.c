@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 20:24:43 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/29 05:03:03 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/30 01:28:49 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		istypecorrect(t_field *field, t_process *process)
 {
-	signed char argtype;
-	int	i;
-	int reg;
-	int result;
+	signed char	argtype;
+	int			i;
+	int			reg;
+	int			result;
 
 	i = 0;
 	reg = 0;
@@ -38,10 +38,10 @@ int		istypecorrect(t_field *field, t_process *process)
 
 int		isregcorret(t_field *field, t_process *process, int i)
 {
-	int reg;
-	int	bytes;
+	int			reg;
+	int			bytes;
 	signed char argtype;
-	int type;
+	int			type;
 
 	argtype = onebyte(field, process->pos + 1);
 	bytes = 0;
@@ -68,9 +68,9 @@ int		isregcorret(t_field *field, t_process *process, int i)
 int		skip(t_field *field, t_process *process)
 {
 	signed char	argtype;
-	int	i;
-	int	result;
-	int	temporary;
+	int			i;
+	int			result;
+	int			temporary;
 
 	argtype = 0;
 	i = 0;
@@ -100,17 +100,17 @@ void	executer(t_field *field, t_process *process)
 	{
 		if (g_table[process->cop].argumentcode == 1)
 		{
+			process->bytetonextсop = skip(field, process);
 			if ((result = istypecorrect(field, process)) == 1)
 				mainexecuter(field, process);
 			else if (result == 2 && isregcorret(field, process, 0) != -1)
 				mainexecuter(field, process);
-			process->bytetonextсop = skip(field, process);
 		}
 		else
 		{
+			process->bytetonextсop = skipnoarg(process);
 			if (istypecorrectnoargreg(field, process) == 1)
 				mainexecuter(field, process);
-			process->bytetonextсop = skipnoarg(process);
 		}
 	}
 	else
@@ -119,7 +119,8 @@ void	executer(t_field *field, t_process *process)
 
 int		calcpos(int pos)
 {
+	pos = pos % MEM_SIZE;
 	if (pos < 0)
-		pos = pos * -1;
+		pos = MEM_SIZE + pos;
 	return (pos % MEM_SIZE);
 }

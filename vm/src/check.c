@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:50:11 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/29 09:45:53 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/01/29 23:44:29 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		findanddeletedied(t_field *field)
 	now = field->first;
 	while (now != NULL)
 	{
-		if (now->lastcyclelive <= (field->cycle - field->cycles_to_die)\
+		if (field->cycle - now->lastcyclelive >= field->cycles_to_die\
 			|| field->cycles_to_die <= 0)
 			now = delete(field, now);
 		else
