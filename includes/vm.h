@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/31 13:56:36 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 20:23:46 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct		s_field
 	int				cyclecheck;
 	int				cycles_to_die;
 	int				v;
+	int				l;
 	int				isdump;
 	t_process		*first;
 	t_champlist		*champlist;

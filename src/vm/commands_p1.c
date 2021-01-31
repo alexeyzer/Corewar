@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_p1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/31 12:38:52 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 20:24:36 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ void	isindex(t_field *field, int nbr)
 	while (now != NULL && now->nowchamp != NULL)
 	{
 		if (now->nowchamp->number == nbr)
+		{
 			now->nowchamp->alive = field->cycle;
+			if (field->l == 1)
+				ft_printf("A process shows that player %d %s is alive\n",\
+					now->nowchamp->number * -1,\
+						now->nowchamp->inf->prog_name);
+		}
 		now = now->next;
 	}
 }

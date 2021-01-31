@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valider.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/31 12:38:39 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 20:25:13 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int				is_key_aorv(char *curr, t_field *field)
 	if (ft_strequ(curr, "-v"))
 	{
 		field->v = 1;
+		return (1);
+	}
+	if (ft_strequ(curr, "-l"))
+	{
+		field->l = 1;
 		return (1);
 	}
 	return (MISTAKESYMB);
@@ -53,6 +58,7 @@ t_field			*init(int i, t_field *field)
 	field->cycle = 0;
 	field->aff = 0;
 	field->v = 0;
+	field->l = 0;
 	field->cyclecheck = 0;
 	field->dump = -1;
 	field->countlive = 0;

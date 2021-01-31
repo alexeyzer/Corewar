@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
+#    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/31 14:40:43 by aguiller          #+#    #+#              #
-#    Updated: 2021/01/31 14:40:45 by aguiller         ###   ########.fr        #
+#    Updated: 2021/01/31 20:47:42 by alexzudin        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,10 @@ $(NAME): $(OBJ)
 	@ar rcs  libftprintf.a $(OBJ)
 
 file: $(NAME)
-	gcc -Wall -Wextra -Werror -o test ./src/main.o libftprintf.a
+	@gcc -Wall -Wextra -Werror -o test ./src/main.o libftprintf.a
 
 %.o:%.c $(INCNAME)
-	gcc -Wall -Wextra -Werror $(PRINTF_H) $(PRINTF_HL) -c $< -o $@
+	@gcc -Wall -Wextra -Werror $(PRINTF_H) $(PRINTF_HL) -c $< -o $@
 
 clean:
 	@cd libft && $(MAKE) clean	

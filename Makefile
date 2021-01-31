@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
+#    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/31 14:40:35 by aguiller          #+#    #+#              #
-#    Updated: 2021/01/31 14:40:37 by aguiller         ###   ########.fr        #
+#    Updated: 2021/01/31 20:47:47 by alexzudin        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJ_VM)
 
 
 %.o:%.c $(INCNAME1) $(INCNAME2)
-	gcc -Wall -Wextra -ggdb -Werror $(COREWAR_H) $(PRINTF_H) $(LIB_H) -c $< -o $@
+	@gcc -Wall -Wextra -ggdb -Werror $(COREWAR_H) $(PRINTF_H) $(LIB_H) -c $< -o $@
 
 clean:
 	@cd libftprintf && $(MAKE) clean	
