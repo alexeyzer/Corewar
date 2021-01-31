@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
+#    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 22:26:44 by aguiller          #+#    #+#              #
-#    Updated: 2021/01/05 15:48:16 by alexzudin        ###   ########.fr        #
+#    Updated: 2021/01/31 14:36:55 by aguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,9 @@ NAME = libft.a
 
 INCNAME = includes/libft.h
 
+%.c:%.o $(INCNAME)
+	@gcc -Wall -Wextra -Werror -c $< -o $@
+
 OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
@@ -84,9 +87,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
-
-%.o:%.c $(INCNAME)
-	gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJ)
