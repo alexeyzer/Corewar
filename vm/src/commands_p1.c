@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 17:23:33 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 02:44:19 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:38:52 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	live(t_field *field, t_process *process)
 
 	nbrplayer = map_to_int(field, process->pos + 1, 4);
 	field->countlive++;
-	field->lastprocesssadlust = process->parent->nowchamp->number;
 	isindex(field, nbrplayer);
 	process->lastcyclelive = field->cycle;
 }

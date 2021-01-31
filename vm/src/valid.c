@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:46:20 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 17:41:25 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:40:56 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ static int	key_dump(char *curr, char *next, t_field *field)
 		return (MISTAKESYMB);
 	if ((ft_atoi(next) || ft_strequ(next, "0")) && ft_strequ(curr, "-dump"))
 	{
+		field->isdump = 1;
+		field->dump = ft_atoi(next);
+		return (1);
+	}
+	else if ((ft_atoi(next) || ft_strequ(next, "0")) && ft_strequ(curr, "-d"))
+	{
+		field->isdump = 2;
 		field->dump = ft_atoi(next);
 		return (1);
 	}
@@ -105,6 +112,11 @@ int			main(int argc, char **argv)
 
 	fild = NULL;
 	fild = init(0, fild);
+	if (argc == 1)
+	{
+		print_usage();
+		return (0);
+	}
 	v_and_r(argc, argv, 1, fild);
 	currectnum(fild);
 	makecolor(fild->champlist);

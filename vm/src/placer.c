@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 17:19:30 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 03:13:05 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:38:12 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ void	printcurrentcolor(t_cell *cell)
 void	field_print(t_field *field)
 {
 	int i;
+	int perem;
 
 	i = 0;
+	perem = (field->isdump == 1) ? 32 : 64;
 	ft_printf("0x%04x : ", i);
 	while (i < MEM_SIZE)
 	{
-		if (i % 32 == 0 && i != 0)
+		if (i % perem == 0 && i != 0)
 		{
 			ft_printf("\n");
 			ft_printf("0x%04x : ", i);

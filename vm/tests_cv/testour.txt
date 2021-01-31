@@ -1,1 +1,0 @@
-Error more then 4 players or less than 1

@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 15:52:23 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 18:42:30 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:42:31 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ int		search_parent(t_champlist *head, t_field *field)
 		iter = iter->next;
 	}
 	return (i);
+}
+
+void	print_usage(void)
+{
+	ft_printf("Usage: ./corewar [-dump N] [-d N] [-v]\
+		 [-a] [[-n number] champion1.cor]\n");
 }

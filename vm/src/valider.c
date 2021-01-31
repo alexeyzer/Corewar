@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:36:56 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 17:40:52 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:38:39 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ t_field			*init(int i, t_field *field)
 	field->champlist->nowchamp = NULL;
 	field->now = field->champlist;
 	field->first = NULL;
+	field->isdump = 0;
 	field->cycle = 0;
 	field->aff = 0;
 	field->v = 0;
 	field->cyclecheck = 0;
 	field->dump = -1;
-	field->lastprocesssadlust = -1;
 	field->countlive = 0;
 	field->checks = 0;
 	field->cycles_to_die = CYCLE_TO_DIE;

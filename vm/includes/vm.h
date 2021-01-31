@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:45:16 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/30 17:44:37 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/01/31 12:40:34 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ typedef struct		s_process
 {
 	int					pos;
 	int					idle;
-	int					carry;
 	char				color;
 	int					bytetonextсop;
 	int					lastcyclelive;
 	int					moved;
 	int					cop;
+	int					carry;
 	int					reg[REG_NUMBER];
 	t_champlist			*parent;
 	struct s_process	*prev;
@@ -77,7 +77,7 @@ typedef struct		s_field
 	int				cyclecheck;
 	int				cycles_to_die;
 	int				v;
-	int				lastprocesssadlust;
+	int				isdump;
 	t_process		*first;
 	t_champlist		*champlist;
 	t_champlist		*now;
@@ -92,7 +92,6 @@ typedef struct		s_command
 	int				typeparams[3];
 	int				argumentcode;
 	int				dir_size;
-	int				carry;
 	int				cycle;
 	void			(*exec)(t_field *, t_process *);
 }					t_command;
@@ -155,6 +154,7 @@ int					search_parent(t_champlist *head, t_field *field);
 void				putborder(int i, int size);
 void				field_print_cur(t_field *field);
 void				start_pal(int i);
+void				print_usage(void);
 
 static t_command	g_table[16] = {
 	{
@@ -164,7 +164,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 4,
 		.argumentcode = 0,
-		.carry = 0,
 		.cycle = 10,
 		.exec = &live,
 	},
@@ -175,7 +174,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_DIR | T_IND, T_REG, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 5,
 		.exec = &load,
 	},
@@ -186,7 +184,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG, T_REG | T_IND, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 0,
 		.cycle = 5,
 		.exec = &st,
 	},
@@ -197,7 +194,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG, T_REG, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 10,
 		.exec = &arith,
 	},
@@ -208,7 +204,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG, T_REG, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 10,
 		.exec = &arith,
 	},
@@ -219,7 +214,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 6,
 		.exec = &multiplyfunc,
 	},
@@ -230,7 +224,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 6,
 		.exec = &multiplyfunc,
 	},
@@ -241,7 +234,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 6,
 		.exec = &multiplyfunc,
 	},
@@ -252,7 +244,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 2,
 		.argumentcode = 0,
-		.carry = 0,
 		.cycle = 20,
 		.exec = &zjmp,
 	},
@@ -263,7 +254,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 		.dir_size = 2,
 		.argumentcode = 1,
-		.carry = 0,
 		.cycle = 25,
 		.exec = &ldi,
 	},
@@ -274,7 +264,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
 		.dir_size = 2,
 		.argumentcode = 1,
-		.carry = 0,
 		.cycle = 25,
 		.exec = &sti,
 	},
@@ -285,7 +274,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 2,
 		.argumentcode = 0,
-		.carry = 0,
 		.cycle = 800,
 		.exec = &my_fork,
 	},
@@ -296,7 +284,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_DIR | T_IND, T_REG, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 10,
 		.exec = &lld,
 	},
@@ -307,7 +294,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 		.dir_size = 2,
 		.argumentcode = 1,
-		.carry = 1,
 		.cycle = 50,
 		.exec = &ldi,
 	},
@@ -318,7 +304,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_DIR, 0, 0},
 		.dir_size = 2,
 		.argumentcode = 0,
-		.carry = 0,
 		.cycle = 1000,
 		.exec = &my_fork,
 	},
@@ -329,7 +314,6 @@ static t_command	g_table[16] = {
 		.typeparams = {T_REG, 0, 0},
 		.dir_size = 4,
 		.argumentcode = 1,
-		.carry = 0,
 		.cycle = 2,
 		.exec = &aff,
 	}

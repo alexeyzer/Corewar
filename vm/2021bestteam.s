@@ -1,6 +1,6 @@
-.name "man i said"
-.comment "one, two, free, four. I wanna live "forevere I wana live forever dont ask me anymore 
-I wanna live forever""
+.name "man i said you got trouble"
+.comment "one, two, free, four. i wanna live forevere i wana live forever dont ask me anymore 
+i wanna live forever"
 
 start:
 	sti		r1, %:live, %1
@@ -14,13 +14,9 @@ wall:
 	ld %10, r9
 	ld %-1, r10
 	live %1
-	sti r4, %:here, %0
-	sti r9, %:here, %1
-	sti r8, %:here, %2
-	sti r9, %-50, %0
-	sti r10, %-50, %1
-	sti r8, %-50, %2
-	sti  r2, %-50, %3
+	and r3, r3, r3
+	fork %:here
+	zjmp %:live
 here:
 		live %2
 living:
