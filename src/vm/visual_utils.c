@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 15:52:23 by cgonzo            #+#    #+#             */
-/*   Updated: 2021/01/31 14:39:37 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/01 11:47:04 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int		search_parent(t_champlist *head, t_field *field)
 
 void	print_usage(void)
 {
-	ft_printf("Usage: ./corewar [-dump N] [-d N] [-v]\
-		[-a] [[-n number] champion1.cor]\n");
+	ft_printf("Usage: ./corewar [-dump N] [-d N] [-l] [-v]\
+	[-a] [[-n number] champion1.cor]\n");
 }

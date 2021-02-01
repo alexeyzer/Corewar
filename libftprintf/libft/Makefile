@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
+#    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 22:26:44 by aguiller          #+#    #+#              #
-#    Updated: 2021/01/31 20:46:44 by alexzudin        ###   ########.fr        #
+#    Updated: 2021/02/01 11:46:26 by aguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 
 %.o:%.c $(INCNAME)
-	@gcc -Wall -Wextra -Werror -c $< -o $@
+	gcc -Wall -Wextra -Werror -c $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJ)
