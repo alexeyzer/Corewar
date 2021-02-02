@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
+#    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/31 14:40:35 by aguiller          #+#    #+#              #
-#    Updated: 2021/02/01 17:22:58 by aguiller         ###   ########.fr        #
+#    Updated: 2021/02/02 09:12:03 by alexzudin        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,11 @@ INCNAME1 = includes/vm.h
 INCNAME2 = includes/op.h
 INCNAME3 = includes/asm.h
 INCNAME4 = includes/errors.h
-INCNAME4 = includes/oplist_asmh.h
+INCNAME5 = includes/oplist_asm.h
 
 OBJ_VM = $(SRCS_VM:%.c=%.o)
 
-%.o:%.c 
+%.o:%.c
 	@gcc -Wall -Wextra -ggdb -Werror $(COREWAR_H) $(PRINTFVM_H) $(LIBVM_H) $(LIBASM_H) -c $< -o $@
 
 OBJ_ASM = $(SRCS_ASM:%.c=%.o)
@@ -63,7 +63,7 @@ $(NAME_VM): $(OBJ_VM)  $(INCNAME1) $(INCNAME2)
 	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME_VM) $(OBJ_VM) libftprintfvm.a -lncurses
 	@echo "$(GREEN)VM are created"
 
-$(NAME_ASM): $(OBJ_ASM) 
+$(NAME_ASM): $(OBJ_ASM) $(INCNAME2) $(INCNAME3) $(INCNAME4) $(INCNAME5)
 	@cd lib && $(MAKE) all
 	@mv lib/libft.a ./lib.a
 	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME_ASM) $(OBJ_ASM) lib.a

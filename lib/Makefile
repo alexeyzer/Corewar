@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
+#    By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/21 10:18:18 by kjamar            #+#    #+#              #
-#    Updated: 2021/02/01 16:41:27 by aguiller         ###   ########.fr        #
+#    Updated: 2021/02/02 09:13:52 by alexzudin        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,8 +111,8 @@ PATH_GNL = $(addprefix $(DIR_GNL), $(SOURCES_GNL))
 OBJS = $(addprefix $(DIR_O),$(SOURCES_PRINTF:.c=.o)) $(addprefix $(DIR_O),\
 $(SOURCES_LIBFT:.c=.o)) $(addprefix $(DIR_O),$(SOURCES_GNL:.c=.o)) 
 
-all: obj $(NAME)
-obj:
+all: $(NAME)
+$(NAME):
 	@mkdir -p $(DIR_O)
 	@$(CC) $(FLAG) $(HEADER_PRINTF) $(HEADER_LIBFT) $(HEADER_GNL) $(PATH_GNL) $(PATH_LIBFT) $(PATH_PRINTF) -c $<
 	@mv *.o $(DIR_O)
