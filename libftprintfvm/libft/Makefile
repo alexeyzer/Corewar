@@ -6,7 +6,7 @@
 #    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/06 22:26:44 by aguiller          #+#    #+#              #
-#    Updated: 2021/02/01 14:02:43 by aguiller         ###   ########.fr        #
+#    Updated: 2021/02/03 00:23:11 by aguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ $(NAME): $(OBJ)
 	@ar rcs $(NAME) $(OBJ)
 
 %.o:%.c $(INCNAME)
-	@gcc -Wall -Wextra -Werror -c $< -o $@
+	@gcc -Wall -Wextra -ggdb -Werror -c $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:08:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 23:50:33 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/03 00:57:31 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int  checkreg(t_corewar *corewar, char *line, int n, t_asm *now)
 		nbr = ft_atoi(&(line[j]));
 		if (nbr > 255)
 			exitn(&corewar, "max register nbr is 255. Error with", now->command->online, n);
-		if (nbr == 0)
-			exitn(&corewar, "Register nbr can't be zero. Error with", now->command->online, n);
+		//if (nbr == 0)
+		//	exitn(&corewar, "Register nbr can't be zero. Error with", now->command->online, n);
 	}
 	else
 		exitn(&corewar, "Invalid start symbol. Error with", now->command->online, n);
@@ -55,7 +55,7 @@ double	getadressdown(char *line, int i, t_corewar *corewar, int n)
 		label = realnow->label;
 		while (label != NULL)
 		{
-			if (ft_strcmp(realnow->label->label, (&line[i])) == 0)
+			if (ft_strcmp(label->label, (&line[i])) == 0)
 				return (size);
 			label = label->next;
 		}
@@ -74,7 +74,7 @@ int funcme(char *line, t_corewar *corewar, int i)
 	label = now->label;
 	while (label != NULL)
 	{
-		if (ft_strcmp(now->label->label, &(line[i])) == 0)
+		if (ft_strcmp(label->label, &(line[i])) == 0)
 			return (1);
 		label = label->next;
 	}
@@ -97,7 +97,7 @@ double	getadressup(char *line, int i, t_corewar *corewar, int n)
 		label = realnow->label;
 		while (label != NULL)
 		{
-			if (ft_strcmp(realnow->label->label, &(line[i])) == 0)
+			if (ft_strcmp(label->label, &(line[i])) == 0)
 				return ((size + realnow->size) * -1);
 			label = label->next;
 		}
@@ -161,7 +161,7 @@ int  checkind(t_corewar *corewar, char *line, int n)
 
 	i = 0;
 	if (line[i] == ':')
-		result = getadressup(line, i, corewar, n);
+		result = getadressup(line, i + 1, corewar, n);
 	else
 	{
 		checknbr(corewar, line, i, n);

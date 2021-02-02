@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/asm",
-            "args": ["./test/42.s"],
+            "args": ["42-corewar/tests/asm/valid/big_feet.s"],
             "cwd": "${workspaceFolder}"
         }
     ]

@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 23:42:22 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/03 00:50:46 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,26 @@ void	afterlabel(t_corewar *corewar, char *line, int i)
 			addlabel(corewar, line, j);
 			iscommandcorrect(corewar, line, numcommand, i);
 		}
-		else if (correctend(&line[i]) == -1)
+		else if (correctend(&line[i]) == 1)
+			addlabel(corewar, line, j);
+		else
 			exitcorewar(&corewar, "Error with syntax after label", corewar->currentline, line);
 	}
+}
+
+int emtyline(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] == '\t' || line[i] == ' ' || line[i] == '\r')
+		i++;
+	if (line[i] == '\n' || line[i] == '\0')
+		return (1);
+	if (line[i - 1] == '\t' && line[i] == '\0')
+		return (1);
+	else
+		return (-1);
 }
 
 int		commandparser(t_corewar *corewar)
@@ -99,13 +116,13 @@ int		commandparser(t_corewar *corewar)
 	corewar->now = corewar->head;
     while	(get_str(corewar->fd, &line) > 0)
 	{
-        if (isitcomment(line) == 0 && *line != '\n')
+        if (isitcomment(line) == 0 && (*line != '\n' || *line != '\t'))
         {
 			if ( (i = isitlabel(corewar, line)) > 0)
 				afterlabel(corewar, line, i);
 			else if ((i = isitcommand(line, 0)) >= 0)
 				iscommandcorrect(corewar, line, i, 0);
-			else
+			else if (emtyline(line) == -1)
 				exitcorewar(&corewar, "Syntax error" , corewar->currentline, line);
         }
 		if (line != NULL)
