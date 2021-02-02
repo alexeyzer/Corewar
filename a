@@ -1,0 +1,4 @@
+
+l2:
+		sti r99,%:live,%1 adfa
+Error with command argument on line 5
