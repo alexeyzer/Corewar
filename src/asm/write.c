@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:40:57 by aguiller          #+#    #+#             */
-/*   Updated: 2021/02/02 20:14:05 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:36:22 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *newname(char *name)
 	return (new);
 }
 
-void int_tobytecode(int fd, int value, int size)
+void int_tobytecode(int fd, long int value, int size)
 {
 	int i;
 	signed char a;
@@ -62,7 +62,7 @@ void commands(t_corewar *corewar)
 {
 	t_asm *now;
 	int i;
-	int num;
+	long int num;
 
 	now = corewar->head;
 	while (now != NULL && now->command != NULL)
@@ -73,7 +73,7 @@ void commands(t_corewar *corewar)
 			writecarg(corewar, now);
 		while (i < table[now->command->commandnum].countofparams)
 		{
-			num = correctnum((int)now->command->paramtransmited[i]);
+			num = correctnum(now->command->paramtransmited[i]);
 			if (now->command->typeparams[i] == T_REG)
 				int_tobytecode(corewar->fdwrite, num, 1);
 			if (now->command->typeparams[i] == T_IND)

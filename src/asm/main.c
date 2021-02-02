@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 13:49:36 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 21:44:57 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 22:54:27 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,16 @@ int main(int argc, char **argv)
 	t_corewar *corewar;
 
 	if (argc != 2)
+	{
 		ft_printf("Usage: ./asm player.s\n");
+		exit(0);
+	}
 	else
 	{
 		if (checkname(argv[1]) < 0)
 		{
 			ft_printf("Our program could work only with .s extension\n");
-			return (0);
+			exit(0);
 		}
 		else
 		{
@@ -107,11 +110,10 @@ int main(int argc, char **argv)
 			commandparser(corewar);
 			getsizeall(corewar);
 			checkallarguments(corewar);
-			testfunc(corewar);
+			//testfunc(corewar);
 			filewrite(argv[1], corewar);
 			exitcorewar(&corewar, NULL, -1, NULL);
 		}
 	}
-	
 	return (0);
 }

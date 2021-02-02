@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:27:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 21:41:16 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:37:13 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_diretcommand
 	int					commandnum;
 	int                	typeparams[3];
 	char				**param;
-	double				*paramtransmited;
+	long int			*paramtransmited;
 }				t_diretcommand;
 
 typedef struct	s_command
@@ -229,7 +229,7 @@ void			getsizeall(t_corewar *corewar);
 int				exitn(t_corewar **corewar, char *strtoprint, int online, int nbr);
 void			checkallarguments(t_corewar *corewar);
 void			filewrite(char *name, t_corewar *corewar);
-void			int_tobytecode(int fd, int value, int size);
+void int_tobytecode(int fd, long int value, int size);
 void			writecarg(t_corewar *corewar, t_asm *asme);
-int				correctnum(int num);
+long int correctnum(long int num);
 #endif

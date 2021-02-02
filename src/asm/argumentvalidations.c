@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:08:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 21:07:07 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:50:33 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ double	getadressdown(char *line, int i, t_corewar *corewar, int n)
 	t_labels *label;
 
 	realnow = corewar->now;
-	size = 0;
+	size = realnow->size;
+	realnow = realnow->next;
 	while(realnow != NULL)//иддем вниз
 	{
 		label = realnow->label;
 		while (label != NULL)
 		{
 			if (ft_strcmp(realnow->label->label, (&line[i])) == 0)
-				return (size + realnow->size);
+				return (size);
 			label = label->next;
 		}
 		size = size + realnow->size;
@@ -124,10 +125,10 @@ void checknbr(t_corewar *corewar, char *line, int i, int n)
 	}
 }
 
-int  checkdir(t_corewar *corewar, char *line, int n, t_asm *now)
+long int  checkdir(t_corewar *corewar, char *line, int n, t_asm *now)
 {
 	int			i;
-	double		result;
+	long int		result;
 
 	i = 0;
 	result = 0;
@@ -160,7 +161,7 @@ int  checkind(t_corewar *corewar, char *line, int n)
 
 	i = 0;
 	if (line[i] == ':')
-		result = getadressup(line, 0, corewar, n);
+		result = getadressup(line, i, corewar, n);
 	else
 	{
 		checknbr(corewar, line, i, n);

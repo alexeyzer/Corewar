@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 15:28:45 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 17:32:50 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:08:29 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int checknameorcomment2(char **line, t_corewar *corewar, int *goin)
 
 	i = 0;
 	j = 0;
-	while ((*line)[i] == ' ')
+	while ((*line)[i] == ' ' || (*line)[i] == '\t')
 		i++;
 	while((*line)[i] == COMMENT_CMD_STRING[j])
 	{
@@ -68,7 +68,7 @@ int checknameorcomment(char **line, t_corewar *corewar, int *goin)
 
 	i = 0;
 	j = 0;
-	while ((*line)[i] == ' ')
+	while ((*line)[i] == ' ' || (*line)[i] == '\t')
 		i++;
 	while((*line)[i] == NAME_CMD_STRING[j])
 	{

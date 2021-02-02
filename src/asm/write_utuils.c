@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 18:53:42 by aguiller          #+#    #+#             */
-/*   Updated: 2021/02/02 20:20:04 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:35:33 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void writecarg(t_corewar *corewar, t_asm *asme)
 	int_tobytecode(corewar->fdwrite, argcode, 1);
 }
 
-int correctnum(int num)
+long int correctnum(long int num)
 {
 	int i;
 

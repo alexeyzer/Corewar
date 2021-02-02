@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 08:32:22 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/02 21:26:36 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/02 23:42:22 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		isitlabel(t_corewar *corewar, char *line)
 	while((line[i] ==  ' ' || line[i] ==  '\t') && (line[i] != '\n' && line [i] != '\0'))
 		i++;
 	j = i;
-	while (line[i] != LABEL_CHAR && line[i] != '\n' && line[i] != '\0' && line[i] != ' ' && line[i] != '\t')
+	while (line[i] != LABEL_CHAR && line[i] != DIRECT_CHAR && line[i] != '\n' && line[i] != '\0' && line[i] != ' ' && line[i] != '\t')
 		i++;
 	if (line[i] == LABEL_CHAR)
 	{
@@ -85,7 +85,7 @@ void	afterlabel(t_corewar *corewar, char *line, int i)
 			addlabel(corewar, line, j);
 			iscommandcorrect(corewar, line, numcommand, i);
 		}
-		else
+		else if (correctend(&line[i]) == -1)
 			exitcorewar(&corewar, "Error with syntax after label", corewar->currentline, line);
 	}
 }

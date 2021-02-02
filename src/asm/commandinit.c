@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commandinit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:54:47 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 21:19:07 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/02/02 23:50:57 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_diretcommand *createcommand(int numcommand)
 		head->param[i] = NULL;
 		i++;
 	}
-	head->paramtransmited = (double*)malloc(sizeof(double) * table[numcommand].countofparams);
+	head->paramtransmited = (long int*)malloc(sizeof(long int) * table[numcommand].countofparams);
 	head->typeparams[0] = 0;
 	head->typeparams[1] = 0;
 	head->typeparams[2] = 0;
