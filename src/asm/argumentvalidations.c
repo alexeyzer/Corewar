@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:08:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/02/03 00:57:31 by aguiller         ###   ########.fr       */
+/*   Updated: 2021/02/03 15:45:52 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void checknbr(t_corewar *corewar, char *line, int i, int n)
 	int c;
 
 	c = 0;
-	while (line[i] != '\0')
+	while (line[i] != '\0' && line[i] != ALT_COMMENT_CHAR && line[i] != COMMENT_CHAR && line[i] != ' ' && line[i] != '\t')
 	{
 		if (ft_isdigit(line[i]) == 0)
 		{

@@ -6,7 +6,7 @@
 #    By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/31 14:40:35 by aguiller          #+#    #+#              #
-#    Updated: 2021/02/02 19:08:58 by aguiller         ###   ########.fr        #
+#    Updated: 2021/02/03 16:34:51 by aguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,10 @@ SRC_DIR_VM = src/vm/
 SRC_DIR_ASM = src/asm/
 
 COREWAR_H =	-I includes/
-PRINTFVM_H = -I libftprintfvm/includes
-LIBVM_H =	-I libftprintfvm/libft/
+PRINTFVM_H = -I libftprintf/includes
+LIBVM_H =	-I libftprintf/libft/
 
-LIBASM_H = -I lib/includes/
+LIBFT = ./libftprintf/libftprintf.a
 
 
 SRCS_VM= $(addprefix $(SRC_DIR_VM), $(SRC_VM))
@@ -46,34 +46,34 @@ INCNAME3 = includes/corewar.h
 
 OBJ_VM = $(SRCS_VM:%.c=%.o)
 
-%.o:%.c
-	@gcc -Wall -Wextra -ggdb -Werror $(COREWAR_H) $(PRINTFVM_H) $(LIBVM_H) $(LIBASM_H) -c $< -o $@
-
 OBJ_ASM = $(SRCS_ASM:%.c=%.o)
 
-all: $(NAME_ASM)
+%.o:%.c
+	@gcc -Wall -Wextra -ggdb -Werror $(COREWAR_H) $(PRINTFVM_H) $(LIBVM_H) -c $< -o $@
 
-$(NAME_VM): $(OBJ_VM)  $(INCNAME1) $(INCNAME2)
-	@cd libftprintfvm && $(MAKE) all
-	@mv libftprintfvm/libftprintf.a ./libftprintfvm.a
-	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME_VM) $(OBJ_VM) libftprintfvm.a -lncurses
+
+all: $(NAME_ASM) $(NAME_VM)
+
+$(NAME_VM): $(OBJ_VM) $(LIBFT) $(INCNAME1) $(INCNAME2)
+	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME_VM) $(OBJ_VM) ./libftprintf/libftprintf.a -lncurses
 	@echo "$(GREEN)VM are created"
 
-$(NAME_ASM): $(OBJ_ASM) $(INCNAME2) $(INCNAME3)
-	@cd libftprintfvm && $(MAKE) all
-	@mv libftprintfvm/libftprintf.a ./libftprintfvm.a
-	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME_ASM) $(OBJ_ASM) libftprintfvm.a
+$(NAME_ASM): $(OBJ_ASM) $(LIBFT) $(INCNAME2) $(INCNAME3)
+	@gcc -Wall -Wextra -Werror -ggdb -o $(NAME_ASM) $(OBJ_ASM) ./libftprintf/libftprintf.a
 	@echo "$(GREEN)ASM are created"
 
+$(LIBFT):
+	@make -C ./libftprintf
+
 clean:
-	@cd libftprintfvm && $(MAKE) clean
+	@cd libftprintf && $(MAKE) clean
 	@/bin/rm -f $(OBJ_VM)
 	@/bin/rm -f $(OBJ_ASM)
-	@/bin/rm -f libftprintfvm.a
-	@/bin/rm -f lib.a
+	@/bin/rm -f libftprintf.a
+	@make -C ./libftprintf clean
 
 fclean: clean
-	@cd libftprintfvm && $(MAKE) fclean
+	@make -C ./libftprintf fclean
 	@/bin/rm -f $(NAME_VM)
 	@/bin/rm -f $(NAME_ASM)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   isitcommand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 13:56:17 by alexzudin         #+#    #+#             */
-/*   Updated: 2021/01/11 16:03:33 by alexzudin        ###   ########.fr       */
+/*   Updated: 2021/02/03 15:49:09 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int getnumofcommand(char *line)
 			else
 				break ;
 		}
-		if ((line[j] == ' ' || line[j] == '\t' || line[j] == DIRECT_CHAR) && table[i].name[j] == '\0')
+		if ((line[j] == ' ' || line[j] == '\t' || line[j] == DIRECT_CHAR ||  line[j] == '-') && table[i].name[j] == '\0')
 			return (i);
 		i++;
 	}
